@@ -11,7 +11,7 @@ export default function Hero() {
         <div className="grid gap-8 md:grid-cols-2 md:gap-12 items-center">
           {/* Texto */}
           <div className="space-y-6 text-center md:text-left">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-display text-primary leading-tight">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-display leading-tight" style={{color: '#8B5E3C'}}>
               Tejidos con Ternura
             </h2>
             <p className="text-lg md:text-xl text-muted-foreground max-w-lg mx-auto md:mx-0">

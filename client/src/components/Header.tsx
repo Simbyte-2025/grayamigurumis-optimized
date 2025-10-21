@@ -10,7 +10,7 @@ export default function Header() {
       <div className="container flex h-16 items-center justify-between">
         <div className="flex items-center gap-2">
           <span className="text-2xl">🧶</span>
-          <h1 className="text-xl md:text-2xl font-display text-primary">
+          <h1 className="text-xl md:text-2xl font-display" style={{color: '#8B5E3C'}}>
             Gray Amigurumis
           </h1>
         </div>

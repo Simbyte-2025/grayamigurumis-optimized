@@ -16,7 +16,7 @@ export default function Catalog() {
     <section className="py-16 md:py-24">
       <div className="container">
         <div className="text-center space-y-4 mb-12">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display text-primary">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display" style={{color: '#8B5E3C'}}>
             Catálogo
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">

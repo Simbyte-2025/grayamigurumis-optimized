@@ -24,7 +24,7 @@ export default function About() {
     <section className="py-16 md:py-24 bg-[#A9D1A7]/20">
       <div className="container">
         <div className="max-w-3xl mx-auto text-center space-y-6 mb-12">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display text-primary">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display" style={{color: '#8B5E3C'}}>
             Quién Soy
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed">

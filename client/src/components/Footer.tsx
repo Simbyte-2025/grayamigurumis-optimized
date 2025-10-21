@@ -11,7 +11,7 @@ export default function Footer() {
           <div className="space-y-4">
             <div className="flex items-center gap-2">
               <span className="text-2xl">🧶</span>
-              <h3 className="text-xl font-display text-primary">Gray Amigurumis</h3>
+              <h3 className="text-xl font-display" style={{color: '#8B5E3C'}}>Gray Amigurumis</h3>
             </div>
             <p className="text-sm text-muted-foreground">
               Creaciones únicas tejidas a mano con amor y dedicación desde Punta Arenas, Chile.
