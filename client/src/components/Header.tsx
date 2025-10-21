@@ -16,8 +16,15 @@ export default function Header() {
     <>
       <header className="sticky top-0 z-50 shadow-md" style={{backgroundColor: 'rgba(255, 192, 203, 0.8)', backdropFilter: 'blur(12px)'}}>
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-          <a href="#" className="font-display text-3xl text-white" style={{textShadow: '1px 1px 2px rgba(139,94,60,0.5)'}}>
-            Grayamigurumis
+          <a href="#" className="flex items-center gap-3">
+            <img 
+              src="/logo.png" 
+              alt="Gray Amigurumis Logo" 
+              className="h-12 w-12 object-contain"
+            />
+            <span className="font-display text-3xl text-white" style={{textShadow: '1px 1px 2px rgba(139,94,60,0.5)'}}>
+              Grayamigurumis
+            </span>
           </a>
           
           {/* Desktop Navigation */}
