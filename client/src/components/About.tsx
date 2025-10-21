@@ -7,14 +7,19 @@ export default function About() {
     >
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row items-center gap-16 md:gap-20">
-          <div className="md:w-1/2">
-            <img 
-              src="https://scontent-dfw5-3.cdninstagram.com/v/t51.2885-15/559367774_2652763835076944_5348790701336978053_n.jpg" 
-              alt="Foto de la artesana de Grayamigurumis" 
-              className="rounded-full shadow-2xl w-full max-w-md mx-auto"
-              loading="lazy"
-            />
+          {/* Imagen circular placeholder */}
+          <div className="md:w-1/2 flex justify-center">
+            <div 
+              className="rounded-full shadow-2xl w-full max-w-md aspect-square flex items-center justify-center"
+              style={{backgroundColor: '#FFF8F0'}}
+            >
+              <span className="text-4xl font-bold" style={{color: '#8B5E3C'}}>
+                Tu Foto Aqui
+              </span>
+            </div>
           </div>
+          
+          {/* Texto */}
           <div className="md:w-1/2 text-center md:text-left">
             <h2 className="text-4xl font-bold mb-8" style={{color: '#8B5E3C'}}>
               El Arte de Tejer tus Ideas

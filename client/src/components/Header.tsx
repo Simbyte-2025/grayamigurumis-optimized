@@ -22,16 +22,16 @@ export default function Header() {
           
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
-            <button onClick={() => scrollToSection('inicio')} className="text-lg font-semibold hover:text-white transition" style={{color: '#8B5E3C'}}>
+            <button onClick={() => scrollToSection('inicio')} className="text-lg font-semibold transition" style={{color: '#8B5E3C'}}>
               Inicio
             </button>
-            <button onClick={() => scrollToSection('tienda')} className="text-lg font-semibold hover:text-white transition" style={{color: '#8B5E3C'}}>
+            <button onClick={() => scrollToSection('tienda')} className="text-lg font-semibold transition" style={{color: '#8B5E3C'}}>
               Tienda
             </button>
-            <button onClick={() => scrollToSection('nosotros')} className="text-lg font-semibold hover:text-white transition" style={{color: '#8B5E3C'}}>
+            <button onClick={() => scrollToSection('nosotros')} className="text-lg font-semibold transition" style={{color: '#8B5E3C'}}>
               Nosotros
             </button>
-            <button onClick={() => scrollToSection('contacto')} className="text-lg font-semibold hover:text-white transition" style={{color: '#8B5E3C'}}>
+            <button onClick={() => scrollToSection('contacto')} className="text-lg font-semibold transition" style={{color: '#8B5E3C'}}>
               Contacto
             </button>
           </nav>
