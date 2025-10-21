@@ -6,25 +6,32 @@ export default function FeaturedProducts() {
       name: "Poodle Soñador",
       price: "$20.000",
       image: "https://scontent-dfw5-3.cdninstagram.com/v/t51.2885-15/559367774_2652763835076944_5348790701336978053_n.jpg",
-      alt: "Amigurumi de Poodle Blanco"
+      alt: "Amigurumi de Poodle Blanco",
+      urlPago: "https://www.flow.cl/btn.php?token=ejemplo-poodle"
     },
     {
       name: "Héroe Mercenario",
       price: "$22.000",
       image: "https://scontent-dfw5-3.cdninstagram.com/v/t51.2885-15/559367774_2652763835076944_5348790701336978053_n.jpg",
-      alt: "Amigurumi de Deadpool"
+      alt: "Amigurumi de Deadpool",
+      urlPago: "https://www.flow.cl/btn.php?token=ejemplo-deadpool"
     },
     {
       name: "Pingüino Abrigado",
       price: "$16.000",
       image: "https://scontent-dfw5-3.cdninstagram.com/v/t51.2885-15/559367774_2652763835076944_5348790701336978053_n.jpg",
-      alt: "Amigurumi de Pingüino"
+      alt: "Amigurumi de Pingüino",
+      urlPago: "https://www.flow.cl/btn.php?token=ejemplo-pinguino"
     }
   ];
 
-  const handleAddToCart = (productName: string) => {
+  const handleWhatsApp = (productName: string) => {
     const message = encodeURIComponent(`¡Hola! Me interesa el producto: ${productName} 🧸`);
     window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
+  };
+
+  const handlePagar = (urlPago: string) => {
+    window.open(urlPago, '_blank');
   };
 
   return (
@@ -59,27 +66,53 @@ export default function FeaturedProducts() {
                 <p className="text-xl font-semibold mb-4" style={{color: '#FFC0CB'}}>
                   {product.price}
                 </p>
-                <button
-                  onClick={() => handleAddToCart(product.name)}
-                  className="font-bold py-2 px-6 rounded-full w-full transition-all duration-300"
-                  style={{
-                    backgroundColor: '#FFC0CB',
-                    color: '#8B5E3C',
-                    boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = '#A9D1A7';
-                    e.currentTarget.style.transform = 'translateY(-2px)';
-                    e.currentTarget.style.boxShadow = '0 6px 8px rgba(0,0,0,0.15)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = '#FFC0CB';
-                    e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
-                  }}
-                >
-                  Añadir al carrito
-                </button>
+                
+                {/* Dos botones: WhatsApp + Pagar */}
+                <div className="flex flex-col gap-3">
+                  <button
+                    onClick={() => handleWhatsApp(product.name)}
+                    className="font-bold py-2 px-6 rounded-full w-full transition-all duration-300"
+                    style={{
+                      backgroundColor: '#A9D1A7',
+                      color: '#FFF8F0',
+                      boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = '#8BB88F';
+                      e.currentTarget.style.transform = 'translateY(-2px)';
+                      e.currentTarget.style.boxShadow = '0 6px 8px rgba(0,0,0,0.15)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = '#A9D1A7';
+                      e.currentTarget.style.transform = 'translateY(0)';
+                      e.currentTarget.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
+                    }}
+                  >
+                    💬 WhatsApp
+                  </button>
+                  
+                  <button
+                    onClick={() => handlePagar(product.urlPago)}
+                    className="font-bold py-2 px-6 rounded-full w-full transition-all duration-300"
+                    style={{
+                      backgroundColor: '#FFC0CB',
+                      color: '#8B5E3C',
+                      boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = '#FFB0BB';
+                      e.currentTarget.style.transform = 'translateY(-2px)';
+                      e.currentTarget.style.boxShadow = '0 6px 8px rgba(0,0,0,0.15)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = '#FFC0CB';
+                      e.currentTarget.style.transform = 'translateY(0)';
+                      e.currentTarget.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
+                    }}
+                  >
+                    💳 Pagar
+                  </button>
+                </div>
               </div>
             </div>
           ))}

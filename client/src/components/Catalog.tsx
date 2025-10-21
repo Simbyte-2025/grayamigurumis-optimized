@@ -11,16 +11,21 @@ export default function Catalog() {
     "Animalitos": "animalitos",
     "Personajes": "cine-tv",
     "Anime": "anime-videojuegos",
-    "Accesorios": "animalitos"
+    "Accesorios": "animalitos",
+    "Objetos": "cine-tv"
   };
 
   const filteredProducts = activeFilter === "all" 
     ? products 
     : products.filter(p => categoryMap[p.category] === activeFilter);
 
-  const handleConsult = (productName: string) => {
+  const handleWhatsApp = (productName: string) => {
     const message = encodeURIComponent(`¡Hola! Me interesa el producto: ${productName} 🧸`);
     window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
+  };
+
+  const handlePagar = (urlPago: string) => {
+    window.open(urlPago, '_blank');
   };
 
   return (
@@ -37,11 +42,7 @@ export default function Catalog() {
         <div className="flex justify-center flex-wrap gap-4 mb-16">
           <button
             onClick={() => setActiveFilter("all")}
-            className={`font-bold py-2 px-6 rounded-full transition-all duration-300 ${
-              activeFilter === "all" 
-                ? 'text-white' 
-                : ''
-            }`}
+            className={`font-bold py-2 px-6 rounded-full transition-all duration-300`}
             style={{
               backgroundColor: activeFilter === "all" ? '#A9D1A7' : '#F8DDA4',
               color: activeFilter === "all" ? '#FFF8F0' : '#8B5E3C'
@@ -102,33 +103,59 @@ export default function Catalog() {
                 loading="lazy"
               />
               <div className="p-4">
-                <h3 className="text-xl font-bold" style={{color: '#8B5E3C'}}>
+                <h3 className="text-xl font-bold mb-2" style={{color: '#8B5E3C'}}>
                   {product.name}
                 </h3>
-                <p className="font-semibold" style={{color: '#FFC0CB'}}>
+                <p className="font-semibold mb-4" style={{color: '#FFC0CB'}}>
                   {product.price}
                 </p>
-                <button
-                  onClick={() => handleConsult(product.name)}
-                  className="mt-3 font-bold py-2 px-4 rounded-full w-full transition-all duration-300 text-sm"
-                  style={{
-                    backgroundColor: '#FFC0CB',
-                    color: '#8B5E3C',
-                    boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = '#A9D1A7';
-                    e.currentTarget.style.transform = 'translateY(-2px)';
-                    e.currentTarget.style.boxShadow = '0 6px 8px rgba(0,0,0,0.15)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = '#FFC0CB';
-                    e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
-                  }}
-                >
-                  Consultar
-                </button>
+                
+                {/* Dos botones: WhatsApp + Pagar */}
+                <div className="flex flex-col gap-2">
+                  <button
+                    onClick={() => handleWhatsApp(product.name)}
+                    className="font-bold py-2 px-4 rounded-full w-full transition-all duration-300 text-sm"
+                    style={{
+                      backgroundColor: '#A9D1A7',
+                      color: '#FFF8F0',
+                      boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = '#8BB88F';
+                      e.currentTarget.style.transform = 'translateY(-2px)';
+                      e.currentTarget.style.boxShadow = '0 6px 8px rgba(0,0,0,0.15)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = '#A9D1A7';
+                      e.currentTarget.style.transform = 'translateY(0)';
+                      e.currentTarget.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
+                    }}
+                  >
+                    💬 WhatsApp
+                  </button>
+                  
+                  <button
+                    onClick={() => handlePagar(product.urlPago)}
+                    className="font-bold py-2 px-4 rounded-full w-full transition-all duration-300 text-sm"
+                    style={{
+                      backgroundColor: '#FFC0CB',
+                      color: '#8B5E3C',
+                      boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = '#FFB0BB';
+                      e.currentTarget.style.transform = 'translateY(-2px)';
+                      e.currentTarget.style.boxShadow = '0 6px 8px rgba(0,0,0,0.15)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = '#FFC0CB';
+                      e.currentTarget.style.transform = 'translateY(0)';
+                      e.currentTarget.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
+                    }}
+                  >
+                    💳 Pagar
+                  </button>
+                </div>
               </div>
             </div>
           ))}

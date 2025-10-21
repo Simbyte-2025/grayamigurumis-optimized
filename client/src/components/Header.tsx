@@ -38,12 +38,23 @@ export default function Header() {
 
           <div className="hidden md:block">
             <a 
-              href={`https://wa.me/${whatsappNumber}`}
+              href={`https://wa.me/${whatsappNumber}?text=Hola!%20Me%20interesan%20tus%20amigurumis.`}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-2xl"
+              className="flex items-center gap-2 font-bold py-2 px-4 rounded-full transition-all duration-300"
+              style={{
+                backgroundColor: '#FFC0CB',
+                color: '#8B5E3C'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = '#A9D1A7';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = '#FFC0CB';
+              }}
             >
-              🛒
+              <span className="text-xl">💬</span>
+              <span>WhatsApp</span>
             </a>
           </div>
 
