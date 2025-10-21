@@ -1,195 +1,192 @@
-# 🧶 Gray Amigurumis - Micro-Sitio Web
+# 🧶 Gray Amigurumis - Versión 2
 
-**Proyecto autogenerado por Manus AI · Micro-Sitios Quilicura 2025 · Fuente Instagram [@grayamigurumis](https://www.instagram.com/grayamigurumis)**
+**Micro-sitio web para Gray Amigurumis** - Creaciones tejidas a mano en Punta Arenas, Chile.
 
-Micro-sitio web de una sola página para el emprendimiento artesanal **Gray Amigurumis**, especializado en la creación de amigurumis tejidos a mano en Punta Arenas, Chile.
+> Proyecto generado por Manus AI — Versión 2 — Micro-Sitios Quilicura 2025 — Fuente visual: HTML de Canvas (Gemini).
 
-## 🎯 Descripción del Proyecto
+## 📋 Descripción
 
-Este sitio web fue diseñado para presentar de manera profesional y emocional las creaciones artesanales de Gray Amigurumis, facilitando el contacto directo con clientes potenciales a través de WhatsApp y redes sociales. El diseño refleja la calidez, ternura y dedicación que caracteriza cada pieza tejida a mano.
+Sitio web de una página (landing page) para el emprendimiento artesanal **Gray Amigurumis**, especializado en la creación de amigurumis (muñecos tejidos a crochet) personalizados. La V2 recrea fielmente el diseño visual del HTML generado por Canvas (Gemini) con componentes React modulares.
 
-## ✨ Características
+### ✨ Características
 
-- **Diseño Mobile-First:** Optimizado para dispositivos móviles con experiencia responsive
-- **Paleta Artesanal:** Colores pasteles suaves que transmiten calidez y ternura
-- **Catálogo de Productos:** 8 productos reales extraídos del feed de Instagram
-- **Contacto Directo:** Integración con WhatsApp para consultas inmediatas
-- **SEO Optimizado:** Metadatos completos para mejor posicionamiento
-- **Performance:** Tiempo de carga optimizado < 2.5s
+- **Hero centrado** con imagen de fondo y caja translúcida
+- **Sección "Nuestros Favoritos"** con 3 productos destacados
+- **Catálogo con filtros** por categorías (Todos, Animalitos, Cine & TV, Anime & Videojuegos)
+- **Generador de ideas** con IA (Gemini API) para describir amigurumis personalizados
+- **Testimonios** de clientes satisfechos
+- **Menú móvil** deslizante desde la derecha
+- **Footer oscuro** con CTA de pedidos personalizados
+- **Integración WhatsApp** para contacto directo
+- **Diseño responsive** mobile-first
+- **Paleta Pastel Dreams** (rosa, verde sage, amarillo suave, crema cálido, marrón)
 
-## 🛠️ Stack Tecnológico
-
-- **Framework:** React 19
-- **Build Tool:** Vite 7
-- **Styling:** Tailwind CSS 4
-- **UI Components:** shadcn/ui
-- **Icons:** Lucide React
-- **Routing:** Wouter
-- **Tipografía:** Montserrat + Pacifico (Google Fonts)
-
-## 📦 Instalación
+## 🚀 Instalación
 
 ### Prerrequisitos
 
-- Node.js 22.x o superior
-- pnpm 10.x o superior
+- Node.js 18+ y pnpm instalados
+- API Key de Google Gemini (para el generador de ideas)
 
-### Pasos de Instalación
+### Pasos
 
-1. **Clonar el repositorio:**
+1. **Clonar el repositorio**
+
 ```bash
-git clone https://github.com/[usuario]/grayamigurumis-manus-v1.git
+git clone https://github.com/suuiso/grayamigurumis-manus-v1.git
 cd grayamigurumis-manus-v1
 ```
 
-2. **Instalar dependencias:**
+2. **Instalar dependencias**
+
 ```bash
 pnpm install
 ```
 
-3. **Iniciar servidor de desarrollo:**
+3. **Configurar variables de entorno**
+
+La API Key de Gemini ya está configurada en el proyecto. Si necesitas actualizarla, contacta al administrador.
+
+4. **Iniciar servidor de desarrollo**
+
 ```bash
 pnpm dev
 ```
 
 El sitio estará disponible en `http://localhost:3000`
 
-## 🚀 Build y Despliegue
-
-### Build para Producción
+## 📦 Scripts disponibles
 
 ```bash
-pnpm build
+pnpm dev      # Inicia servidor de desarrollo
+pnpm build    # Genera build de producción
+pnpm preview  # Previsualiza build de producción
+pnpm lint     # Ejecuta linter
 ```
 
-Los archivos optimizados se generarán en el directorio `dist/`
-
-### Preview del Build
-
-```bash
-pnpm preview
-```
-
-### Despliegue en Cloudflare Pages
-
-1. **Conectar repositorio a Cloudflare Pages:**
-   - Ir a [Cloudflare Dashboard](https://dash.cloudflare.com/)
-   - Seleccionar "Pages" > "Create a project"
-   - Conectar con GitHub y seleccionar el repositorio
-
-2. **Configurar Build Settings:**
-   - **Framework preset:** Vite
-   - **Build command:** `pnpm build`
-   - **Build output directory:** `dist`
-   - **Root directory:** `client`
-
-3. **Variables de Entorno (Opcional):**
-   ```
-   NODE_VERSION=22
-   ```
-
-4. **Deploy:**
-   - Cloudflare Pages desplegará automáticamente en cada push a `main`
-   - URL de producción: `https://grayamigurumis.pages.dev`
-
-### Despliegue Alternativo (Vercel)
-
-```bash
-# Instalar Vercel CLI
-pnpm add -g vercel
-
-# Deploy
-vercel
-```
-
-## 📁 Estructura del Proyecto
+## 🏗️ Estructura del proyecto
 
 ```
 grayamigurumis-manus-v1/
 ├── client/
-│   ├── public/              # Archivos estáticos
 │   ├── src/
-│   │   ├── components/      # Componentes React
-│   │   │   ├── Header.tsx
-│   │   │   ├── Hero.tsx
-│   │   │   ├── About.tsx
-│   │   │   ├── Catalog.tsx
-│   │   │   └── Footer.tsx
+│   │   ├── components/
+│   │   │   ├── Header.tsx              # Navegación sticky con menú móvil
+│   │   │   ├── Hero.tsx                # Hero centrado con overlay
+│   │   │   ├── FeaturedProducts.tsx    # 3 productos destacados
+│   │   │   ├── About.tsx               # Sobre la artesana (2 columnas)
+│   │   │   ├── IdeaGenerator.tsx       # Generador IA con Gemini
+│   │   │   ├── Catalog.tsx             # Catálogo con filtros
+│   │   │   ├── Testimonials.tsx        # Testimonios de clientes
+│   │   │   ├── Footer.tsx              # Footer oscuro
+│   │   │   └── ui/                     # Componentes shadcn/ui
 │   │   ├── data/
-│   │   │   └── products.ts  # Datos de productos
-│   │   ├── pages/
-│   │   │   ├── Home.tsx
-│   │   │   └── NotFound.tsx
-│   │   ├── App.tsx          # Configuración de rutas
-│   │   ├── main.tsx         # Entry point
-│   │   └── index.css        # Estilos globales
-│   └── index.html           # HTML principal
+│   │   │   └── products.ts             # Datos de productos
+│   │   ├── contexts/
+│   │   │   └── ThemeContext.tsx
+│   │   ├── App.tsx                     # Componente principal
+│   │   ├── main.tsx                    # Entry point
+│   │   └── index.css                   # Estilos globales
+│   └── index.html                      # HTML con SEO
 ├── README.md
 ├── CHANGELOG.md
-├── resumen_tecnico_grayamigurumis.md
+├── resumen_tecnico_grayamigurumis_v2.md
 └── package.json
 ```
 
-## 🎨 Personalización
+## 🎨 Stack Tecnológico
 
-### Colores
+- **Framework**: React 19
+- **Build Tool**: Vite 7
+- **Styling**: Tailwind CSS 4
+- **UI Components**: shadcn/ui
+- **Tipografía**: Quicksand (sans-serif) + Pacifico (display)
+- **IA**: Google Gemini API (generador de ideas)
+- **Hosting**: Cloudflare Pages (recomendado)
 
-Los colores se definen en `client/src/index.css` usando variables CSS:
+## 🌐 Despliegue en Cloudflare Pages
 
-```css
-:root {
-  --primary: oklch(0.75 0.12 350);      /* Rosa pastel */
-  --secondary: oklch(0.88 0.08 200);    /* Celeste suave */
-  --accent: oklch(0.92 0.08 90);        /* Amarillo suave */
-}
+### Opción 1: Desde el dashboard de Cloudflare
+
+1. Ve a [Cloudflare Pages](https://dash.cloudflare.com/)
+2. Haz clic en "Create a project"
+3. Conecta tu repositorio de GitHub
+4. Configura el build:
+   - **Build command**: `pnpm build`
+   - **Build output directory**: `dist`
+   - **Environment variables**: Agregar `VITE_GEMINI_API_KEY`
+5. Haz clic en "Save and Deploy"
+
+### Opción 2: Desde la CLI
+
+```bash
+# Instalar Wrangler CLI
+pnpm add -g wrangler
+
+# Login en Cloudflare
+wrangler login
+
+# Desplegar
+pnpm build
+wrangler pages deploy dist --project-name=grayamigurumis
 ```
 
-### Productos
+### Variables de entorno en producción
 
-Los productos se gestionan en `client/src/data/products.ts`. Para agregar o modificar productos, editar este archivo.
+En Cloudflare Pages, ve a:
+**Settings → Environment variables** y agrega:
 
-### Número de WhatsApp
+- `VITE_GEMINI_API_KEY`: Tu API Key de Google Gemini
 
-El número de contacto se encuentra en:
-- `client/src/components/Header.tsx`
-- `client/src/components/Hero.tsx`
-- `client/src/components/Catalog.tsx`
+## 📱 Funcionalidades
 
-Buscar `whatsappNumber` y actualizar el valor.
+### Generador de Ideas con IA
 
-## 📊 Performance
+La sección "Dale Vida a tu Idea" utiliza la API de Gemini para generar descripciones creativas de amigurumis personalizados. El usuario ingresa una idea (ej: "un gatito con sombrero de mago") y la IA genera una descripción detallada con:
 
-- **Lighthouse Score:** ≥ 85 puntos en mobile
-- **Imágenes:** Optimizadas con lazy loading
-- **Fonts:** Carga optimizada desde Google Fonts
-- **CSS:** Tailwind con purge automático
+- Apariencia y expresión
+- Paleta de colores sugerida
+- Accesorios y detalles especiales
 
-## 🔍 SEO
+### Filtros de Catálogo
 
-El sitio incluye:
-- Meta tags completos (title, description, keywords)
-- Open Graph tags para redes sociales
-- Twitter Card tags
-- Geo tags para localización
-- Sitemap automático (generado por Vite)
+El catálogo permite filtrar productos por categorías:
 
-## 📱 Redes Sociales
+- **Todos**: Muestra todos los productos
+- **Animalitos**: Koalas, pollitos, gatitos, etc.
+- **Cine & TV**: Personajes de películas y series
+- **Anime & Videojuegos**: Personajes de anime y videojuegos
 
-- **Instagram:** [@grayamigurumis](https://www.instagram.com/grayamigurumis)
-- **WhatsApp:** +56 9 9283 4268
-- **Ubicación:** Punta Arenas, Chile
+### Integración WhatsApp
 
-## 📄 Licencia
+Todos los botones "Consultar" y "Añadir al carrito" abren WhatsApp con un mensaje precodificado que incluye el nombre del producto.
+
+## 🎯 SEO y Performance
+
+- **Meta tags** completos (title, description, keywords)
+- **Open Graph** tags para redes sociales
+- **Twitter Cards** para compartir en Twitter
+- **Geo tags** para SEO local (Punta Arenas, Chile)
+- **Lazy loading** de imágenes
+- **Lighthouse score** objetivo: ≥ 85 (mobile)
+
+## 📄 Documentación adicional
+
+- **CHANGELOG.md**: Historial de cambios V1 → V2
+- **resumen_tecnico_grayamigurumis_v2.md**: Detalles técnicos completos
+
+## 📞 Contacto
+
+**Gray Amigurumis**  
+📍 Punta Arenas, Chile  
+📱 WhatsApp: +56 9 9283 4268  
+📷 Instagram: [@grayamigurumis](https://www.instagram.com/grayamigurumis)
+
+## 📝 Licencia
 
 © 2025 Gray Amigurumis. Todos los derechos reservados.
 
-## 🤖 Créditos
-
-Proyecto autogenerado por **Manus AI** como parte de la iniciativa **Micro-Sitios Quilicura 2025**.
-
-Fuente de contenido e inspiración visual: Instagram [@grayamigurumis](https://www.instagram.com/grayamigurumis)
-
 ---
 
-**Nota final:** Este proyecto fue creado automáticamente por Manus AI siguiendo las mejores prácticas de desarrollo web, diseño responsive y optimización de performance. El contenido, imágenes y tono de voz fueron extraídos y adaptados del perfil oficial de Instagram de Gray Amigurumis.
+**Desarrollado por Manus AI** · Micro-Sitios Quilicura 2025
 

@@ -1,36 +1,100 @@
-import { Button } from "@/components/ui/button";
-import { MessageCircle } from "lucide-react";
+import { useState } from "react";
 
 export default function Header() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const whatsappNumber = "56992834268";
-  const whatsappMessage = encodeURIComponent("¡Hola! Me interesa conocer más sobre los amigurumis de Gray Amigurumis 🧶");
-  
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+      setMobileMenuOpen(false);
+    }
+  };
+
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center justify-between">
-        <div className="flex items-center gap-2">
-          <span className="text-2xl">🧶</span>
-          <h1 className="text-xl md:text-2xl font-display" style={{color: '#8B5E3C'}}>
-            Gray Amigurumis
-          </h1>
+    <>
+      <header className="sticky top-0 z-50 shadow-md" style={{backgroundColor: 'rgba(255, 192, 203, 0.8)', backdropFilter: 'blur(12px)'}}>
+        <div className="container mx-auto px-6 py-4 flex justify-between items-center">
+          <a href="#" className="font-display text-3xl text-white" style={{textShadow: '1px 1px 2px rgba(139,94,60,0.5)'}}>
+            Grayamigurumis
+          </a>
+          
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex space-x-8">
+            <button onClick={() => scrollToSection('inicio')} className="text-lg font-semibold hover:text-white transition" style={{color: '#8B5E3C'}}>
+              Inicio
+            </button>
+            <button onClick={() => scrollToSection('tienda')} className="text-lg font-semibold hover:text-white transition" style={{color: '#8B5E3C'}}>
+              Tienda
+            </button>
+            <button onClick={() => scrollToSection('nosotros')} className="text-lg font-semibold hover:text-white transition" style={{color: '#8B5E3C'}}>
+              Nosotros
+            </button>
+            <button onClick={() => scrollToSection('contacto')} className="text-lg font-semibold hover:text-white transition" style={{color: '#8B5E3C'}}>
+              Contacto
+            </button>
+          </nav>
+
+          <div className="hidden md:block">
+            <a 
+              href={`https://wa.me/${whatsappNumber}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-2xl"
+            >
+              🛒
+            </a>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button 
+            onClick={() => setMobileMenuOpen(true)}
+            className="md:hidden text-3xl text-white"
+          >
+            ☰
+          </button>
         </div>
-        
-        <Button 
-          asChild
-          className="bg-[#25D366] hover:bg-[#20BA5A] text-white"
+      </header>
+
+      {/* Mobile Menu Overlay */}
+      <div 
+        className={`fixed top-0 right-0 h-full w-64 shadow-lg p-8 md:hidden transition-transform duration-300 ease-in-out z-50 ${
+          mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}
+        style={{backgroundColor: '#FFC0CB'}}
+      >
+        <button 
+          onClick={() => setMobileMenuOpen(false)}
+          className="absolute top-4 right-4 text-3xl text-white"
         >
+          &times;
+        </button>
+        
+        <nav className="flex flex-col space-y-6 mt-12">
+          <button onClick={() => scrollToSection('inicio')} className="text-xl text-white font-semibold text-left">
+            Inicio
+          </button>
+          <button onClick={() => scrollToSection('tienda')} className="text-xl text-white font-semibold text-left">
+            Tienda
+          </button>
+          <button onClick={() => scrollToSection('nosotros')} className="text-xl text-white font-semibold text-left">
+            Nosotros
+          </button>
+          <button onClick={() => scrollToSection('contacto')} className="text-xl text-white font-semibold text-left">
+            Contacto
+          </button>
           <a 
-            href={`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`}
+            href={`https://wa.me/${whatsappNumber}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2"
+            className="text-xl text-white font-semibold"
           >
-            <MessageCircle className="h-4 w-4" />
-            <span className="hidden sm:inline">Contactar</span>
+            Carrito 🛒
           </a>
-        </Button>
+        </nav>
       </div>
-    </header>
+    </>
   );
 }
 

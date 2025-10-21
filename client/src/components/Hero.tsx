@@ -1,71 +1,57 @@
-import { Button } from "@/components/ui/button";
-import { MessageCircle, Instagram } from "lucide-react";
-
 export default function Hero() {
-  const whatsappNumber = "56992834268";
-  const whatsappMessage = encodeURIComponent("¡Hola! Quiero hacer un pedido personalizado 🧸");
-  
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-[#E8D5C4]/30 to-background py-12 md:py-20">
-      <div className="container">
-        <div className="grid gap-8 md:grid-cols-2 md:gap-12 items-center">
-          {/* Texto */}
-          <div className="space-y-6 text-center md:text-left">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-display leading-tight" style={{color: '#8B5E3C'}}>
-              Tejidos con Ternura
-            </h2>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-lg mx-auto md:mx-0">
-              Cada amigurumi es una creación única, hecha a mano con dedicación y pensada para esa persona especial que la recibirá.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-              <Button 
-                asChild
-                size="lg"
-                className="bg-[#25D366] hover:bg-[#20BA5A] text-white text-base"
-              >
-                <a 
-                  href={`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2"
-                >
-                  <MessageCircle className="h-5 w-5" />
-                  Hacer un Pedido
-                </a>
-              </Button>
-              <Button 
-                asChild
-                variant="outline"
-                size="lg"
-                className="text-base"
-              >
-                <a 
-                  href="https://www.instagram.com/grayamigurumis"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2"
-                >
-                  <Instagram className="h-5 w-5" />
-                  Ver Instagram
-                </a>
-              </Button>
-            </div>
-          </div>
-          
-          {/* Imagen */}
-          <div className="relative">
-            <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl bg-white/60 backdrop-blur-sm">
-              <img 
-                src="https://scontent-dfw5-3.cdninstagram.com/v/t51.2885-15/559367774_2652763835076944_5348790701336978053_n.jpg"
-                alt="Homero Simpson Amigurumi"
-                className="w-full h-full object-cover"
-                loading="eager"
-              />
-            </div>
-            {/* Decoración */}
-            <div className="absolute -top-4 -right-4 w-24 h-24 bg-accent rounded-full opacity-50 blur-2xl"></div>
-            <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-secondary rounded-full opacity-50 blur-2xl"></div>
-          </div>
+    <section 
+      id="inicio" 
+      className="relative flex items-center justify-center py-20 bg-cover bg-center"
+      style={{
+        minHeight: '60vh',
+        backgroundImage: `url('https://scontent-dfw5-3.cdninstagram.com/v/t51.2885-15/559367774_2652763835076944_5348790701336978053_n.jpg')`,
+      }}
+    >
+      <div className="absolute inset-0" style={{backgroundColor: 'rgba(0,0,0,0.1)'}}></div>
+      
+      <div className="relative container mx-auto px-6 text-center">
+        <div 
+          className="inline-block p-8 md:p-12 rounded-xl shadow-lg"
+          style={{backgroundColor: 'rgba(255,255,255,0.6)', backdropFilter: 'blur(4px)'}}
+        >
+          <h1 className="font-display text-5xl md:text-7xl mb-4" style={{color: '#8B5E3C'}}>
+            Hecho a mano, con el corazón
+          </h1>
+          <p className="text-2xl md:text-3xl font-semibold mb-8" style={{color: 'rgba(139,94,60,0.8)'}}>
+            Tus personajes favoritos en crochet
+          </p>
+          <p className="text-lg max-w-2xl mx-auto mb-10 leading-relaxed" style={{color: '#8B5E3C'}}>
+            Amigurumis y accesorios únicos, confeccionados a pedido con toda la dedicación de una emprendedora regional.
+          </p>
+          <button
+            onClick={() => scrollToSection('tienda')}
+            className="font-bold py-3 px-8 rounded-full text-lg transition-all duration-300"
+            style={{
+              backgroundColor: '#FFC0CB',
+              color: '#8B5E3C',
+              boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = '#A9D1A7';
+              e.currentTarget.style.transform = 'translateY(-2px)';
+              e.currentTarget.style.boxShadow = '0 6px 8px rgba(0,0,0,0.15)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = '#FFC0CB';
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
+            }}
+          >
+            Ver creaciones
+          </button>
         </div>
       </div>
     </section>

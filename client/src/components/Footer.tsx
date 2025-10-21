@@ -1,78 +1,57 @@
-import { Instagram, MapPin, Phone } from "lucide-react";
-
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const whatsappNumber = "56992834268";
+  const message = encodeURIComponent("¿Tienes una idea? ¡La tejo para ti! Contáctame para cotizar tu próximo amigurumi.");
   
   return (
-    <footer className="border-t bg-[#F5EBE0]/50 py-12">
-      <div className="container">
-        <div className="grid gap-8 md:grid-cols-3 mb-8">
-          {/* Branding */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-2">
-              <span className="text-2xl">🧶</span>
-              <h3 className="text-xl font-display" style={{color: '#8B5E3C'}}>Gray Amigurumis</h3>
-            </div>
-            <p className="text-sm text-muted-foreground">
-              Creaciones únicas tejidas a mano con amor y dedicación desde Punta Arenas, Chile.
-            </p>
-          </div>
-          
-          {/* Contacto */}
-          <div className="space-y-4">
-            <h4 className="font-semibold text-lg">Contacto</h4>
-            <div className="space-y-2 text-sm">
-              <div className="flex items-center gap-2 text-muted-foreground">
-                <MapPin className="h-4 w-4 shrink-0" />
-                <span>Punta Arenas, Chile</span>
-              </div>
-              <div className="flex items-center gap-2 text-muted-foreground">
-                <Phone className="h-4 w-4 shrink-0" />
-                <a href="tel:+56992834268" className="hover:text-primary transition-colors">
-                  +56 9 9283 4268
-                </a>
-              </div>
-              <div className="flex items-center gap-2 text-muted-foreground">
-                <Instagram className="h-4 w-4 shrink-0" />
-                <a 
-                  href="https://www.instagram.com/grayamigurumis" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="hover:text-primary transition-colors"
-                >
-                  @grayamigurumis
-                </a>
-              </div>
-            </div>
-          </div>
-          
-          {/* Horario */}
-          <div className="space-y-4">
-            <h4 className="font-semibold text-lg">Pedidos</h4>
-            <p className="text-sm text-muted-foreground">
-              Disponible por encargo. Los tiempos de entrega varían según la complejidad del proyecto.
-            </p>
-            <p className="text-sm text-muted-foreground">
-              También ofrecemos clases de amigurumi para principiantes. ¡Consulta por próximas fechas!
-            </p>
-          </div>
+    <footer 
+      id="contacto" 
+      className="pt-20 pb-10"
+      style={{backgroundColor: '#8B5E3C', color: '#FFF8F0'}}
+    >
+      <div className="container mx-auto px-6 text-center">
+        <h2 className="font-display text-5xl mb-6">
+          Grayamigurumis
+        </h2>
+        <p className="text-lg mb-10 leading-relaxed">
+          ¿Tienes una idea? ¡La tejo para ti! Contáctame para cotizar tu próximo amigurumi.
+        </p>
+        <a 
+          href={`https://wa.me/${whatsappNumber}?text=${message}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block font-bold py-3 px-8 rounded-full text-lg mb-12 transition-all duration-300"
+          style={{
+            backgroundColor: '#FFC0CB',
+            color: '#8B5E3C',
+            boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = '#A9D1A7';
+            e.currentTarget.style.transform = 'translateY(-2px)';
+            e.currentTarget.style.boxShadow = '0 6px 8px rgba(0,0,0,0.15)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = '#FFC0CB';
+            e.currentTarget.style.transform = 'translateY(0)';
+            e.currentTarget.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
+          }}
+        >
+          Pedidos Personalizados
+        </a>
+        <div className="flex justify-center space-x-6 mb-12 text-4xl">
+          <a 
+            href="https://www.instagram.com/grayamigurumis/" 
+            target="_blank"
+            rel="noopener noreferrer"
+            className="transition-colors hover:text-[#FFC0CB]"
+          >
+            📷
+          </a>
         </div>
-        
-        {/* Copyright */}
-        <div className="border-t pt-8 text-center text-sm text-muted-foreground space-y-2">
-          <p>© {currentYear} Gray Amigurumis. Todos los derechos reservados.</p>
-          <p className="text-xs">
-            Proyecto autogenerado por <strong>Manus AI</strong> · Micro-Sitios Quilicura 2025 · 
-            Fuente Instagram <a 
-              href="https://www.instagram.com/grayamigurumis" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="hover:text-primary transition-colors"
-            >
-              @grayamigurumis
-            </a>
-          </p>
-        </div>
+        <p>
+          &copy; {currentYear} Grayamigurumis. Tejido con amor desde Punta Arenas, Chile.
+        </p>
       </div>
     </footer>
   );
