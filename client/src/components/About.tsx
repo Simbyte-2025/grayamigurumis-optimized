@@ -21,7 +21,7 @@ export default function About() {
   ];
   
   return (
-    <section className="py-16 md:py-24 bg-muted/30">
+    <section className="py-16 md:py-24 bg-[#A9D1A7]/20">
       <div className="container">
         <div className="max-w-3xl mx-auto text-center space-y-6 mb-12">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-display text-primary">

@@ -6,7 +6,7 @@ export default function Hero() {
   const whatsappMessage = encodeURIComponent("¡Hola! Quiero hacer un pedido personalizado 🧸");
   
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-secondary/20 to-background py-12 md:py-20">
+    <section className="relative overflow-hidden bg-gradient-to-b from-[#E8D5C4]/30 to-background py-12 md:py-20">
       <div className="container">
         <div className="grid gap-8 md:grid-cols-2 md:gap-12 items-center">
           {/* Texto */}
@@ -54,7 +54,7 @@ export default function Hero() {
           
           {/* Imagen */}
           <div className="relative">
-            <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl">
+            <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl bg-white/60 backdrop-blur-sm">
               <img 
                 src="https://scontent-dfw5-3.cdninstagram.com/v/t51.2885-15/559367774_2652763835076944_5348790701336978053_n.jpg"
                 alt="Homero Simpson Amigurumi"
