@@ -14,7 +14,7 @@ export default function About() {
               style={{backgroundColor: '#FFF8F0'}}
             >
               <span className="text-4xl font-bold" style={{color: '#8B5E3C'}}>
-                Tu Foto Aqui
+                Tu Foto Aquí
               </span>
             </div>
           </div>
@@ -36,4 +36,5 @@ export default function About() {
     </section>
   );
 }
+
 
