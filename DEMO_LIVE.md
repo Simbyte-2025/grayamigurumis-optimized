@@ -2,7 +2,7 @@
 
 ## 🚀 URL del Demo
 
-**🔗 DEMO EN VIVO**: https://3000-itwykr32t4ppj6850nkuj-b32ec7bb.sandbox.novita.ai
+**🔗 DEMO EN VIVO**: https://3001-itwykr32t4ppj6850nkuj-b32ec7bb.sandbox.novita.ai
 
 ---
 
@@ -21,7 +21,7 @@
 - **Framework**: React 19 + Vite 7
 - **Styling**: Tailwind CSS 4 + Custom CSS
 - **Server**: Vite Dev Server
-- **Puerto**: 3000
+- **Puerto**: 3001
 
 ---
 
@@ -227,7 +227,7 @@ VITE_GEMINI_API_KEY=tu_api_key_aqui
 ```
 
 ### Puertos
-- **Dev Server**: 3000
+- **Dev Server**: 3001
 - **Preview**: 4173
 
 ---
@@ -301,7 +301,7 @@ Este demo representa la **versión 2.0 del UI Prototype** para Grayamigurumis, c
 **Proyecto**: Grayamigurumis  
 **Versión**: 2.0 (UI Prototype)  
 **Branch**: feat/ui-proto-v2-estetica-sin-logica  
-**Demo**: https://3000-itwykr32t4ppj6850nkuj-b32ec7bb.sandbox.novita.ai  
+**Demo**: https://3001-itwykr32t4ppj6850nkuj-b32ec7bb.sandbox.novita.ai  
 **Repositorio**: https://github.com/Simbyte-2025/GreyAmigurumis.Demo  
 **PR**: https://github.com/Simbyte-2025/GreyAmigurumis.Demo/pull/1  
 
