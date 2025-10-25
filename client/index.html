@@ -6,10 +6,10 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1"
     />
-    <link rel="icon" type="image/png" href="%VITE_APP_LOGO%" />
-    <link rel="apple-touch-icon" href="%VITE_APP_LOGO%" />
-    <title>%VITE_APP_TITLE%</title>
-    
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <link rel="apple-touch-icon" href="/logo.png" />
+    <title>Gray Amigurumis</title>
+
     <!-- SEO Meta Tags -->
     <meta name="description" content="Amigurumis únicos tejidos a mano en Punta Arenas, Chile. Personajes, animales y accesorios personalizados hechos con amor y dedicación. Pedidos personalizados disponibles." />
     <meta name="keywords" content="amigurumis, crochet, tejido a mano, Punta Arenas, Chile, artesanía, peluches tejidos, regalos personalizados, amigurumi personalizado" />
@@ -37,10 +37,38 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    <script
-      defer
-      src="%VITE_ANALYTICS_ENDPOINT%/umami"
-      data-website-id="%VITE_ANALYTICS_WEBSITE_ID%"
-    ></script>
+    <script type="module">
+      const logo =
+        import.meta.env.VITE_APP_LOGO ??
+        "/logo.png";
+      const title =
+        import.meta.env.VITE_APP_TITLE ??
+        "Gray Amigurumis";
+
+      const favicon = document.querySelector<HTMLLinkElement>('link[rel="icon"]');
+      if (favicon) {
+        favicon.href = logo;
+      }
+
+      const appleIcon = document.querySelector<HTMLLinkElement>('link[rel="apple-touch-icon"]');
+      if (appleIcon) {
+        appleIcon.href = logo;
+      }
+
+      if (document.title !== title) {
+        document.title = title;
+      }
+
+      const analyticsEndpoint = import.meta.env.VITE_ANALYTICS_ENDPOINT;
+      const analyticsWebsiteId = import.meta.env.VITE_ANALYTICS_WEBSITE_ID;
+
+      if (analyticsEndpoint && analyticsWebsiteId) {
+        const script = document.createElement("script");
+        script.defer = true;
+        script.src = `${analyticsEndpoint.replace(/\\/$/, "")}/umami`;
+        script.dataset.websiteId = analyticsWebsiteId;
+        document.body.appendChild(script);
+      }
+    </script>
   </body>
 </html>
