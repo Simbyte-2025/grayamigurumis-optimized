@@ -1,309 +1,268 @@
-# 🎨 Grayamigurumis UI Prototype v2.0 - Cambios Visuales
+# 🎨 Grayamigurumis V2 - Visual Aesthetic Overhaul
 
-## 📋 Resumen
+## 📋 Overview
 
-Este documento detalla los cambios visuales y estéticos implementados en el prototipo v2.0 de Grayamigurumis. Se han aplicado mejoras en la capa visual manteniendo toda la lógica y estructura funcional existente.
+This document describes the visual changes applied in the **feat/ui-proto-v2-estetica-sin-logica** branch. The goal was to recreate the aesthetic layer and visual coherence of the Grayamigurumis project using the GeminiCanvas code as a visual reference, while maintaining all existing logic, hooks, and functions.
 
-## 🎨 Paleta de Colores Artesanal
+## 🎨 New Artisan Palette
 
-### Colores Principales
-- **Coral**: `#E68B6F` - Usado para acentos y hover states
-- **Terracota**: `#C88B77` - Para bordes y detalles
-- **Teal**: `#32808D` - Acentos especiales
-- **Crema**: `#FCF8F3` - Fondos suaves
-- **Menta**: `#7AB89C` - Elementos de éxito
-- **Marrón**: `#8B6F47` - Textos y títulos
+The following color palette was added to create a warm, handcrafted aesthetic:
 
-### Colores de Texto
-- **Texto Principal**: `#4A5568` - Gris oscuro cálido para mejor contraste
-- **Texto Secundario**: `#777C7C` - Gris medio para textos descriptivos
-
-## 📁 Ubicación de Assets
-
-### Texturas de Papel (Seamless)
-Ubicadas en: `/client/public/assets/textures/`
-
-- `paper-cream-1024.png` - Base #FFF9F5 (Hero)
-- `paper-beige-1024.png` - Base #F8EBDD (Favoritos)
-- `paper-warm-1024.png` - Base #F5E6D3 (Sobre Nosotros)
-- `paper-neutral-1024.png` - Base #FCF8F3 (Catálogo/Footer)
-- `paper-parchment-1024.png` - Base #EFE7DE (Testimonios)
-
-**Características**:
-- Tamaño: 1024x1024px
-- Formato: PNG con transparencia
-- Contraste: ≤ 6%
-- Azulejables (seamless)
-- Sin marcas de agua
-
-### Íconos SVG
-Ubicados en: `/client/public/assets/icons/`
-
-- `whatsapp.svg` - Ícono oficial de WhatsApp (monocromo)
-- `instagram.svg` - Ícono oficial de Instagram (monocromo)
-
-**Características**:
-- Formato: SVG inline
-- `viewBox` limpio
-- `aria-hidden="true"` y `focusable="false"`
-- Color controlado por `currentColor`
-
-## ⚡ Variables CSS Añadidas
-
-### Duraciones de Animación
 ```css
---duration-instant: 200ms;
---duration-quick: 450ms;
---duration-smooth: 600ms;
---duration-gentle: 700ms;
---duration-slow: 800ms;
---duration-heartbeat: 1500ms;
+--c-coral: #E68B6F;        /* Coral for borders and accents */
+--c-terracota: #C88B77;    /* Terracota for hover states */
+--c-teal: #32808D;         /* Teal for focus states */
+--c-crema: #FCF8F3;        /* Cream for backgrounds */
+--c-menta: #7AB89C;        /* Mint for success states */
+--c-marron: #8B6F47;       /* Brown for text */
 ```
+
+## ⏱️ Animation System
+
+### Durations
+- `--duration-instant`: 200ms (quick interactions)
+- `--duration-quick`: 450ms (button hovers)
+- `--duration-smooth`: 600ms (card transitions)
+- `--duration-gentle`: 700ms (soft animations)
+- `--duration-slow`: 800ms (scroll animations)
+- `--duration-heartbeat`: 1500ms (pulsing effects)
 
 ### Easing Functions
+- `--ease-natural`: cubic-bezier(0.16, 1, 0.3, 1) - Smooth natural motion
+- `--ease-bounce`: cubic-bezier(0.34, 1.56, 0.64, 1) - Bouncy effect
+- `--ease-soft`: cubic-bezier(0.4, 0, 0.2, 1) - Gentle acceleration
+- `--ease-elastic`: cubic-bezier(0.68, -0.55, 0.265, 1.55) - Elastic bounce
+
+## 🖼️ Assets Created
+
+### Textures (`/client/public/assets/textures/`)
+Five seamless paper textures (1024x1024px) with subtle grain:
+
+1. **paper-cream-1024.png** - Base color `#FFF9F5` (Hero section)
+2. **paper-beige-1024.png** - Base color `#F8EBDD` (Featured Products)
+3. **paper-warm-1024.png** - Base color `#F5E6D3` (About section)
+4. **paper-neutral-1024.png** - Base color `#FCF8F3` (Catalog section)
+5. **paper-parchment-1024.png** - Base color `#EFE7DE` (Testimonials)
+
+All textures have less than 6% contrast for subtle, non-intrusive backgrounds.
+
+### Icons (`/client/public/assets/icons/`)
+Official brand SVG icons:
+
+1. **whatsapp.svg** - WhatsApp official logo
+2. **instagram.svg** - Instagram official logo
+
+Both icons are:
+- Monochrome (use `currentColor`)
+- Clean `viewBox` with no watermarks
+- Include `aria-hidden="true"` and `focusable="false"`
+- Container elements have descriptive `aria-label` and `title`
+
+## 🎭 Visual Components
+
+### Product Cards (.producto-card)
+- **Aspect Ratio**: 4:5 for images (`aspect-ratio: 4 / 5`)
+- **Border**: 2px solid coral with low opacity (20%)
+- **Shadow**: Soft default shadow with coral tint on hover
+- **Animation**: Gentle lift on hover (`translateY(-8px) scale(1.02)`)
+- **Image Zoom**: 1.05 scale on hover with bounce easing
+- **Title**: Color transition to coral on hover
+- **Price**: Elastic scale animation (1.08) on hover
+
+### Buttons
+
+#### WhatsApp Button (.btn-whatsapp)
+- **Background**: WhatsApp green `#25D366`
+- **Animation**: Continuous heartbeat pulse on hover
+- **Scale**: 1.05 on hover with additional ring shadow
+- **Icon**: WhatsApp SVG with scale and bounce animation
+
+#### Comprar/Pay Button (.btn-comprar)
+- **Style**: Transparent with pink border
+- **Animation**: Soft fill effect from left to right
+- **Fill Color**: Pink `#E91E63`
+- **Duration**: 700ms gentle timing
+- **Disabled State**: Gray with no hover effects
+
+### Category Filters (.categoria-btn)
+- **Inactive**: Pink background `#F4C7D4`
+- **Active**: Blue background `#B8D4E3` with scale (1.05)
+- **Animation**: Filter pulse effect when activated
+- **Hover**: Slight lift (`translateY(-2px)`) with shadow
+
+### Testimonial Cards (.testimonio-card)
+- **Border**: 2px dashed with stitched appearance
+- **Color**: Terracota `rgba(200, 139, 119, 0.5)`
+- **Quote Mark**: Large decorative quotation with opacity transition
+- **Hover**: Subtle lift with border color intensification
+
+## 🎬 Animation Classes
+
+### Floating Animations
+- `.float-animation`: 3-second gentle float with rotation
+- `.float-animation-slow`: 8-second slow vertical float (for hero box)
+
+### Hero Animations
+- `.hero-title`: Fade in up animation (800ms)
+- `.hero-subtitle`: Fade in up with 200ms delay
+- `.hero-cta`: Fade in up with 400ms delay
+
+### Scroll Animations
+- `.fade-in-scroll`: Opacity and translateY transition
+- `.visible`: Triggered by IntersectionObserver
+- Staggered delays for multiple elements (0-500ms)
+
+## 🏗️ Section Backgrounds
+
+All sections use the `.section-paper` utility class with specific background textures:
+
+| Section | Background Class | Color | Texture |
+|---------|-----------------|-------|---------|
+| Hero | `bg-hero` | `#FFF9F5` | paper-cream |
+| Featured | `bg-favs` | `#F8EBDD` | paper-beige |
+| About | `bg-about` | `#F5E6D3` | paper-warm |
+| Catalog | `bg-catalog` | `#FCF8F3` | paper-neutral |
+| Testimonials | `bg-quotes` | `#EFE7DE` | paper-parchment |
+| Footer | `bg-footer` | `#EDE8E3` | paper-neutral |
+
+## ♿ Accessibility Improvements
+
+### Motion Reduction
 ```css
---ease-natural: cubic-bezier(0.16, 1, 0.3, 1);
---ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
---ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
---ease-elastic: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+@media (prefers-reduced-motion: reduce) {
+  /* All animations reduced to 0.01ms duration */
+  /* Heartbeat animation disabled */
+}
 ```
 
-### Sombras Contextuales
+### ARIA Labels
+- All icon-only buttons have `aria-label` attributes
+- All clickable icons have descriptive `title` attributes
+- All SVG icons have `aria-hidden="true"` and `focusable="false"`
+- Category filter buttons have `aria-pressed` state
+- Mobile menu has proper dialog role and labeling
+
+### Keyboard Navigation
+- All interactive elements are keyboard accessible
+- Focus states preserved with ring utilities
+- Tab order follows logical document flow
+
+## 🎯 Performance Optimizations
+
+### Hardware Acceleration
+- `transform: translateZ(0)` for animated elements
+- `will-change: transform` for hover-enabled elements
+- `backface-visibility: hidden` to prevent flickering
+
+### Conditional Will-Change
 ```css
---shadow-card-default: 0 2px 8px rgba(0, 0, 0, 0.06);
---shadow-card-hover: 0 12px 24px rgba(0, 0, 0, 0.08), 0 4px 8px rgba(230, 139, 111, 0.12);
+.producto-card:not(:hover) {
+  will-change: auto; /* Reset after animation */
+}
 ```
 
-## 🎬 Animaciones Implementadas
-
-### 1. Tarjetas de Producto - "Gentle Lift"
-- **Trigger**: Hover
-- **Efecto**: Elevación suave hacia arriba con escala sutil
-- **Transform**: `translateY(-8px) scale(1.02)`
-- **Sombra dinámica** con toque coral
-- **Aspect Ratio**: 4:5 mantenido
-- **Transición imagen**: Zoom interno con bounce
-
-### 2. Botón WhatsApp - "Heartbeat Pulse"
-- **Trigger**: Hover
-- **Efecto**: Latido suave continuo
-- **Animación**: `@keyframes gentleHeartbeat`
-- **Duración**: 1500ms infinito
-- **Escala**: Oscila entre 1.05 y 1.08
-
-### 3. Botón Comprar - "Soft Fill"
-- **Trigger**: Hover
-- **Efecto**: Relleno progresivo de izquierda a derecha
-- **Pseudo-elemento**: `::before` con width animado
-- **Transición de color**: De transparente a rosa
-
-### 4. Filtros de Categoría - "Smooth Transition"
-- **Estado activo**: Fondo #B8D4E3 con scale(1.05)
-- **Animación pulse**: Al activar
-- **Hover**: Elevación y escala sutil
-
-### 5. Testimonios - "Stitched Border"
-- **Borde**: `2px dashed rgba(200, 139, 119, 0.5)`
-- **Hover**: Elevación suave con borde más visible
-- **Comillas decorativas** con transición de opacidad
-
-### 6. Logo Flotante - "Gentle Float"
-- **Animación**: Flotación suave 3s infinito
-- **Transform**: `translateY(-8px) rotate(5deg)` en punto medio
-- **Aplicado a**: Logo circular del header
-
-### 7. Hero - "Float Animation Slow"
-- **Animación**: Flotación muy lenta 8s infinito
-- **Efecto**: Caja de contenido flotando sutilmente
-- **Transform**: `translateY(-6px)` en punto medio
-
-### 8. Scroll Reveal - "Fade In"
-- **Efecto**: Aparición progresiva al hacer scroll
-- **Clase**: `.fade-in-scroll`
-- **Observer**: IntersectionObserver en App.tsx
-- **Delays escalonados**: 0-500ms para elementos consecutivos
-
-## 📐 Fondos por Sección
-
-| Sección | Clase CSS | Color Base | Textura |
-|---------|-----------|------------|---------|
-| Hero | `section-paper bg-hero` | #FFF9F5 | paper-cream |
-| Favoritos | `section-paper bg-favs` | #F8EBDD | paper-beige |
-| Sobre Nosotros | `section-paper bg-about` | #F5E6D3 | paper-warm |
-| Catálogo | `section-paper bg-catalog` | #FCF8F3 | paper-neutral |
-| Testimonios | `section-paper bg-quotes` | #EFE7DE | paper-parchment |
-| Footer | `section-paper bg-footer` | #EDE8E3 | paper-neutral |
-
-## ♿ Accesibilidad
-
-### Mejoras Implementadas
-1. **Aria Labels**: Todos los botones y enlaces con íconos tienen `aria-label` y `title`
-2. **Focus States**: Mejorados con outlines claros
-3. **Contraste**: ≥ 4.5:1 en todos los textos
-4. **Motion Reduction**: 
-   ```css
-   @media (prefers-reduced-motion: reduce) {
-     /* Animaciones deshabilitadas */
-   }
-   ```
-5. **Keyboard Navigation**: Mantenida y mejorada
-6. **Semantic HTML**: Roles ARIA para diálogos y navegación
-
-## 🎯 Componentes Modificados
-
-### Header.tsx
-- Logo con círculo flotante y animación
-- Ícono SVG de WhatsApp inline
-- Menú móvil mejorado con accesibilidad
-- Colores actualizados a nueva paleta
-
-### Hero.tsx
-- Caja flotante lenta con fondo semi-transparente
-- Clases de animación aplicadas (hero-title, hero-subtitle, hero-cta)
-- Background con textura papel crema
-
-### FeaturedProducts.tsx
-- Tarjetas con clase `.producto-card`
-- Botones con clases `.btn-whatsapp` y `.btn-comprar`
-- Aspect ratio 4:5 en imágenes
-- Fade-in-scroll en tarjetas
-
-### Catalog.tsx
-- Filtros con clase `.categoria-btn`
-- Grid responsive mejorado
-- Tarjetas coherentes con Featured
-- Fondo con textura papel neutral
-
-### About.tsx
-- Imagen circular flotante
-- Borde blanco decorativo
-- Fondo con textura papel warm
-- Responsive optimizado
-
-### Testimonials.tsx
-- Clase `.testimonio-card` con borde cosido
-- Comillas decorativas animadas
-- Fondo con textura papel parchment
-
-### Footer.tsx
-- Íconos SVG de Instagram y WhatsApp inline
-- Colores actualizados (#4A5568, #FFF9F5)
-- Fondo con textura
-- Responsive mejorado
-
-### App.tsx
-- IntersectionObserver añadido para scroll animations
-- Cleanup en useEffect
-
-## 🔧 Clases CSS Nuevas
-
-### Clases de Componentes
-- `.producto-card` - Tarjetas de producto con animaciones
-- `.btn-whatsapp` - Botón WhatsApp con heartbeat
-- `.btn-comprar` - Botón comprar con fill animation
-- `.categoria-btn` - Filtros de categoría
-- `.testimonio-card` - Tarjetas de testimonio con borde cosido
-
-### Clases de Animación
-- `.float-animation` - Flotación rápida (3s)
-- `.float-animation-slow` - Flotación lenta (8s)
-- `.fade-in-scroll` - Aparición al scroll
-- `.hero-title` - Entrada con fadeInUp
-- `.hero-subtitle` - Entrada con fadeInUp + delay
-- `.hero-cta` - Entrada con fadeInUp + delay mayor
-
-### Clases de Fondo
-- `.section-paper` - Base para texturas
-- `.bg-hero`, `.bg-favs`, `.bg-about`, etc. - Fondos específicos
+### Mobile Optimizations
+- Reduced lift animations on mobile (`translateY(-4px)` instead of `-8px`)
+- Larger button padding for touch targets (12px vs 10px)
+- Simplified animations for better performance
 
 ## 📱 Responsive Design
 
 ### Breakpoints
-- **Mobile**: < 768px - Animaciones reducidas, espaciado compacto
-- **Tablet**: 768px - 1024px - Grid adaptativo
-- **Desktop**: > 1024px - Experiencia completa
+- **Mobile**: < 768px - Single column, larger touch targets
+- **Tablet**: 768px - 1024px - Two columns for products
+- **Desktop**: > 1024px - Full multi-column layouts
 
-### Optimizaciones Móviles
+### Grid Adjustments
 ```css
-@media (max-width: 768px) {
-  .producto-card:hover {
-    transform: translateY(-4px) scale(1.01); /* Menos elevación */
-  }
-  .btn-whatsapp, .btn-comprar {
-    padding: 12px 24px; /* Botones más grandes */
-    font-size: 15px;
-  }
+.productos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px; /* 16px on mobile */
 }
 ```
 
-## ⚡ Performance
+## 🔍 Custom Scrollbar
 
-### Optimizaciones Implementadas
-1. **GPU Acceleration**: `will-change: transform` en elementos animados
-2. **Backface Visibility**: `hidden` para mejor rendering
-3. **Lazy Loading**: Imágenes con `loading="lazy"`
-4. **Error Handling**: onError en todas las imágenes
-5. **Cleanup automático**: `will-change: auto` al finalizar hover
+Styled scrollbar matching the artisan theme:
+- **Track**: Cream background
+- **Thumb**: Coral color with terracota on hover
+- **Width**: 10px
+- **Border radius**: 5px
 
-## 🧪 Testing Sugerido
+## ✨ Key Visual Changes Summary
 
-### Desktop (> 1024px)
-- [ ] Animaciones smooth en todas las tarjetas
-- [ ] Heartbeat en botón WhatsApp
-- [ ] Fill animation en botón Comprar
-- [ ] Scroll reveal funcionando
-- [ ] Texturas visibles y alineadas
+1. ✅ **Paper Textures**: All sections now have subtle, warm paper backgrounds
+2. ✅ **Product Cards**: 4:5 aspect ratio with gentle lift and coral accents
+3. ✅ **WhatsApp Button**: Heartbeat animation with SVG icon
+4. ✅ **Comprar Button**: Soft fill animation with disabled state support
+5. ✅ **Category Filters**: Smooth transitions with pulse effect
+6. ✅ **Testimonials**: Stitched dashed borders with quote marks
+7. ✅ **Floating Animations**: Logo and hero box have subtle float effects
+8. ✅ **Scroll Animations**: Fade-in with staggered delays
+9. ✅ **Icons**: Official WhatsApp and Instagram SVGs inline
+10. ✅ **Accessibility**: Motion reduction, ARIA labels, focus states
 
-### Tablet (768px - 1024px)
-- [ ] Grid responsive correcto
-- [ ] Animaciones funcionando
-- [ ] Touch interactions suaves
+## 🚀 What Was NOT Changed
 
-### Mobile (< 768px)
-- [ ] Animaciones reducidas activas
-- [ ] Botones con tamaño táctil adecuado
-- [ ] Menú móvil accesible
-- [ ] Motion reduction respetado
+- ❌ Component logic and state management
+- ❌ React hooks and effects
+- ❌ API integrations (Gemini, WhatsApp links)
+- ❌ Routing and navigation logic
+- ❌ Data structures (products, testimonials)
+- ❌ TypeScript types and interfaces
+- ❌ Build configuration (Vite, Tailwind)
 
-### Accesibilidad
-- [ ] Navegación por teclado completa
-- [ ] Aria-labels presentes
-- [ ] Contraste ≥ 4.5:1
-- [ ] Motion reduction funcional
+## 📦 Files Modified
 
-## 🚀 Próximos Pasos
+### New Files
+- `/client/public/assets/textures/paper-cream-1024.png`
+- `/client/public/assets/textures/paper-beige-1024.png`
+- `/client/public/assets/textures/paper-warm-1024.png`
+- `/client/public/assets/textures/paper-neutral-1024.png`
+- `/client/public/assets/textures/paper-parchment-1024.png`
+- `/client/public/assets/icons/whatsapp.svg`
+- `/client/public/assets/icons/instagram.svg`
 
-1. **Build de Producción**: Probar `pnpm build` para validar assets
-2. **Lighthouse Audit**: Verificar scores de performance y accesibilidad
-3. **Cross-browser Testing**: Verificar en Chrome, Firefox, Safari
-4. **Mobile Device Testing**: Probar en dispositivos reales
+### Modified Files
+- `/client/src/index.css` - Added all visual styles and animations
+- All component files already had the correct classes applied
 
-## 📝 Notas Técnicas
+## 🎓 Testing Checklist
 
-- **Lógica NO modificada**: Hooks, funciones y rutas intactas
-- **Componentes shadcn/ui**: Mantenidos sin cambios
-- **TypeScript**: No hay errores de tipo
-- **Tailwind**: Clases custom agregadas vía @layer components
-- **Assets locales**: No se depende de CDNs externos
+### Visual QA
+- [ ] Hero section has floating box with cream paper texture
+- [ ] Product cards maintain 4:5 aspect ratio
+- [ ] Product cards lift gently on hover with coral borders
+- [ ] WhatsApp button pulses with heartbeat animation
+- [ ] Comprar button fills with pink color smoothly
+- [ ] Category filters pulse when activated
+- [ ] Testimonials have dashed "stitched" borders
+- [ ] All sections have distinct paper textures
+- [ ] Scroll animations trigger smoothly
+- [ ] Logo floats gently in header
 
-## 🔍 Verificación de Cambios
+### Accessibility
+- [ ] All animations respect `prefers-reduced-motion`
+- [ ] Icon buttons have aria-labels
+- [ ] Keyboard navigation works correctly
+- [ ] Focus states are visible
+- [ ] Color contrast meets WCAG AA standards
 
-```bash
-# Ver archivos modificados
-git status
+### Responsive
+- [ ] Mobile layout works correctly (< 768px)
+- [ ] Tablet layout shows proper grid (768px-1024px)
+- [ ] Desktop shows full multi-column layout (> 1024px)
+- [ ] Touch targets are large enough on mobile
+- [ ] Animations are simplified on mobile
 
-# Ver diff de cambios
-git diff
+## 📸 Screenshots
 
-# Compilar y verificar
-pnpm build
-
-# Ejecutar dev server
-pnpm dev
-```
+_(Screenshots would be added to PR showing desktop, tablet, and mobile views)_
 
 ---
 
-**Desarrollado para**: Grayamigurumis - Prototipo v2.0  
-**Fecha**: Octubre 2025  
-**Branch**: `feat/ui-proto-v2-estetica-sin-logica`
+**Version**: 2.0  
+**Date**: 2025-10-25  
+**Branch**: feat/ui-proto-v2-estetica-sin-logica  
+**Author**: Manus AI / GenSpark (Sonet 4.5)
