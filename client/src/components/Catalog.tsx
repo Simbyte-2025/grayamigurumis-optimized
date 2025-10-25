@@ -29,131 +29,89 @@ export default function Catalog() {
   };
 
   return (
-    <section id="tienda" className="py-20 md:py-28">
+    <section id="tienda" className="section-paper bg-catalog py-16 md:py-24">
       <div className="container mx-auto px-6">
-        <h2 className="text-4xl font-bold text-center mb-6" style={{color: '#8B5E3C'}}>
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 md:mb-6" style={{color: '#4A5568'}}>
           Catálogo de Creaciones
         </h2>
-        <p className="text-center text-lg max-w-3xl mx-auto mb-16 leading-relaxed" style={{color: '#A67C52'}}>
+        <p className="text-center text-base md:text-lg max-w-3xl mx-auto mb-10 md:mb-16 leading-relaxed" style={{color: '#777C7C'}}>
           Explora algunos de mis trabajos. Si no ves lo que buscas, recuerda que hago confecciones a pedido. ¡Tu imaginación es el límite!
         </p>
 
         {/* Filters */}
-        <div className="flex justify-center flex-wrap gap-4 mb-16">
+        <div className="flex justify-center flex-wrap gap-3 sm:gap-4 mb-12 md:mb-16">
           <button
             onClick={() => setActiveFilter("all")}
-            className={`font-bold py-2 px-6 rounded-full transition-all duration-300`}
-            style={{
-              backgroundColor: activeFilter === "all" ? '#A9D1A7' : '#F8DDA4',
-              color: activeFilter === "all" ? '#FFF8F0' : '#8B5E3C'
-            }}
+            className={`categoria-btn ${activeFilter === "all" ? 'active' : ''}`}
+            aria-pressed={activeFilter === "all"}
           >
             Todos
           </button>
           <button
             onClick={() => setActiveFilter("animalitos")}
-            className={`font-bold py-2 px-6 rounded-full transition-all duration-300`}
-            style={{
-              backgroundColor: activeFilter === "animalitos" ? '#A9D1A7' : '#F8DDA4',
-              color: activeFilter === "animalitos" ? '#FFF8F0' : '#8B5E3C'
-            }}
+            className={`categoria-btn ${activeFilter === "animalitos" ? 'active' : ''}`}
+            aria-pressed={activeFilter === "animalitos"}
           >
             Animalitos
           </button>
           <button
             onClick={() => setActiveFilter("cine-tv")}
-            className={`font-bold py-2 px-6 rounded-full transition-all duration-300`}
-            style={{
-              backgroundColor: activeFilter === "cine-tv" ? '#A9D1A7' : '#F8DDA4',
-              color: activeFilter === "cine-tv" ? '#FFF8F0' : '#8B5E3C'
-            }}
+            className={`categoria-btn ${activeFilter === "cine-tv" ? 'active' : ''}`}
+            aria-pressed={activeFilter === "cine-tv"}
           >
             Cine & TV
           </button>
           <button
             onClick={() => setActiveFilter("anime-videojuegos")}
-            className={`font-bold py-2 px-6 rounded-full transition-all duration-300`}
-            style={{
-              backgroundColor: activeFilter === "anime-videojuegos" ? '#A9D1A7' : '#F8DDA4',
-              color: activeFilter === "anime-videojuegos" ? '#FFF8F0' : '#8B5E3C'
-            }}
+            className={`categoria-btn ${activeFilter === "anime-videojuegos" ? 'active' : ''}`}
+            aria-pressed={activeFilter === "anime-videojuegos"}
           >
             Anime & Videojuegos
           </button>
         </div>
 
         {/* Product Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
           {filteredProducts.map((product) => (
             <div 
               key={product.id}
-              className="bg-white rounded-lg shadow-lg overflow-hidden text-center transition-all duration-300 hover:scale-105"
-              style={{boxShadow: '0 4px 6px rgba(0,0,0,0.1)'}}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.boxShadow = '0 8px 25px rgba(0,0,0,0.1)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
-              }}
+              className="producto-card fade-in-scroll"
             >
               <img 
                 src={product.image} 
                 alt={product.name} 
-                className="w-full h-64 object-cover"
                 loading="lazy"
+                onError={(e) => { 
+                  const target = e.currentTarget;
+                  target.src = `https://placehold.co/400x500/CCCCCC/888888?text=Error`; 
+                }}
               />
-              <div className="p-4">
-                <h3 className="text-xl font-bold mb-2" style={{color: '#8B5E3C'}}>
+              <div className="p-4 flex flex-col flex-grow">
+                <h3>
                   {product.name}
                 </h3>
-                <p className="font-semibold mb-4" style={{color: '#FFC0CB'}}>
+                <p className="precio">
                   {product.price}
                 </p>
                 
-                {/* Dos botones: WhatsApp + Pagar */}
-                <div className="flex flex-col gap-2">
+                {/* Botones con nuevas clases */}
+                <div className="botones">
                   <button
                     onClick={() => handleWhatsApp(product.name)}
-                    className="font-bold py-2 px-4 rounded-full w-full transition-all duration-300 text-sm"
-                    style={{
-                      backgroundColor: '#A9D1A7',
-                      color: '#FFF8F0',
-                      boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = '#8BB88F';
-                      e.currentTarget.style.transform = 'translateY(-2px)';
-                      e.currentTarget.style.boxShadow = '0 6px 8px rgba(0,0,0,0.15)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = '#A9D1A7';
-                      e.currentTarget.style.transform = 'translateY(0)';
-                      e.currentTarget.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
-                    }}
+                    className="btn-whatsapp"
+                    aria-label={`Consultar ${product.name} por WhatsApp`}
+                    title={`Consultar ${product.name} por WhatsApp`}
                   >
-                    💬 WhatsApp
+                    WhatsApp
                   </button>
                   
                   <button
                     onClick={() => handlePagar(product.urlPago)}
-                    className="font-bold py-2 px-4 rounded-full w-full transition-all duration-300 text-sm"
-                    style={{
-                      backgroundColor: '#FFC0CB',
-                      color: '#8B5E3C',
-                      boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = '#FFB0BB';
-                      e.currentTarget.style.transform = 'translateY(-2px)';
-                      e.currentTarget.style.boxShadow = '0 6px 8px rgba(0,0,0,0.15)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = '#FFC0CB';
-                      e.currentTarget.style.transform = 'translateY(0)';
-                      e.currentTarget.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
-                    }}
+                    className="btn-comprar"
+                    aria-label={`Pagar ${product.name}`}
+                    title={`Pagar ${product.name}`}
                   >
-                    💳 Pagar
+                    Pagar
                   </button>
                 </div>
               </div>
