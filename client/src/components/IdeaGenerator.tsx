@@ -76,6 +76,8 @@ export default function IdeaGenerator() {
         <div className="max-w-2xl mx-auto">
           <div className="flex flex-col sm:flex-row gap-4 mb-6">
             <input
+              id="idea"
+              name="idea"
               type="text"
               value={idea}
               onChange={(e) => setIdea(e.target.value)}

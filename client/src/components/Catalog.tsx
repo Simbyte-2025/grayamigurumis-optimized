@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { products } from "../data/products";
+import WhatsAppIcon from "./shared/WhatsAppIcon";
 
 type Category = "all" | "animalitos" | "cine-tv" | "anime-videojuegos";
 
@@ -102,7 +103,7 @@ export default function Catalog() {
                     aria-label={`Consultar ${product.name} por WhatsApp`}
                     title={`Consultar ${product.name} por WhatsApp`}
                   >
-                    WhatsApp
+                    <WhatsAppIcon size={20} title="WhatsApp" />
                   </button>
                   
                   <button

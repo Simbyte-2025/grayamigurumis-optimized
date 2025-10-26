@@ -348,9 +348,14 @@
      BUTTON ANIMATIONS
   ======================================== */
   .btn-whatsapp {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 36px;
+    padding: 0;
     background: #25D366;
     color: white;
-    padding: 10px 20px;
     border: none;
     border-radius: 24px;
     font-weight: 550;
