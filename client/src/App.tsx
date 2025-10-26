@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import ErrorBoundary from "./components/ErrorBoundary";
@@ -12,6 +13,37 @@ import Testimonials from "./components/Testimonials";
 import Footer from "./components/Footer";
 
 function App() {
+  // Scroll animation observer
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          // Optional: Stop observing after animation
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    // Observe all fade-in-scroll elements
+    const targets = document.querySelectorAll('.fade-in-scroll');
+    targets.forEach(el => {
+      observer.observe(el);
+    });
+
+    // Cleanup
+    return () => {
+      targets.forEach(el => {
+        observer.unobserve(el);
+      });
+    };
+  }, []); // Empty array ensures this runs once on mount
+
   return (
     <ErrorBoundary>
       <ThemeProvider defaultTheme="light">

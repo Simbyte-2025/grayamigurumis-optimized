@@ -93,6 +93,37 @@
   --chart-4: #D4A5A5;
   --chart-5: #B8D4D4;
   
+  /* ========================================
+     NUEVA PALETA ARTESANAL - Grayamigurumis V2
+  ======================================== */
+  /* Colores artesanales cálidos */
+  --c-coral: #E68B6F;
+  --c-terracota: #C88B77;
+  --c-teal: #32808D;
+  --c-crema: #FCF8F3;
+  --c-menta: #7AB89C;
+  --c-marron: #8B6F47;
+  
+  /* Duraciones de animación contextuales */
+  --duration-instant: 200ms;
+  --duration-quick: 450ms;
+  --duration-smooth: 600ms;
+  --duration-gentle: 700ms;
+  --duration-slow: 800ms;
+  --duration-heartbeat: 1500ms;
+  
+  /* Easing functions artesanales */
+  --ease-natural: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-elastic: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  
+  /* Sombras contextuales */
+  --shadow-card-default: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-card-hover: 0 12px 24px rgba(0, 0, 0, 0.08), 0 4px 8px rgba(230, 139, 111, 0.12);
+  --shadow-button: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --shadow-button-hover: 0 8px 16px rgba(0, 0, 0, 0.15);
+  
   /* Tipografía */
   --font-sans: "Quicksand", ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
@@ -171,7 +202,7 @@
    * Usage: <div className="container">...</div>
    *
    * For custom widths, use max-w-* utilities directly:
-   * <div className="max-w-6xl mx-auto px-4">...</div>
+   * <div className="max-w-6xl mx-auto px-auto">...</div>
    */
   .container {
     width: 100%;
@@ -198,6 +229,444 @@
   
   .font-display {
     font-family: var(--font-display);
+  }
+
+  /* ========================================
+     SECTION BACKGROUNDS - Paper Textures
+  ======================================== */
+  .section-paper {
+    background-repeat: repeat;
+    background-size: 1024px 1024px;
+  }
+
+  .bg-hero {
+    background-color: #FFF9F5;
+    background-image: url('/assets/textures/paper-cream-1024.png');
+  }
+
+  .bg-favs {
+    background-color: #F8EBDD;
+    background-image: url('/assets/textures/paper-beige-1024.png');
+  }
+
+  .bg-about {
+    background-color: #F5E6D3;
+    background-image: url('/assets/textures/paper-warm-1024.png');
+  }
+
+  .bg-catalog {
+    background-color: #FCF8F3;
+    background-image: url('/assets/textures/paper-neutral-1024.png');
+  }
+
+  .bg-quotes {
+    background-color: #EFE7DE;
+    background-image: url('/assets/textures/paper-parchment-1024.png');
+  }
+
+  .bg-footer {
+    background-color: #EDE8E3;
+    background-image: url('/assets/textures/paper-neutral-1024.png');
+  }
+
+  /* ========================================
+     PRODUCT CARDS - Gentle Lift Animation
+  ======================================== */
+  .producto-card {
+    background: white;
+    border-radius: 16px;
+    padding: 16px;
+    text-align: center;
+    border: 2px solid rgba(230, 139, 111, 0.2);
+    box-shadow: var(--shadow-card-default);
+    transform: translateY(0) scale(1);
+    transform-style: preserve-3d;
+    transition: 
+      transform var(--duration-smooth) var(--ease-natural),
+      box-shadow var(--duration-smooth) var(--ease-natural),
+      border-color var(--duration-smooth) ease;
+    will-change: transform, box-shadow;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .producto-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: var(--shadow-card-hover);
+    border-color: var(--c-coral);
+    cursor: pointer;
+  }
+
+  .producto-card img {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: 12px;
+    display: block;
+    transition: transform var(--duration-gentle) var(--ease-bounce);
+  }
+
+  .producto-card:hover img {
+    transform: scale(1.05);
+  }
+
+  .producto-card h3 {
+    margin: 12px 0 8px;
+    font-size: 18px;
+    color: var(--c-marron);
+    transition: color var(--duration-quick) ease;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .producto-card:hover h3 {
+    color: var(--c-coral);
+  }
+
+  .producto-card .precio {
+    font-size: 20px;
+    font-weight: 600;
+    color: #E91E63;
+    margin: 8px 0 16px;
+    transition: transform var(--duration-quick) var(--ease-elastic);
+  }
+
+  .producto-card:hover .precio {
+    transform: scale(1.08);
+  }
+
+  .producto-card .botones {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  /* ========================================
+     BUTTON ANIMATIONS
+  ======================================== */
+  .btn-whatsapp {
+    background: #25D366;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 24px;
+    font-weight: 550;
+    font-size: 14px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transform: scale(1);
+    transition: all var(--duration-quick) var(--ease-natural);
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.2);
+  }
+
+  .btn-whatsapp:hover {
+    transform: scale(1.05);
+    box-shadow: 
+      0 8px 16px rgba(37, 211, 102, 0.3),
+      0 0 0 4px rgba(37, 211, 102, 0.1);
+    animation: gentleHeartbeat var(--duration-heartbeat) ease-in-out infinite;
+  }
+
+  @keyframes gentleHeartbeat {
+    0%, 100% { 
+      transform: scale(1.05); 
+    }
+    50% { 
+      transform: scale(1.08); 
+    }
+  }
+
+  .btn-whatsapp:active {
+    transform: scale(0.98);
+    transition: transform 100ms ease;
+  }
+
+  .btn-comprar {
+    background: transparent;
+    color: #E91E63;
+    border: 2px solid #E91E63;
+    padding: 10px 20px;
+    border-radius: 24px;
+    font-weight: 550;
+    font-size: 14px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: color var(--duration-smooth) ease;
+  }
+
+  .btn-comprar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background: #E91E63;
+    z-index: -1;
+    transition: width var(--duration-gentle) var(--ease-natural);
+  }
+
+  .btn-comprar:hover {
+    color: white;
+    border-color: #E91E63;
+  }
+
+  .btn-comprar:hover::before {
+    width: 100%;
+  }
+
+  .btn-comprar:active {
+    transform: scale(0.97);
+    transition: transform 100ms ease;
+  }
+
+  .btn-comprar:disabled {
+    background-color: #E0E0E0;
+    color: #9E9E9E;
+    border-color: #E0E0E0;
+    cursor: not-allowed;
+  }
+
+  .btn-comprar:disabled:hover {
+    color: #9E9E9E;
+  }
+
+  .btn-comprar:disabled::before {
+    width: 0;
+  }
+
+  /* ========================================
+     CATEGORY FILTERS - Smooth Transition
+  ======================================== */
+  .categoria-btn {
+    padding: 8px 20px;
+    border-radius: 20px;
+    border: 2px solid transparent;
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all var(--duration-quick) var(--ease-soft);
+    transform: scale(1);
+    background-color: #F4C7D4;
+    color: #4A5568;
+  }
+
+  .categoria-btn.active {
+    background-color: #B8D4E3;
+    color: #4A5568;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    animation: filterPulse 0.4s ease;
+  }
+
+  .categoria-btn:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .categoria-btn:active {
+    transform: scale(0.98);
+  }
+
+  @keyframes filterPulse {
+    0%, 100% { transform: scale(1.05); }
+    50% { transform: scale(1.1); }
+  }
+
+  /* ========================================
+     TESTIMONIALS - Stitched Border
+  ======================================== */
+  .testimonio-card {
+    background: white;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    border: 2px dashed rgba(200, 139, 119, 0.5);
+    transition: all var(--duration-smooth) var(--ease-natural);
+    transform: translateY(0);
+  }
+
+  .testimonio-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    border-color: var(--c-terracota);
+    border-style: dashed;
+  }
+
+  .testimonio-card::before {
+    content: '"';
+    font-size: 48px;
+    color: #F4C7D4;
+    opacity: 0.3;
+    line-height: 0;
+    transition: opacity var(--duration-quick) ease;
+  }
+
+  .testimonio-card:hover::before {
+    opacity: 0.6;
+  }
+
+  /* ========================================
+     FLOAT ANIMATIONS
+  ======================================== */
+  .float-animation {
+    display: inline-block;
+    animation: gentleFloat 3s ease-in-out infinite;
+  }
+
+  @keyframes gentleFloat {
+    0%, 100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-8px) rotate(5deg);
+    }
+  }
+
+  .float-animation-slow {
+    animation: gentleFloatSlow 8s ease-in-out infinite;
+  }
+
+  @keyframes gentleFloatSlow {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-6px);
+    }
+  }
+
+  /* ========================================
+     SCROLL ANIMATIONS - Fade In
+  ======================================== */
+  .fade-in-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all var(--duration-slow) var(--ease-natural);
+  }
+
+  .fade-in-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .fade-in-scroll:nth-child(1) { transition-delay: 0ms; }
+  .fade-in-scroll:nth-child(2) { transition-delay: 100ms; }
+  .fade-in-scroll:nth-child(3) { transition-delay: 200ms; }
+  .fade-in-scroll:nth-child(4) { transition-delay: 300ms; }
+  .fade-in-scroll:nth-child(5) { transition-delay: 400ms; }
+  .fade-in-scroll:nth-child(6) { transition-delay: 500ms; }
+
+  /* ========================================
+     HERO ANIMATIONS
+  ======================================== */
+  .hero-title {
+    animation: fadeInUp 0.8s var(--ease-natural);
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .hero-subtitle {
+    animation: fadeInUp 0.8s var(--ease-natural) 0.2s backwards;
+  }
+
+  .hero-cta {
+    animation: fadeInUp 0.8s var(--ease-natural) 0.4s backwards;
+  }
+
+  /* ========================================
+     SMOOTH SCROLL
+  ======================================== */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--c-crema);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--c-coral);
+    border-radius: 5px;
+    transition: background var(--duration-quick) ease;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--c-terracota);
+  }
+
+  /* ========================================
+     ACCESSIBILITY - Motion Reduction
+  ======================================== */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    
+    .btn-whatsapp {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+
+  /* ========================================
+     PERFORMANCE OPTIMIZATION
+  ======================================== */
+  .producto-card,
+  .btn-whatsapp,
+  .btn-comprar,
+  .categoria-btn,
+  .float-animation,
+  .float-animation-slow {
+    will-change: transform;
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+
+  .producto-card:not(:hover),
+  .btn-whatsapp:not(:hover),
+  .btn-comprar:not(:hover),
+  .categoria-btn:not(:hover) {
+    will-change: auto;
+  }
+
+  /* ========================================
+     MOBILE OPTIMIZATIONS
+  ======================================== */
+  @media (max-width: 768px) {
+    .producto-card:hover {
+      transform: translateY(-4px) scale(1.01);
+    }
+
+    .btn-whatsapp,
+    .btn-comprar {
+      padding: 12px 24px;
+      font-size: 15px;
+    }
   }
 }
 

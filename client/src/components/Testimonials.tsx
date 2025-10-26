@@ -17,23 +17,22 @@ export default function Testimonials() {
   return (
     <section 
       id="testimonios" 
-      className="py-20 md:py-28"
-      style={{backgroundColor: 'rgba(248, 221, 164, 0.4)'}}
+      className="section-paper bg-quotes py-16 md:py-24"
     >
       <div className="container mx-auto px-6">
-        <h2 className="text-4xl font-bold text-center mb-16" style={{color: '#8B5E3C'}}>
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 md:mb-16" style={{color: '#4A5568'}}>
           Lo que dicen los fans
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 text-center">
           {testimonials.map((testimonial, index) => (
             <div 
               key={index}
-              className="bg-white p-8 rounded-lg shadow-md"
+              className="testimonio-card fade-in-scroll"
             >
-              <p className="text-lg italic mb-6 leading-relaxed" style={{color: '#8B5E3C'}}>
-                "{testimonial.text}"
+              <p style={{color: '#4A5568', fontStyle: 'italic', marginBottom: '24px', lineHeight: '1.6'}}>
+                {testimonial.text}
               </p>
-              <p className="font-bold" style={{color: '#8B5E3C'}}>
+              <p style={{color: '#4A5568', fontWeight: 'bold'}}>
                 {testimonial.author}
               </p>
             </div>
