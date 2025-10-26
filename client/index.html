@@ -65,7 +65,7 @@
       if (analyticsEndpoint && analyticsWebsiteId) {
         const script = document.createElement("script");
         script.defer = true;
-        script.src = `${analyticsEndpoint.replace(/\\/$/, "")}/umami`;
+        script.src = `${analyticsEndpoint.replace(/\/$/, "")}/umami`;
         script.dataset.websiteId = analyticsWebsiteId;
         document.body.appendChild(script);
       }

@@ -5,21 +5,21 @@ export default function FeaturedProducts() {
     {
       name: "Poodle Soñador",
       price: "$20.000",
-      image: "https://scontent-dfw5-3.cdninstagram.com/v/t51.2885-15/559367774_2652763835076944_5348790701336978053_n.jpg",
+      image: "/assets/img/placeholder-4x5.jpg",
       alt: "Amigurumi de Poodle Blanco",
       urlPago: "https://www.flow.cl/btn.php?token=ejemplo-poodle"
     },
     {
       name: "Héroe Mercenario",
       price: "$22.000",
-      image: "https://scontent-dfw5-3.cdninstagram.com/v/t51.2885-15/559367774_2652763835076944_5348790701336978053_n.jpg",
+      image: "/assets/img/placeholder-4x5.jpg",
       alt: "Amigurumi de Deadpool",
       urlPago: "https://www.flow.cl/btn.php?token=ejemplo-deadpool"
     },
     {
       name: "Pingüino Abrigado",
       price: "$16.000",
-      image: "https://scontent-dfw5-3.cdninstagram.com/v/t51.2885-15/559367774_2652763835076944_5348790701336978053_n.jpg",
+      image: "/assets/img/placeholder-4x5.jpg",
       alt: "Amigurumi de Pingüino",
       urlPago: "https://www.flow.cl/btn.php?token=ejemplo-pinguino"
     }
@@ -67,11 +67,12 @@ export default function FeaturedProducts() {
                 <div className="botones">
                   <button
                     onClick={() => handleWhatsApp(product.name)}
-                    className="btn-whatsapp"
+                    className="btn-whatsapp flex items-center justify-center gap-2"
                     aria-label={`Consultar ${product.name} por WhatsApp`}
                     title={`Consultar ${product.name} por WhatsApp`}
                   >
-                    WhatsApp
+                    <img src="/assets/icons/whatsapp.svg" alt="" aria-hidden="true" width="18" height="18" />
+                    <span>WhatsApp</span>
                   </button>
                   
                   <button

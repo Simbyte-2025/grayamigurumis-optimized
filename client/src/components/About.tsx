@@ -1,4 +1,4 @@
-const PORTRAIT_SRC = "/perfil.png";
+const PORTRAIT_SRC = "/assets/img/about-owner.jpg";
 
 export default function About() {
   return (

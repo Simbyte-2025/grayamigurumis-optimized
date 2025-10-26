@@ -76,11 +76,13 @@ export default function IdeaGenerator() {
         <div className="max-w-2xl mx-auto">
           <div className="flex flex-col sm:flex-row gap-4 mb-6">
             <input
+              id="idea"
+              name="idea"
               type="text"
               value={idea}
               onChange={(e) => setIdea(e.target.value)}
               placeholder="Ej: un gatito con sombrero de mago"
-              className="w-full px-4 py-3 rounded-lg border-2 transition-all"
+              className="w-full px-4 py-3 rounded-lg border-2 transition-all input-idea"
               style={{
                 borderColor: 'rgba(139,94,60,0.2)',
                 outline: 'none'
