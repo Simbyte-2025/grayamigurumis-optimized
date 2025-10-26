@@ -12,7 +12,7 @@ export default function Hero() {
       className="section-paper bg-hero relative flex items-center justify-center py-24 md:py-32 bg-cover bg-center"
       style={{
         minHeight: '65vh',
-        backgroundImage: `url('https://scontent-dfw5-3.cdninstagram.com/v/t51.2885-15/559367774_2652763835076944_5348790701336978053_n.jpg')`,
+        backgroundImage: `url('/assets/img/placeholder-4x5.jpg')`,
       }}
     >
       <div className="absolute inset-0 bg-black/20"></div>

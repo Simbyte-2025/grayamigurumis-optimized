@@ -98,11 +98,12 @@ export default function Catalog() {
                 <div className="botones">
                   <button
                     onClick={() => handleWhatsApp(product.name)}
-                    className="btn-whatsapp"
+                    className="btn-whatsapp flex items-center justify-center gap-2"
                     aria-label={`Consultar ${product.name} por WhatsApp`}
                     title={`Consultar ${product.name} por WhatsApp`}
                   >
-                    WhatsApp
+                    <img src="/assets/icons/whatsapp.svg" alt="" aria-hidden="true" width="18" height="18" />
+                    <span>WhatsApp</span>
                   </button>
                   
                   <button
