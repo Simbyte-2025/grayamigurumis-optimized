@@ -1,3 +1,6 @@
+import WhatsAppIcon from "./shared/WhatsAppIcon";
+import InstagramIcon from "./shared/InstagramIcon";
+
 export default function Footer() {
   const currentYear = new Date().getFullYear();
   const whatsappNumber = "56992834268";
@@ -39,7 +42,7 @@ export default function Footer() {
                 title="Visitar Instagram"
                 style={{color: '#FFF9F5'}}
               >
-                <img src="/assets/icons/instagram.svg" alt="" aria-hidden="true" width="28" height="28" style={{filter: 'brightness(0) invert(1)'}} />
+                <InstagramIcon size={28} title="Instagram" className="text-white" />
               </a>
               <a 
                 href={`https://wa.me/${whatsappNumber}?text=${message}`}
@@ -50,7 +53,9 @@ export default function Footer() {
                 title="Contactar por WhatsApp"
                 style={{color: '#FFF9F5'}}
               >
-                <img src="/assets/icons/whatsapp.svg" alt="" aria-hidden="true" width="28" height="28" style={{filter: 'brightness(0) invert(1)'}} />
+                <div style={{ filter: 'brightness(0) invert(1)' }}>
+                  <WhatsAppIcon size={28} title="WhatsApp" />
+                </div>
               </a>
             </div>
           </div>

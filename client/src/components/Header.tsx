@@ -1,4 +1,5 @@
 import { useState } from "react";
+import WhatsAppIcon from "./shared/WhatsAppIcon";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -57,11 +58,11 @@ export default function Header() {
               href={`https://wa.me/${whatsappNumber}?text=Hola!%20Me%20interesan%20tus%20amigurumis.`}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-whatsapp flex items-center justify-center"
+              className="btn-whatsapp"
               aria-label="Contactar por WhatsApp"
               title="Contactar por WhatsApp"
             >
-              <img src="/assets/icons/whatsapp.svg" alt="" aria-hidden="true" width="18" height="18" />
+              <WhatsAppIcon size={20} title="WhatsApp" />
             </a>
           </div>
 

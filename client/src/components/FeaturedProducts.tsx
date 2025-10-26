@@ -1,3 +1,5 @@
+import WhatsAppIcon from "./shared/WhatsAppIcon";
+
 export default function FeaturedProducts() {
   const whatsappNumber = "56992834268";
 
@@ -67,12 +69,11 @@ export default function FeaturedProducts() {
                 <div className="botones">
                   <button
                     onClick={() => handleWhatsApp(product.name)}
-                    className="btn-whatsapp flex items-center justify-center gap-2"
+                    className="btn-whatsapp"
                     aria-label={`Consultar ${product.name} por WhatsApp`}
                     title={`Consultar ${product.name} por WhatsApp`}
                   >
-                    <img src="/assets/icons/whatsapp.svg" alt="" aria-hidden="true" width="18" height="18" />
-                    <span>WhatsApp</span>
+                    <WhatsAppIcon size={20} title="WhatsApp" />
                   </button>
                   
                   <button
