@@ -1,27 +1,28 @@
-# 🌐 Grayamigurumis - Demo en Vivo
+# 🌐 Grayamigurumis - Web de Producción
 
-## 🚀 URL del Demo
+## 🚀 URL de Producción
 
-**🔗 DEMO EN VIVO**: https://3002-itwykr32t4ppj6850nkuj-b32ec7bb.sandbox.novita.ai
+**🔗 WEB DE PRODUCCIÓN**: https://3000-itwykr32t4ppj6850nkuj-b32ec7bb.sandbox.novita.ai
 
 ---
 
-## 📋 Información del Demo
+## 📋 Información de la Web
 
 ### 🎨 Versión
-**UI Prototype V2.0** - Visual Aesthetic Overhaul
+**V2.0 con Animaciones Gemini Canvas** - Specs Exactas Aplicadas
 
 ### 🌿 Branch
-`feat/ui-proto-v2-estetica-sin-logica`
+`fix/restore-canvas-css-from-master`
 
-### 📅 Fecha de Deploy
-25 de Octubre, 2025
+### 📅 Última Actualización
+28 de Octubre, 2025
 
 ### ⚡ Tecnología
 - **Framework**: React 19 + Vite 7
-- **Styling**: Tailwind CSS 4 + Custom CSS
+- **Styling**: Tailwind CSS 4 + Custom CSS + Gemini Canvas Specs
+- **Animaciones**: Framer Motion v12.23.22
 - **Server**: Vite Dev Server
-- **Puerto**: 3002
+- **Puerto**: 3000
 
 ---
 
@@ -43,14 +44,16 @@ Cada sección tiene su propia textura sutil:
 - **Catálogo**: Papel neutral (#FCF8F3)
 - **Testimonios**: Papel pergamino (#EFE7DE)
 
-### 🎬 Animaciones Implementadas
+### 🎬 Animaciones Gemini Canvas (Especificaciones Exactas)
 
-#### 1. **Tarjetas de Producto**
-- ✨ Elevación suave al hover (Gentle Lift)
-- 🔍 Zoom de imagen con efecto bounce
+#### 1. **Tarjetas de Producto** (0.6s smooth - EXACTO Gemini)
+- ✨ Elevación suave al hover: `translateY(-4px)` con 600ms natural easing
+- 🔍 Zoom de imagen: `scale(1.05)` con 700ms gentle easing
 - 🎨 Transición de color en títulos
 - 💰 Rebote elástico en precios
-- 📐 Aspect ratio 4:5 perfecto
+- 📐 **Aspect ratio 4:5 perfecto** ✅
+- 🎨 Borde coral sutil: 2px solid rgba(230, 139, 111, 0.2)
+- 🌟 Hover border: #E68B6F (coral sólido)
 
 #### 2. **Botón WhatsApp**
 - 💚 Animación de latido continuo (Heartbeat Pulse)
@@ -64,11 +67,12 @@ Cada sección tiene su propia textura sutil:
 - 🚫 Estado deshabilitado visual
 - 🎯 Micro-interacción al click
 
-#### 4. **Filtros de Categoría**
-- 🔘 Pulso al activar (Filter Pulse)
-- 🎨 Cambio de color suave
-- 📏 Escala sutil en hover
-- ✅ Estado activo claro
+#### 4. **Filtros de Categoría** (0.45s quick - EXACTO Gemini)
+- 🔘 Pulso al activar con 450ms (Filter Pulse Gemini)
+- 🎨 Cambio de color suave con soft easing
+- 📏 Hover: `translateY(-2px) scale(1.03)` a 450ms
+- ✅ Estado activo claro con bounce animation
+- ⚡ **NO muy rápido** - velocidad exacta de Gemini Canvas
 
 #### 5. **Testimonios**
 - 🧵 Borde cosido dashed (Stitched Border)
@@ -299,14 +303,14 @@ Este demo representa la **versión 2.0 del UI Prototype** para Grayamigurumis, c
 ## 📞 Contacto
 
 **Proyecto**: Grayamigurumis  
-**Versión**: 2.0 (UI Prototype)  
-**Branch**: feat/ui-proto-v2-estetica-sin-logica  
-**Demo**: https://3002-itwykr32t4ppj6850nkuj-b32ec7bb.sandbox.novita.ai  
+**Versión**: 2.0 (Animaciones Gemini Canvas Aplicadas)  
+**Branch**: fix/restore-canvas-css-from-master  
+**Web de Producción**: https://3000-itwykr32t4ppj6850nkuj-b32ec7bb.sandbox.novita.ai  
 **Repositorio**: https://github.com/Simbyte-2025/GreyAmigurumis.Demo  
-**PR**: https://github.com/Simbyte-2025/GreyAmigurumis.Demo/pull/1  
+**PR Activo**: https://github.com/Simbyte-2025/GreyAmigurumis.Demo/pull/5  
 
 ---
 
-**Desarrollado por**: Manus AI / GenSpark (Sonet 4.5)  
-**Fecha**: 25 de Octubre, 2025  
-**Estado**: ✅ Listo para Producción
+**Desarrollado por**: Manus AI / GenSpark (Claude Sonnet 3.5)  
+**Última Actualización**: 28 de Octubre, 2025  
+**Estado**: ✅ Producción con Animaciones Gemini Canvas

@@ -1,4 +1,8 @@
+import { motion } from "framer-motion";
+import { animationVariants, useScrollAnimation } from "@/hooks/useAnimations";
+
 export default function Testimonials() {
+  const scrollAnimationProps = useScrollAnimation();
   const testimonials = [
     {
       text: "¡Mi Deadpool tejido es simplemente perfecto! La calidad es de otro nivel, lleno de detalles que solo un verdadero fan notaría.",
@@ -25,9 +29,11 @@ export default function Testimonials() {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 text-center">
           {testimonials.map((testimonial, index) => (
-            <div 
+            <motion.div 
               key={index}
-              className="testimonio-card fade-in-scroll"
+              className="testimonio-card"
+              variants={animationVariants.fadeInScroll}
+              {...scrollAnimationProps}
             >
               <p style={{color: '#4A5568', fontStyle: 'italic', marginBottom: '24px', lineHeight: '1.6'}}>
                 {testimonial.text}
@@ -35,7 +41,7 @@ export default function Testimonials() {
               <p style={{color: '#4A5568', fontWeight: 'bold'}}>
                 {testimonial.author}
               </p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

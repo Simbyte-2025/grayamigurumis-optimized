@@ -1,3 +1,6 @@
+import { motion } from "framer-motion";
+import { animationVariants } from "@/hooks/useAnimations";
+
 const PORTRAIT_SRC = "/assets/img/about-owner.jpg";
 
 export default function About() {
@@ -10,9 +13,11 @@ export default function About() {
         <div className="flex flex-col md:flex-row items-center gap-12 md:gap-16 lg:gap-20">
           {/* Retrato principal */}
           <div className="md:w-1/2 flex justify-center">
-            <div
-              className="rounded-full shadow-2xl w-full max-w-sm sm:max-w-md aspect-square overflow-hidden border-4 border-white float-animation-slow"
+            <motion.div
+              className="rounded-full shadow-2xl w-full max-w-sm sm:max-w-md aspect-square overflow-hidden border-4 border-white"
               style={{ backgroundColor: "#FFF9F5" }}
+              initial={animationVariants.floatAnimationSlow.initial}
+              animate={animationVariants.floatAnimationSlow.animate}
             >
               <img
                 src={PORTRAIT_SRC}
@@ -24,7 +29,7 @@ export default function About() {
                   target.src = 'https://placehold.co/448x448/B8D4E3/FFF9F5?text=Foto'; 
                 }}
               />
-            </div>
+            </motion.div>
           </div>
 
           {/* Texto */}

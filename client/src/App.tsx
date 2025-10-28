@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import ErrorBoundary from "./components/ErrorBoundary";
@@ -7,42 +6,15 @@ import Header from "./components/Header";
 import Hero from "./components/Hero";
 import FeaturedProducts from "./components/FeaturedProducts";
 import About from "./components/About";
-import IdeaGenerator from "./components/IdeaGenerator";
+// import IdeaGenerator from "./components/IdeaGenerator"; // Reemplazado por Chatbot flotante
 import Catalog from "./components/Catalog";
 import Testimonials from "./components/Testimonials";
 import Footer from "./components/Footer";
+import Chatbot from "./components/Chatbot";
 
 function App() {
-  // Scroll animation observer
-  useEffect(() => {
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          // Optional: Stop observing after animation
-          observer.unobserve(entry.target);
-        }
-      });
-    }, observerOptions);
-
-    // Observe all fade-in-scroll elements
-    const targets = document.querySelectorAll('.fade-in-scroll');
-    targets.forEach(el => {
-      observer.observe(el);
-    });
-
-    // Cleanup
-    return () => {
-      targets.forEach(el => {
-        observer.unobserve(el);
-      });
-    };
-  }, []); // Empty array ensures this runs once on mount
+  // Scroll animations handled by Framer Motion (whileInView)
+  // Animations applied directly in real components (no showcase needed)
 
   return (
     <ErrorBoundary>
@@ -55,11 +27,14 @@ function App() {
               <Hero />
               <FeaturedProducts />
               <About />
-              <IdeaGenerator />
+              {/* <IdeaGenerator /> - Reemplazado por Chatbot flotante */}
               <Catalog />
               <Testimonials />
             </main>
             <Footer />
+            
+            {/* Chatbot flotante - reemplaza la sección IdeaGenerator */}
+            <Chatbot />
           </div>
         </TooltipProvider>
       </ThemeProvider>
@@ -68,4 +43,3 @@ function App() {
 }
 
 export default App;
-
