@@ -71,7 +71,7 @@
 /* ========================================
    TARJETAS DE PRODUCTO - ESTILOS BASE
 ======================================== */
-.producto-card-gemini {
+.producto-card {
   background: white;
   border-radius: 16px;
   padding: 16px;
@@ -86,24 +86,38 @@
   /* Layout flex */
   display: flex;
   flex-direction: column;
+  
+  /* Transición suave para hover (EXACTO Gemini) */
+  transition: border-color var(--duration-smooth) var(--ease-natural),
+              box-shadow var(--duration-smooth) var(--ease-natural),
+              transform var(--duration-smooth) var(--ease-natural);
 }
 
-/* Hover de tarjeta - Borde visible */
-.producto-card-gemini:hover {
+/* Hover de tarjeta - Borde visible y lift suave */
+.producto-card:hover {
   border-color: var(--color-coral);
   box-shadow: var(--shadow-card-hover);
+  transform: translateY(-4px);
 }
 
 /* ========================================
    IMÁGENES DE PRODUCTO (ASPECT RATIO 4:5)
 ======================================== */
-.producto-card-gemini img,
-.producto-image-gemini {
+.producto-card img,
+.producto-image {
   width: 100%;
   aspect-ratio: 4 / 5; /* CRÍTICO: Relación 4:5 de Gemini Canvas */
   object-fit: cover;
   border-radius: 12px;
   display: block;
+  
+  /* Transición suave para zoom en hover */
+  transition: transform var(--duration-gentle) var(--ease-natural);
+}
+
+/* Zoom suave de imagen al hover de la card */
+.producto-card:hover img {
+  transform: scale(1.05);
 }
 
 /* ========================================
@@ -143,7 +157,7 @@
 /* ========================================
    TARJETAS DE TESTIMONIOS (BORDE DASHED)
 ======================================== */
-.testimonio-card-gemini {
+.testimonio-card {
   background: white;
   padding: 24px;
   border-radius: 12px;
@@ -151,12 +165,18 @@
   
   /* Borde "cosido" de Gemini Canvas */
   border: 2px dashed rgba(200, 139, 119, 0.5);
+  
+  /* Transición suave */
+  transition: box-shadow var(--duration-smooth) var(--ease-natural),
+              border-color var(--duration-smooth) var(--ease-natural),
+              transform var(--duration-smooth) var(--ease-natural);
 }
 
-.testimonio-card-gemini:hover {
+.testimonio-card:hover {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   border-color: var(--color-terracota);
   border-style: dashed; /* Mantener dashed */
+  transform: translateY(-2px);
 }
 
 /* ========================================
@@ -185,6 +205,33 @@ html {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-terracota);
+}
+
+/* ========================================
+   BOTONES DE CATEGORÍA - ANIMACIÓN QUICK (450ms)
+======================================== */
+.categoria-btn {
+  /* Transición con duración EXACTA de Gemini Canvas */
+  transition: all var(--duration-quick) var(--ease-soft) !important;
+  transform: scale(1);
+  will-change: transform, background-color, box-shadow;
+}
+
+.categoria-btn.active {
+  /* Animación de activación */
+  animation: filterPulseGemini var(--duration-quick) var(--ease-bounce);
+}
+
+.categoria-btn:hover {
+  /* Hover suave y rápido (450ms) */
+  transform: translateY(-2px) scale(1.03);
+  transition: all var(--duration-quick) var(--ease-soft);
+}
+
+@keyframes filterPulseGemini {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1.05); }
 }
 
 /* ========================================
