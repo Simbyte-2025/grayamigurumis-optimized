@@ -1,85 +1,32 @@
 export interface Product {
   id: number;
   name: string;
-  description: string;
   image: string;
-  category: string;
   price: string;
-  urlPago: string;
+  flowLink: string;
+  category: string;
 }
 
 export const products: Product[] = [
-  {
-    id: 1,
-    name: "Homero Simpson",
-    description: "Amigurumi personalizado tejido a mano con mucho cariño. Viene en su caja de acrílico, perfecto para regalar.",
-    image: "/assets/img/placeholder-4x5.jpg",
-    category: "Personajes",
-    price: "$20.000",
-    urlPago: "https://www.flow.cl/btn.php?token=ejemplo-homero"
-  },
-  {
-    id: 2,
-    name: "Mamá Koala con Bebé",
-    description: "Dulce mamá koala con su bebé, tejidos a mano con toda la ternura. Transmiten esa sensación de refugio y amor.",
-    image: "/assets/img/placeholder-4x5.jpg",
-    category: "Animalitos",
-    price: "$22.000",
-    urlPago: "https://www.flow.cl/btn.php?token=ejemplo-koala"
-  },
-  {
-    id: 3,
-    name: "Hombre Araña",
-    description: "El fantástico Hombre Araña en versión amigurumi, perfecto para colgar donde tú quieras.",
-    image: "/assets/img/placeholder-4x5.jpg",
-    category: "Personajes",
-    price: "$22.000",
-    urlPago: "https://www.flow.cl/btn.php?token=ejemplo-spiderman"
-  },
-  {
-    id: 4,
-    name: "Labubu",
-    description: "Una criatura única con carácter. No es tierna, tampoco es fea. Labubu es simplemente ella, auténtica.",
-    image: "/assets/img/placeholder-4x5.jpg",
-    category: "Personajes",
-    price: "$16.000",
-    urlPago: "https://www.flow.cl/btn.php?token=ejemplo-labubu"
-  },
-  {
-    id: 5,
-    name: "Pollito Asesino",
-    description: "Pequeño, adorable y letalmente tierno. Tejido a mano en técnica amigurumi, listo para conquistar tu corazón.",
-    image: "/assets/img/placeholder-4x5.jpg",
-    category: "Animalitos",
-    price: "$20.000",
-    urlPago: "https://www.flow.cl/btn.php?token=ejemplo-pollito"
-  },
-  {
-    id: 6,
-    name: "Máquina de Coser",
-    description: "Máquina de coser hecha en el arte del Amigurumis, un regalo perfecto hecho con amor.",
-    image: "/assets/img/placeholder-4x5.jpg",
-    category: "Objetos",
-    price: "$18.000",
-    urlPago: "https://www.flow.cl/btn.php?token=ejemplo-maquina"
-  },
-  {
-    id: 7,
-    name: "Mesh Hat",
-    description: "Gorro tejido a mano, ligero, fresco y con estilo único. Perfecto para días de sol y escapadas al aire libre.",
-    image: "/assets/img/placeholder-4x5.jpg",
-    category: "Accesorios",
-    price: "$15.000",
-    urlPago: "https://www.flow.cl/btn.php?token=ejemplo-gorro"
-  },
-  {
-    id: 8,
-    name: "Bichito Adorable",
-    description: "Un nuevo amiguito tejido con amor y paciencia, perfecto para acompañarte o decorar tu espacio.",
-    image: "/assets/img/placeholder-4x5.jpg",
-    category: "Animalitos",
-    price: "$16.000",
-    urlPago: "https://www.flow.cl/btn.php?token=ejemplo-bichito"
-  }
+  { id: 1, name: "Deadpool", price: "$22.000", image: "/src/assets/deadpool.webp", flowLink: "https://www.flow.cl/checkout", category: "Cine & TV" },
+  { id: 2, name: "El Grinch", price: "$20.000", image: "/src/assets/grinch.webp", flowLink: "https://www.flow.cl/checkout", category: "Cine & TV" },
+  { id: 3, name: "Groot", price: "$18.000", image: "/src/assets/groot.webp", flowLink: "https://www.flow.cl/checkout", category: "Cine & TV" },
+  { id: 4, name: "Heisenberg", price: "$25.000", image: "/src/assets/heisenberg.webp", flowLink: "https://www.flow.cl/checkout", category: "Cine & TV" },
+  { id: 5, name: "Iron Man", price: "$22.000", image: "/src/assets/ironman.webp", flowLink: "https://www.flow.cl/checkout", category: "Cine & TV" },
+  { id: 6, name: "Jack Skellington", price: "$21.000", image: "/src/assets/jack.webp", flowLink: "https://www.flow.cl/checkout", category: "Cine & TV" },
+  { id: 7, name: "V for Vendetta", price: "$24.000", image: "/src/assets/vforvendetta.webp", flowLink: "https://www.flow.cl/checkout", category: "Cine & TV" },
+  { id: 8, name: "Howl Pendragon", price: "$23.000", image: "/src/assets/howl.webp", flowLink: "https://www.flow.cl/checkout", category: "Cine & TV" },
+  { id: 9, name: "Aslo el Dinosaurio", price: "$18.000", image: "/src/assets/aslo.webp", flowLink: "https://www.flow.cl/checkout", category: "Animatitos" },
+  { id: 10, name: "Stitch", price: "$18.000", image: "/src/assets/stitch.webp", flowLink: "https://www.flow.cl/checkout", category: "Animatitos" },
+  { id: 11, name: "Peach", price: "$22.000", image: "/src/assets/peach.webp", flowLink: "https://www.flow.cl/checkout", category: "Animatitos" },
+  { id: 12, name: "Jazmín", price: "$22.000", image: "/src/assets/jazmin.webp", flowLink: "https://www.flow.cl/checkout", category: "Animatitos" },
+  { id: 13, name: "Ana de Arendelle", price: "$20.000", image: "/src/assets/ana.webp", flowLink: "https://www.flow.cl/checkout", category: "Animatitos" },
+  { id: 14, name: "Naruto Uzumaki", price: "$23.000", image: "/src/assets/naruto.webp", flowLink: "https://www.flow.cl/checkout", category: "Anime & Videojuegos" },
+  { id: 15, name: "Goku", price: "$24.000", image: "/src/assets/goku.webp", flowLink: "https://www.flow.cl/checkout", category: "Anime & Videojuegos" },
+  { id: 16, name: "Vegeta", price: "$24.000", image: "/src/assets/vegeta.webp", flowLink: "https://www.flow.cl/checkout", category: "Anime & Videojuegos" },
+  { id: 17, name: "Zenitsu Agatsuma", price: "$22.000", image: "/src/assets/zenitsu.webp", flowLink: "https://www.flow.cl/checkout", category: "Anime & Videojuegos" },
+  { id: 18, name: "The Joker", price: "$21.000", image: "/src/assets/joker.webp", flowLink: "https://www.flow.cl/checkout", category: "Cine & TV" },
+  { id: 19, name: "Kurt Cobain", price: "$25.000", image: "/src/assets/kurt.webp", flowLink: "https://www.flow.cl/checkout", category: "Cine & TV" },
+  { id: 20, name: "Ansiedad Espacial", price: "$21.000", image: "/src/assets/ansiedad.webp", flowLink: "https://www.flow.cl/checkout", category: "Cine & TV" }
 ];
 

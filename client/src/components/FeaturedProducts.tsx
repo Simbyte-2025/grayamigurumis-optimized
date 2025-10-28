@@ -1,114 +1,98 @@
 import { motion } from "framer-motion";
 import WhatsAppIcon from "./shared/WhatsAppIcon";
-import { animationVariants, useScrollAnimation, productCardVariants, productCardImageVariants } from "@/hooks/useAnimations";
+import {
+  animationVariants,
+  useScrollAnimation,
+  productCardVariants,
+  productCardImageVariants,
+} from "@/hooks/useAnimations";
+
+const featuredProducts = [
+  { id: 1, name: "Deadpool", price: "$22.000", image: "/src/assets/deadpool.webp", flowLink: "https://www.flow.cl/checkout" },
+  { id: 10, name: "Stitch", price: "$18.000", image: "/src/assets/stitch.webp", flowLink: "https://www.flow.cl/checkout" },
+  { id: 15, name: "Goku", price: "$24.000", image: "/src/assets/goku.webp", flowLink: "https://www.flow.cl/checkout" },
+];
 
 export default function FeaturedProducts() {
   const scrollAnimationProps = useScrollAnimation();
   const whatsappNumber = "56992834268";
 
-  const featured = [
-    {
-      name: "Poodle Soñador",
-      price: "$20.000",
-      image: "/assets/img/placeholder-4x5.jpg",
-      alt: "Amigurumi de Poodle Blanco",
-      urlPago: "https://www.flow.cl/btn.php?token=ejemplo-poodle"
-    },
-    {
-      name: "Héroe Mercenario",
-      price: "$22.000",
-      image: "/assets/img/placeholder-4x5.jpg",
-      alt: "Amigurumi de Deadpool",
-      urlPago: "https://www.flow.cl/btn.php?token=ejemplo-deadpool"
-    },
-    {
-      name: "Pingüino Abrigado",
-      price: "$16.000",
-      image: "/assets/img/placeholder-4x5.jpg",
-      alt: "Amigurumi de Pingüino",
-      urlPago: "https://www.flow.cl/btn.php?token=ejemplo-pinguino"
-    }
-  ];
-
   const handleWhatsApp = (productName: string) => {
     const message = encodeURIComponent(`¡Hola! Me interesa el producto: ${productName} 🧸`);
-    window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
+    window.open(`https://wa.me/${whatsappNumber}?text=${message}`, "_blank");
   };
 
-  const handlePagar = (urlPago: string) => {
-    window.open(urlPago, '_blank');
+  const handlePagar = (flowLink: string) => {
+    window.open(flowLink, "_blank");
   };
 
   return (
     <section id="favoritos" className="section-paper bg-favs py-16 md:py-24">
-      <div className="container mx-auto px-6">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 md:mb-16" style={{color: '#4A5568'}}>
-          Nuestros Favoritos
-        </h2>
-        <div className="productos-grid-gemini md:grid-cols-3">
-          {featured.map((product, index) => (
-            <motion.div 
-              key={index}
-              variants={animationVariants.fadeInScroll}
-              {...scrollAnimationProps}
-            >
-              <motion.div 
-                className="producto-card"
-                variants={productCardVariants}
-                initial="initial"
-                whileHover="hover"
-                whileTap="tap"
+      {/* Contenedor sin padding lateral ni desplazamiento */}
+      <div className="w-full flex justify-center bg-favs py-16 md:py-24">
+        <div className="w-full max-w-7xl px-4 md:px-0 flex flex-col items-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 md:mb-16" style={{ color: "#4A5568" }}>
+            Nuestros Favoritos
+          </h2>
+
+          {/* Grid perfectamente centrado */}
+          <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-3 justify-items-center mx-auto place-items-center">
+            {featuredProducts.map((product) => (
+              <motion.div
+                key={product.id}
+                variants={animationVariants.fadeInUp}
+                {...scrollAnimationProps}
               >
-              <motion.img 
-                src={product.image} 
-                alt={product.alt} 
-                loading="lazy"
-                variants={productCardImageVariants}
-                style={{
-                  aspectRatio: '4/5',
-                  objectFit: 'cover',
-                }}
-                onError={(e) => { 
-                  const target = e.currentTarget;
-                  target.src = `https://placehold.co/400x500/CCCCCC/888888?text=Error+${index+1}`; 
-                }}
-              />
-              <div className="p-6 flex flex-col flex-grow">
-                <h3>
-                  {product.name}
-                </h3>
-                <p className="precio">
-                  {product.price}
-                </p>
-                
-                {/* Botones con nuevas clases */}
-                <div className="botones">
-                  <motion.button
-                    onClick={() => handleWhatsApp(product.name)}
-                    className="btn-whatsapp"
-                    aria-label={`Consultar ${product.name} por WhatsApp`}
-                    title={`Consultar ${product.name} por WhatsApp`}
-                    whileHover={animationVariants.heartbeat}
-                  >
-                    <WhatsAppIcon size={20} title="WhatsApp" />
-                  </motion.button>
-                  
-                  <button
-                    onClick={() => handlePagar(product.urlPago)}
-                    className="btn-comprar"
-                    aria-label={`Pagar ${product.name}`}
-                    title={`Pagar ${product.name}`}
-                  >
-                    Pagar
-                  </button>
-                </div>
-              </div>
+                <motion.div
+                  className="producto-card flex h-full flex-col"
+                  variants={productCardVariants}
+                  initial="initial"
+                  whileHover="hover"
+                  whileTap="tap"
+                >
+                  <div className="relative aspect-[4/5] overflow-hidden rounded-xl">
+                    <motion.img
+                      src={product.image}
+                      alt={product.name}
+                      loading="lazy"
+                      className="h-full w-full object-cover"
+                      variants={productCardImageVariants}
+                      onError={(event) => {
+                        const target = event.currentTarget;
+                        target.src = "https://placehold.co/400x500/CCCCCC/888888?text=Error";
+                      }}
+                    />
+                  </div>
+
+                  <div className="flex flex-1 flex-col p-6 text-center">
+                    <h3>{product.name}</h3>
+                    <p className="precio">{product.price}</p>
+                    <div className="botones flex justify-center gap-3 mt-2">
+                      <motion.button
+                        onClick={() => handleWhatsApp(product.name)}
+                        className="btn-whatsapp"
+                        aria-label={`Consultar ${product.name} por WhatsApp`}
+                        title={`Consultar ${product.name} por WhatsApp`}
+                        whileHover={animationVariants.heartbeat}
+                      >
+                        <WhatsAppIcon size={20} title="WhatsApp" />
+                      </motion.button>
+                      <button
+                        onClick={() => handlePagar(product.flowLink)}
+                        className="btn-comprar"
+                        aria-label={`Pagar ${product.name}`}
+                        title={`Pagar ${product.name}`}
+                      >
+                        Pagar
+                      </button>
+                    </div>
+                  </div>
+                </motion.div>
               </motion.div>
-            </motion.div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>
   );
 }
-
