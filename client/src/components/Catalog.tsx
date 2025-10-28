@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { products } from "../data/products";
 import WhatsAppIcon from "./shared/WhatsAppIcon";
-import { animationVariants, useScrollAnimation } from "@/hooks/useAnimations";
+import { animationVariants, useScrollAnimation, categoryButtonVariants, productCardVariants, productCardImageVariants } from "@/hooks/useAnimations";
 
 type Category = "all" | "animalitos" | "cine-tv" | "anime-videojuegos";
 
@@ -44,49 +44,80 @@ export default function Catalog() {
 
         {/* Filters */}
         <div className="flex justify-center flex-wrap gap-3 sm:gap-4 mb-12 md:mb-16">
-          <button
+          <motion.button
             onClick={() => setActiveFilter("all")}
             className={`categoria-btn ${activeFilter === "all" ? 'active' : ''}`}
+            variants={categoryButtonVariants}
+            initial="initial"
+            whileHover="hover"
+            whileTap="tap"
+            animate={activeFilter === "all" ? "active" : "initial"}
             aria-pressed={activeFilter === "all"}
           >
             Todos
-          </button>
-          <button
+          </motion.button>
+          <motion.button
             onClick={() => setActiveFilter("animalitos")}
             className={`categoria-btn ${activeFilter === "animalitos" ? 'active' : ''}`}
+            variants={categoryButtonVariants}
+            initial="initial"
+            whileHover="hover"
+            whileTap="tap"
+            animate={activeFilter === "animalitos" ? "active" : "initial"}
             aria-pressed={activeFilter === "animalitos"}
           >
             Animalitos
-          </button>
-          <button
+          </motion.button>
+          <motion.button
             onClick={() => setActiveFilter("cine-tv")}
             className={`categoria-btn ${activeFilter === "cine-tv" ? 'active' : ''}`}
+            variants={categoryButtonVariants}
+            initial="initial"
+            whileHover="hover"
+            whileTap="tap"
+            animate={activeFilter === "cine-tv" ? "active" : "initial"}
             aria-pressed={activeFilter === "cine-tv"}
           >
             Cine & TV
-          </button>
-          <button
+          </motion.button>
+          <motion.button
             onClick={() => setActiveFilter("anime-videojuegos")}
             className={`categoria-btn ${activeFilter === "anime-videojuegos" ? 'active' : ''}`}
+            variants={categoryButtonVariants}
+            initial="initial"
+            whileHover="hover"
+            whileTap="tap"
+            animate={activeFilter === "anime-videojuegos" ? "active" : "initial"}
             aria-pressed={activeFilter === "anime-videojuegos"}
           >
             Anime & Videojuegos
-          </button>
+          </motion.button>
         </div>
 
         {/* Product Grid - Gemini Canvas Style */}
         <div className="productos-grid-gemini">
-          {filteredProducts.map((product) => (
+          {filteredProducts.map((product, index) => (
             <motion.div 
               key={product.id}
-              className="producto-card"
               variants={animationVariants.fadeInScroll}
               {...scrollAnimationProps}
             >
-              <img 
+              <motion.div 
+                className="producto-card"
+                variants={productCardVariants}
+                initial="initial"
+                whileHover="hover"
+                whileTap="tap"
+              >
+              <motion.img 
                 src={product.image} 
                 alt={product.name} 
                 loading="lazy"
+                variants={productCardImageVariants}
+                style={{
+                  aspectRatio: '4/5',
+                  objectFit: 'cover',
+                }}
                 onError={(e) => { 
                   const target = e.currentTarget;
                   target.src = `https://placehold.co/400x500/CCCCCC/888888?text=Error`; 
@@ -122,6 +153,7 @@ export default function Catalog() {
                   </button>
                 </div>
               </div>
+              </motion.div>
             </motion.div>
           ))}
         </div>

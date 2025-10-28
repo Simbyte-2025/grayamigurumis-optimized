@@ -38,13 +38,19 @@ export const EASING = {
 
 export const DURATION = {
   instant: 0.2,   // 200ms
-  quick: 0.45,    // 450ms
-  smooth: 0.6,    // 600ms
-  gentle: 0.7,    // 700ms
+  quick: 0.45,    // 450ms (referencia CSS)
+  smooth: 0.6,    // 600ms (referencia CSS)
+  gentle: 0.7,    // 700ms (referencia CSS)
   slow: 0.8,      // 800ms
   heartbeat: 1.5, // 1500ms
   float: 3,       // 3000ms
   floatSlow: 8,   // 8000ms
+  
+  // Duraciones ajustadas para Framer Motion (del Showcase Demo funcional)
+  framerQuick: 0.65,    // +44% para compensar velocidad de Framer Motion
+  framerSmooth: 0.85,   // +42% para suavidad real
+  framerGentle: 0.95,   // +36% para zoom lento
+  framerSlow: 1.1,      // +38% para animaciones lentas
 } as const;
 
 // ============================================================================
@@ -60,7 +66,7 @@ export const productCardVariants: Variants = {
     y: -8,
     scale: 1.02,
     transition: {
-      duration: DURATION.smooth,
+      duration: DURATION.framerSmooth, // 0.85s - Ajustado para Framer Motion
       ease: EASING.natural,
     },
   },
@@ -77,7 +83,7 @@ export const productCardImageVariants: Variants = {
   hover: {
     scale: 1.05,
     transition: {
-      duration: DURATION.gentle,
+      duration: DURATION.framerGentle, // 0.95s - Zoom lento y suave
       ease: EASING.bounce,
     },
   },
@@ -88,7 +94,7 @@ export const productCardTitleVariants: Variants = {
   hover: {
     color: "#E68B6F", // var(--color-coral)
     transition: {
-      duration: DURATION.quick,
+      duration: DURATION.framerQuick, // 0.65s - Cambio de color suave
     },
   },
 };
@@ -98,7 +104,7 @@ export const productCardPriceVariants: Variants = {
   hover: {
     scale: 1.08,
     transition: {
-      duration: DURATION.quick,
+      duration: DURATION.framerQuick, // 0.65s - Bounce del precio
       ease: EASING.elastic,
     },
   },
@@ -236,14 +242,14 @@ export const categoryButtonVariants: Variants = {
     y: -2,
     scale: 1.03,
     transition: {
-      duration: DURATION.quick,
+      duration: DURATION.framerQuick, // 0.65s - Progresivo y suave
       ease: EASING.soft,
     },
   },
   active: {
     scale: 1.05,
     transition: {
-      duration: 0.4,
+      duration: DURATION.framerQuick, // 0.65s consistente
     },
   },
   tap: {
