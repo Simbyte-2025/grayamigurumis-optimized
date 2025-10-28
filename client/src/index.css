@@ -7,7 +7,6 @@
 
 /* Animaciones y variables globales */
 @import "./styles/animations.css";
-@import "./styles/gemini-animations.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -266,84 +265,15 @@
   /* ========================================
      TARJETAS DE PRODUCTO - GENTLE LIFT
   ======================================== */
-  .producto-card {
-    /* Layout base (mantener lo que ya tienes) */
-    @apply bg-white rounded-2xl p-4 text-center;
-    
-    /* Borde sutil artesanal */
-    border: 2px solid rgba(230, 139, 111, 0.2);
-    
-    /* Sombra inicial suave */
-    box-shadow: var(--shadow-card-default);
-    
-    /* Preparar transformación 3D */
-    transform: translateY(0) scale(1);
-    transform-style: preserve-3d;
-    
-    /* Transición suave con easing natural */
-    transition: 
-      transform var(--duration-smooth) var(--ease-natural),
-      box-shadow var(--duration-smooth) var(--ease-natural),
-      border-color var(--duration-smooth) ease;
-      
-    /* Prevenir saltos de layout */
-    will-change: transform, box-shadow;
-
-    /* Flex layout para alinear contenido */
-    @apply flex flex-col;
-  }
-  
-  .producto-card:hover {
-    /* Elevación suave hacia arriba con escala sutil */
-    transform: translateY(-8px) scale(1.02);
-    
-    /* Sombra más profunda con toque coral */
-    box-shadow: var(--shadow-card-hover);
-    
-    /* Borde más visible */
-    border-color: var(--c-coral);
-    
-    /* Cursor pointer para indicar interactividad */
-    @apply cursor-pointer;
-  }
-
-  .producto-card img {
-    @apply w-full object-cover rounded-xl block;
-    aspect-ratio: 4 / 5; /* Relación de aspecto 4:5 */
-    
-    /* Transición con bounce suave */
-    transition: transform var(--duration-gentle) var(--ease-bounce);
-  }
-  
-  .producto-card:hover img {
-    /* Zoom sutil de imagen */
-    transform: scale(1.05);
-  }
-  
-  .producto-card h3 {
-    @apply mt-3 mb-2 text-lg flex-grow flex items-center justify-center;
-    color: var(--c-marron);
-    
-    /* Transición suave de color */
-    transition: color var(--duration-quick) ease;
-  }
-  
-  .producto-card:hover h3 {
-    color: var(--c-coral);
-  }
-  
-  .producto-card .precio {
-    @apply text-xl font-semibold mb-4;
-    color: var(--color-rosa-boton); /* Usando la variable original del botón */
-    
-    /* Preparar transformación */
-    transition: transform var(--duration-quick) var(--ease-elastic);
-  }
-  
-  .producto-card:hover .precio {
-    /* Bounce sutil del precio */
-    transform: scale(1.08);
-  }
+  /* ========================================
+     PRODUCTO CARD - ESTILOS MOVIDOS A gemini-animations.css
+     ======================================== 
+     
+     IMPORTANTE: Los estilos de .producto-card ahora están SOLO en 
+     client/src/styles/gemini-animations.css para evitar conflictos.
+     
+     NO DUPLICAR estilos aquí. Usar gemini-animations.css como fuente única.
+  ======================================== */
   
   /* Contenedor de botones en tarjeta */
   .producto-card .botones {
@@ -469,33 +399,15 @@
   /* ========================================
      FILTROS DE CATEGORÍA - SMOOTH TRANSITION
   ======================================== */
-  .categoria-btn {
-    @apply px-5 py-2 rounded-full border-2 border-transparent font-medium text-sm cursor-pointer;
-    transition: all var(--duration-quick) var(--ease-soft);
-    transform: scale(1);
-    background-color: #F4C7D4; /* Rosa principal */
-    color: #4A5568; /* Gray 600 */
-  }
-  
-  /* Estado activo */
-  .categoria-btn.active {
-    background-color: #B8D4E3; /* Azul suave */
-    color: #4A5568;
-    transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    animation: filterPulse 0.4s ease;
-  }
-  
-  /* Hover state */
-  .categoria-btn:hover {
-    transform: translateY(-2px) scale(1.03);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Active click */
-  .categoria-btn:active {
-    transform: scale(0.98);
-  }
+  /* ========================================
+     CATEGORIA BTN - ESTILOS MOVIDOS A gemini-animations.css
+     ======================================== 
+     
+     IMPORTANTE: Los estilos de .categoria-btn ahora están SOLO en 
+     client/src/styles/gemini-animations.css para evitar conflictos.
+     
+     NO DUPLICAR estilos aquí. Usar gemini-animations.css como fuente única.
+  ======================================== */
 
   /* ========================================
      TESTIMONIOS - GENTLE HOVER & DASHED BORDER
@@ -694,3 +606,16 @@
     opacity: 1;
   }
 }
+
+/* ============================================================================
+   GEMINI ANIMATIONS - CARGAR AL FINAL PARA MÁXIMA PRIORIDAD
+   ============================================================================
+   
+   CRÍTICO: Este import debe estar AL FINAL para que las transiciones
+   NO sean sobrescritas por Tailwind CSS 4.
+   
+   Tailwind CSS 4 optimiza y elimina transiciones que considera "no utilizadas".
+   Al cargar gemini-animations.css al final, aseguramos que estas reglas
+   tengan la máxima especificidad y NO sean eliminadas.
+============================================================================ */
+@import "./styles/gemini-animations.css";

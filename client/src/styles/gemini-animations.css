@@ -69,7 +69,7 @@
 }
 
 /* ========================================
-   TARJETAS DE PRODUCTO - ESTILOS BASE
+   TARJETAS DE PRODUCTO - ESTILOS BASE (SOLO LAYOUT)
 ======================================== */
 .producto-card {
   background: white;
@@ -87,21 +87,18 @@
   display: flex;
   flex-direction: column;
   
-  /* Transición suave para hover (EXACTO Gemini) */
-  transition: border-color var(--duration-smooth) var(--ease-natural),
-              box-shadow var(--duration-smooth) var(--ease-natural),
-              transform var(--duration-smooth) var(--ease-natural);
+  /* IMPORTANTE: NO transiciones CSS - Framer Motion las maneja */
 }
 
-/* Hover de tarjeta - Borde visible y lift suave */
+/* Hover de tarjeta - Solo estilos visuales, NO transforms */
 .producto-card:hover {
-  border-color: var(--color-coral);
-  box-shadow: var(--shadow-card-hover);
-  transform: translateY(-4px);
+  border-color: #E68B6F; /* var(--color-coral) */
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08), 0 4px 8px rgba(230, 139, 111, 0.12);
+  /* IMPORTANTE: NO transform aquí - Framer Motion lo maneja */
 }
 
 /* ========================================
-   IMÁGENES DE PRODUCTO (ASPECT RATIO 4:5)
+   IMÁGENES DE PRODUCTO (ASPECT RATIO 4:5 - SOLO LAYOUT)
 ======================================== */
 .producto-card img,
 .producto-image {
@@ -111,14 +108,10 @@
   border-radius: 12px;
   display: block;
   
-  /* Transición suave para zoom en hover */
-  transition: transform var(--duration-gentle) var(--ease-natural);
+  /* IMPORTANTE: NO transiciones CSS - Framer Motion las maneja */
 }
 
-/* Zoom suave de imagen al hover de la card */
-.producto-card:hover img {
-  transform: scale(1.05);
-}
+/* NO hover styles para img - Framer Motion lo maneja completamente */
 
 /* ========================================
    LAYOUT DE TARJETA - CONTENIDO
@@ -152,6 +145,40 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+}
+
+/* Estilos adicionales para elementos dentro de .producto-card */
+.producto-card h3 {
+  margin-top: 0.75rem; /* mt-3 */
+  margin-bottom: 0.5rem; /* mb-2 */
+  font-size: 1.125rem; /* text-lg */
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-marron);
+  
+  /* Transición suave de color */
+  transition: color var(--duration-quick) ease;
+}
+
+.producto-card:hover h3 {
+  color: var(--color-coral);
+}
+
+.producto-card .precio {
+  font-size: 1.25rem; /* text-xl */
+  font-weight: 600; /* font-semibold */
+  margin-bottom: 1rem; /* mb-4 */
+  color: var(--color-rosa-boton);
+  
+  /* Preparar transformación */
+  transition: transform var(--duration-quick) var(--ease-elastic);
+}
+
+.producto-card:hover .precio {
+  /* Bounce sutil del precio */
+  transform: scale(1.08);
 }
 
 /* ========================================
@@ -208,31 +235,34 @@ html {
 }
 
 /* ========================================
-   BOTONES DE CATEGORÍA - ANIMACIÓN QUICK (450ms)
+   BOTONES DE CATEGORÍA (SOLO LAYOUT Y COLORES)
 ======================================== */
 .categoria-btn {
-  /* Transición con duración EXACTA de Gemini Canvas */
-  transition: all var(--duration-quick) var(--ease-soft) !important;
-  transform: scale(1);
-  will-change: transform, background-color, box-shadow;
+  /* Layout base */
+  padding: 0.5rem 1.25rem; /* px-5 py-2 */
+  border-radius: 9999px; /* rounded-full */
+  border: 2px solid transparent;
+  font-weight: 500; /* font-medium */
+  font-size: 0.875rem; /* text-sm */
+  cursor: pointer;
+  
+  /* Colores base */
+  background-color: #F4C7D4; /* Rosa principal */
+  color: #4A5568; /* Gray 600 */
+  
+  /* IMPORTANTE: NO transiciones CSS - Framer Motion las maneja */
 }
 
 .categoria-btn.active {
-  /* Animación de activación */
-  animation: filterPulseGemini var(--duration-quick) var(--ease-bounce);
+  /* Estado activo - solo estilos visuales */
+  background-color: #B8D4E3; /* Azul suave */
+  color: #4A5568;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  
+  /* NO transform ni animation - Framer Motion lo maneja */
 }
 
-.categoria-btn:hover {
-  /* Hover suave y rápido (450ms) */
-  transform: translateY(-2px) scale(1.03);
-  transition: all var(--duration-quick) var(--ease-soft);
-}
-
-@keyframes filterPulseGemini {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.08); }
-  100% { transform: scale(1.05); }
-}
+/* NO hover styles - Framer Motion lo maneja completamente */
 
 /* ========================================
    PERFORMANCE - REDUCIR ANIMACIONES MÓVIL

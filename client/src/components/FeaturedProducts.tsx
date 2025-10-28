@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import WhatsAppIcon from "./shared/WhatsAppIcon";
-import { animationVariants, useScrollAnimation } from "@/hooks/useAnimations";
+import { animationVariants, useScrollAnimation, productCardVariants, productCardImageVariants } from "@/hooks/useAnimations";
 
 export default function FeaturedProducts() {
   const scrollAnimationProps = useScrollAnimation();
@@ -49,14 +49,25 @@ export default function FeaturedProducts() {
           {featured.map((product, index) => (
             <motion.div 
               key={index}
-              className="producto-card"
               variants={animationVariants.fadeInScroll}
               {...scrollAnimationProps}
             >
-              <img 
+              <motion.div 
+                className="producto-card"
+                variants={productCardVariants}
+                initial="initial"
+                whileHover="hover"
+                whileTap="tap"
+              >
+              <motion.img 
                 src={product.image} 
                 alt={product.alt} 
                 loading="lazy"
+                variants={productCardImageVariants}
+                style={{
+                  aspectRatio: '4/5',
+                  objectFit: 'cover',
+                }}
                 onError={(e) => { 
                   const target = e.currentTarget;
                   target.src = `https://placehold.co/400x500/CCCCCC/888888?text=Error+${index+1}`; 
@@ -92,6 +103,7 @@ export default function FeaturedProducts() {
                   </button>
                 </div>
               </div>
+              </motion.div>
             </motion.div>
           ))}
         </div>
