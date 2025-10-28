@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import WhatsAppIcon from "./shared/WhatsAppIcon";
+import { animationVariants } from "@/hooks/useAnimations";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -18,9 +20,11 @@ export default function Header() {
       <header className="sticky top-0 z-50 shadow-md" style={{backgroundColor: 'rgba(244, 199, 212, 0.8)', backdropFilter: 'blur(12px)'}}>
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
           <a href="#" className="flex items-center gap-2 sm:gap-3">
-            <div 
-              className="h-10 w-10 sm:h-12 sm:w-12 object-contain rounded-full border-2 border-white/50 flex items-center justify-center float-animation"
+            <motion.div 
+              className="h-10 w-10 sm:h-12 sm:w-12 object-contain rounded-full border-2 border-white/50 flex items-center justify-center inline-block"
               style={{ backgroundColor: '#FFF9F5' }}
+              initial={animationVariants.floatAnimation.initial}
+              animate={animationVariants.floatAnimation.animate}
             >
               <img
                 src="/logo.png" 
@@ -31,7 +35,7 @@ export default function Header() {
                   target.src = 'https://placehold.co/48x48/FFF9F5/4A5568?text=GA'; 
                 }}
               />
-            </div>
+            </motion.div>
             <span className="font-display text-2xl sm:text-3xl text-white drop-shadow-sm" style={{textShadow: '1px 1px 2px rgba(74, 85, 104, 0.5)'}}>
               Grayamigurumis
             </span>
@@ -54,16 +58,17 @@ export default function Header() {
           </nav>
 
           <div className="hidden md:block">
-            <a 
+            <motion.a 
               href={`https://wa.me/${whatsappNumber}?text=Hola!%20Me%20interesan%20tus%20amigurumis.`}
               target="_blank"
               rel="noopener noreferrer"
               className="btn-whatsapp"
               aria-label="Contactar por WhatsApp"
               title="Contactar por WhatsApp"
+              whileHover={animationVariants.heartbeat}
             >
               <WhatsAppIcon size={20} title="WhatsApp" />
-            </a>
+            </motion.a>
           </div>
 
           {/* Mobile Menu Button */}

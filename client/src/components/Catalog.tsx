@@ -1,12 +1,15 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { products } from "../data/products";
 import WhatsAppIcon from "./shared/WhatsAppIcon";
+import { animationVariants, useScrollAnimation } from "@/hooks/useAnimations";
 
 type Category = "all" | "animalitos" | "cine-tv" | "anime-videojuegos";
 
 export default function Catalog() {
   const [activeFilter, setActiveFilter] = useState<Category>("all");
   const whatsappNumber = "56992834268";
+  const scrollAnimationProps = useScrollAnimation();
 
   const categoryMap: Record<string, Category> = {
     "Animalitos": "animalitos",
@@ -71,12 +74,14 @@ export default function Catalog() {
           </button>
         </div>
 
-        {/* Product Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
+        {/* Product Grid - Gemini Canvas Style */}
+        <div className="productos-grid-gemini">
           {filteredProducts.map((product) => (
-            <div 
+            <motion.div 
               key={product.id}
-              className="producto-card fade-in-scroll"
+              className="producto-card"
+              variants={animationVariants.fadeInScroll}
+              {...scrollAnimationProps}
             >
               <img 
                 src={product.image} 
@@ -97,14 +102,15 @@ export default function Catalog() {
                 
                 {/* Botones con nuevas clases */}
                 <div className="botones">
-                  <button
+                  <motion.button
                     onClick={() => handleWhatsApp(product.name)}
                     className="btn-whatsapp"
                     aria-label={`Consultar ${product.name} por WhatsApp`}
                     title={`Consultar ${product.name} por WhatsApp`}
+                    whileHover={animationVariants.heartbeat}
                   >
                     <WhatsAppIcon size={20} title="WhatsApp" />
-                  </button>
+                  </motion.button>
                   
                   <button
                     onClick={() => handlePagar(product.urlPago)}
@@ -116,7 +122,7 @@ export default function Catalog() {
                   </button>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
