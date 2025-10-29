@@ -31,7 +31,7 @@ export default function FeaturedProducts() {
       {/* Contenedor sin padding lateral ni desplazamiento */}
       <div className="w-full flex justify-center bg-favs py-16 md:py-24">
         <div className="w-full max-w-7xl px-4 md:px-0 flex flex-col items-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 md:mb-16" style={{ color: "#4A5568" }}>
+          <h2 className="font-heading text-4xl sm:text-5xl text-center mb-12 md:mb-16" style={{ color: "#4A5568" }}>
             Nuestros Favoritos
           </h2>
 

@@ -17,27 +17,27 @@ export default function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-50 shadow-md" style={{backgroundColor: 'rgba(244, 199, 212, 0.8)', backdropFilter: 'blur(12px)'}}>
-        <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-          <a href="#" className="flex items-center gap-2 sm:gap-3">
+      <header className="sticky top-0 z-50 shadow-md h-16 sm:h-18 md:h-20" style={{backgroundColor: 'rgba(244, 199, 212, 0.8)', backdropFilter: 'blur(12px)'}}>
+        <div className="container mx-auto px-4 sm:px-6 h-full flex justify-between items-center">
+          <a href="#" className="flex items-center gap-3 sm:gap-4">
             <motion.div 
-              className="h-10 w-10 sm:h-12 sm:w-12 object-contain rounded-full border-2 border-white/50 flex items-center justify-center inline-block"
+              className="h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 rounded-full border-2 border-white/50 flex items-center justify-center inline-block"
               style={{ backgroundColor: '#FFF9F5' }}
               initial={animationVariants.floatAnimation.initial}
               animate={animationVariants.floatAnimation.animate}
             >
               <img
                 src="/logo.png" 
-                alt="Gray Amigurumis Logo"
-                className="h-full w-full object-contain rounded-full"
+                alt="GrayAmigurumis Logo"
+                className="h-full w-full object-contain aspect-square rounded-full"
                 onError={(e) => { 
                   const target = e.currentTarget;
                   target.src = 'https://placehold.co/48x48/FFF9F5/4A5568?text=GA'; 
                 }}
               />
             </motion.div>
-            <span className="font-display text-2xl sm:text-3xl text-white drop-shadow-sm" style={{textShadow: '1px 1px 2px rgba(74, 85, 104, 0.5)'}}>
-              Grayamigurumis
+            <span className="font-heading text-3xl sm:text-4xl md:text-5xl text-white drop-shadow-sm" style={{textShadow: '1px 1px 2px rgba(74, 85, 104, 0.5)'}}>
+              GrayAmigurumis
             </span>
           </a>
           

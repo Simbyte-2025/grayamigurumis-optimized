@@ -21,7 +21,7 @@ export default function About() {
             >
               <img
                 src={PORTRAIT_SRC}
-                alt="Retrato de la artesana Grayamigurumis"
+                alt="Retrato de la artesana GrayAmigurumis"
                 className="w-full h-full object-cover"
                 loading="lazy"
                 onError={(e) => { 
@@ -34,14 +34,14 @@ export default function About() {
 
           {/* Texto */}
           <div className="md:w-1/2 text-center md:text-left">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 md:mb-8" style={{ color: "#4A5568" }}>
+            <h2 className="font-heading text-4xl sm:text-5xl mb-6 md:mb-8" style={{ color: "#4A5568" }}>
               El Arte de Tejer tus Ideas
             </h2>
             <p
               className="text-base md:text-lg leading-relaxed mb-4 text-balance"
               style={{ color: "#4A5568" }}
             >
-              ¡Hola! Soy la creadora detrás de Grayamigurumis. Como <strong>emprendedora regional</strong>, mi pasión es dar vida a tus personajes e ideas a través del crochet. Cada pieza es una confección única, hecha a pedido con materiales de la más alta calidad.
+              ¡Hola! Soy la creadora detrás de GrayAmigurumis. Como <strong>emprendedora regional</strong>, mi pasión es dar vida a tus personajes e ideas a través del crochet. Cada pieza es una confección única, hecha a pedido con materiales de la más alta calidad.
             </p>
             <p className="text-base md:text-lg leading-relaxed text-balance" style={{ color: "#4A5568" }}>
               Desde adorables animalitos hasta complejos personajes, me especializo en <strong>pedidos personalizados</strong> para crear ese regalo o auto-regalo perfecto que estás buscando. ¡Gracias por apoyar mi emprendimiento!

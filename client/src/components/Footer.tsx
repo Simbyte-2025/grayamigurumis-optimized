@@ -23,10 +23,10 @@ export default function Footer() {
         {/* Grid de 3 columnas */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12 mb-10 md:mb-12">
           
-          {/* Columna 1: Gray Amigurumis */}
+          {/* Columna 1: GrayAmigurumis */}
           <div>
-            <h3 className="font-display text-2xl sm:text-3xl mb-4">
-              Gray Amigurumis
+            <h3 className="font-heading text-2xl sm:text-3xl mb-4">
+              GrayAmigurumis
             </h3>
             <p className="text-base sm:text-lg leading-relaxed mb-5 sm:mb-6 opacity-90">
               Confecciones artesanales hechas con amor desde Punta Arenas, Chile.
@@ -62,7 +62,7 @@ export default function Footer() {
           
           {/* Columna 2: Enlaces Rápidos */}
           <div>
-            <h3 className="font-bold text-xl sm:text-2xl mb-4">
+            <h3 className="font-heading text-2xl sm:text-3xl mb-4">
               Enlaces Rápidos
             </h3>
             <nav className="flex flex-col space-y-2 sm:space-y-3">
@@ -89,7 +89,7 @@ export default function Footer() {
           
           {/* Columna 3: Ubicación */}
           <div>
-            <h3 className="font-bold text-xl sm:text-2xl mb-4">
+            <h3 className="font-heading text-2xl sm:text-3xl mb-4">
               Ubicación
             </h3>
             <div className="flex items-start gap-2 text-base sm:text-lg leading-relaxed opacity-90">
@@ -124,7 +124,7 @@ export default function Footer() {
         {/* Línea divisora */}
         <div className="border-t border-white/20 pt-6 sm:pt-8">
           <p className="text-center text-xs sm:text-sm opacity-80">
-            © {currentYear} Gray Amigurumis. Todos los derechos reservados.
+            © {currentYear} GrayAmigurumis. Todos los derechos reservados.
           </p>
         </div>
       </div>

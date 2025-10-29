@@ -1,6 +1,16 @@
 /* Importar fuentes primero */
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;500;700&display=swap');
 
+/* Moon Flower - Fuente local */
+@font-face {
+  font-family: 'Moon Flower';
+  src: url('/fonts/Moon Flower.ttf') format('truetype'),
+       url('/fonts/Moon Flower.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* Directivas de Tailwind CSS 4 */
 @import "tailwindcss";
 @import "tw-animate-css";
@@ -260,6 +270,11 @@
   
   .font-display {
     font-family: var(--font-display);
+  }
+
+  /* Moon Flower heading font utility - Manual definition for Tailwind CSS 4 */
+  .font-heading {
+    font-family: 'Moon Flower', cursive !important;
   }
 
   /* ========================================

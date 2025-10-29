@@ -28,7 +28,7 @@ export default function Hero() {
           animate={animationVariants.floatAnimationSlow.animate}
         >
           <motion.h1 
-            className="font-display text-4xl sm:text-5xl md:text-6xl mb-4 leading-tight" 
+            className="font-heading text-5xl sm:text-6xl md:text-7xl mb-4 leading-tight" 
             style={{color: '#4A5568'}}
             variants={animationVariants.heroTitle}
             initial="initial"
