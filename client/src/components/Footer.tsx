@@ -40,7 +40,6 @@ export default function Footer() {
                 className="transition-opacity hover:opacity-70 p-1"
                 aria-label="Instagram"
                 title="Visitar Instagram"
-                style={{color: '#FFF9F5'}}
               >
                 <InstagramIcon size={28} title="Instagram" className="text-white" />
               </a>
@@ -51,11 +50,8 @@ export default function Footer() {
                 className="transition-opacity hover:opacity-70 p-1"
                 aria-label="WhatsApp"
                 title="Contactar por WhatsApp"
-                style={{color: '#FFF9F5'}}
               >
-                <div style={{ filter: 'brightness(0) invert(1)' }}>
-                  <WhatsAppIcon size={28} title="WhatsApp" />
-                </div>
+                <WhatsAppIcon size={28} title="WhatsApp" />
               </a>
             </div>
           </div>

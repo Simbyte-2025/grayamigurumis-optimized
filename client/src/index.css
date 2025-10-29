@@ -275,6 +275,8 @@
   /* Moon Flower heading font utility - Manual definition for Tailwind CSS 4 */
   .font-heading {
     font-family: 'Moon Flower', cursive !important;
+    font-weight: bold !important;
+    font-weight: 700 !important;
   }
 
   /* ========================================
