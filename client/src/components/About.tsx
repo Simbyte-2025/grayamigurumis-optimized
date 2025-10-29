@@ -34,7 +34,7 @@ export default function About() {
 
           {/* Texto */}
           <div className="md:w-1/2 text-center md:text-left">
-            <h2 className="font-heading text-4xl sm:text-5xl mb-6 md:mb-8" style={{ color: "#4A5568" }}>
+            <h2 className="font-heading text-5xl sm:text-6xl mb-6 md:mb-8" style={{ color: "#4A5568" }}>
               El Arte de Tejer tus Ideas
             </h2>
             <p

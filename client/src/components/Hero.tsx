@@ -37,7 +37,7 @@ export default function Hero() {
             Hecho a mano, con el corazón
           </motion.h1>
           <motion.p 
-            className="text-xl sm:text-2xl md:text-3xl font-semibold mb-6 sm:mb-8" 
+            className="font-heading text-xl sm:text-2xl md:text-3xl mb-6 sm:mb-8" 
             style={{color: 'rgba(74, 85, 104, 0.9)'}}
             variants={animationVariants.heroSubtitle}
             initial="initial"

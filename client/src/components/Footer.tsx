@@ -1,5 +1,4 @@
-import WhatsAppIcon from "./shared/WhatsAppIcon";
-import InstagramIcon from "./shared/InstagramIcon";
+// Logos ahora se usan como imágenes PNG directamente
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -25,7 +24,7 @@ export default function Footer() {
           
           {/* Columna 1: GrayAmigurumis */}
           <div>
-            <h3 className="font-heading text-2xl sm:text-3xl mb-4">
+            <h3 className="font-heading text-4xl sm:text-5xl mb-4">
               GrayAmigurumis
             </h3>
             <p className="text-base sm:text-lg leading-relaxed mb-5 sm:mb-6 opacity-90">
@@ -41,7 +40,7 @@ export default function Footer() {
                 aria-label="Instagram"
                 title="Visitar Instagram"
               >
-                <InstagramIcon size={28} title="Instagram" className="text-white" />
+                <img src="/instagram-logo.png" alt="Instagram" className="w-7 h-7" />
               </a>
               <a 
                 href={`https://wa.me/${whatsappNumber}?text=${message}`}
@@ -51,14 +50,14 @@ export default function Footer() {
                 aria-label="WhatsApp"
                 title="Contactar por WhatsApp"
               >
-                <WhatsAppIcon size={28} title="WhatsApp" />
+                <img src="/whatsapp-logo.png" alt="WhatsApp" className="w-7 h-7" />
               </a>
             </div>
           </div>
           
           {/* Columna 2: Enlaces Rápidos */}
           <div>
-            <h3 className="font-heading text-2xl sm:text-3xl mb-4">
+            <h3 className="font-heading text-4xl sm:text-5xl mb-4">
               Enlaces Rápidos
             </h3>
             <nav className="flex flex-col space-y-2 sm:space-y-3">
@@ -85,7 +84,7 @@ export default function Footer() {
           
           {/* Columna 3: Ubicación */}
           <div>
-            <h3 className="font-heading text-2xl sm:text-3xl mb-4">
+            <h3 className="font-heading text-4xl sm:text-5xl mb-4">
               Ubicación
             </h3>
             <div className="flex items-start gap-2 text-base sm:text-lg leading-relaxed opacity-90">

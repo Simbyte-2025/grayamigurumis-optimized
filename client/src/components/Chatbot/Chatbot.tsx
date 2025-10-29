@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import ChatButton from "./ChatButton";
 import ChatWindow from "./ChatWindow";
 import "./chat.css";
+import { sendChatMessage, convertMessagesToAPIFormat } from "@/services/chatService";
 
 interface Message {
   id: string;
@@ -21,7 +22,7 @@ export default function Chatbot() {
     if (isOpen && messages.length === 0) {
       const welcomeMessage: Message = {
         id: `bot-${Date.now()}`,
-        text: "¡Hola 🧵 soy GrayBot! Puedo ayudarte a imaginar tu amigurumi personalizado. Cuéntame qué te gustaría crear.",
+        text: "¡Hola! 🧵 Soy GrayBot, tu asistente creativa. Puedo ayudarte a imaginar tu amigurumi personalizado. ¿Qué te gustaría crear?",
         sender: "bot",
         timestamp: new Date(),
       };
@@ -41,29 +42,43 @@ export default function Chatbot() {
     };
 
     setMessages((prev) => [...prev, userMessage]);
+    const userInput = input.trim();
     setInput("");
     setIsLoading(true);
 
-    // Simular respuesta del bot (placeholder para testing)
-    setTimeout(() => {
+    try {
+      // Convertir historial de mensajes al formato de la API (excluyendo el mensaje de bienvenida inicial)
+      const conversationHistory = convertMessagesToAPIFormat(
+        messages.filter((msg) => msg.id !== `bot-${messages[0]?.id}`)
+      );
+
+      // Llamar al servicio de chat
+      const response = await sendChatMessage(userInput, conversationHistory);
+
+      // Agregar respuesta del bot
       const botResponse: Message = {
         id: `bot-${Date.now()}`,
-        text: `Qué bonita idea 💖 Un amigurumi con esas características podría verse así: "${input.trim()}". ¡Me encanta! Podríamos trabajar en los detalles como colores, tamaño y accesorios. ¿Te gustaría agregar algo más especial?`,
+        text: response.message || "Lo siento, no pude procesar tu mensaje.",
         sender: "bot",
         timestamp: new Date(),
       };
 
       setMessages((prev) => [...prev, botResponse]);
-      setIsLoading(false);
-    }, 1500);
+    } catch (error) {
+      console.error("Error al enviar mensaje:", error);
+      
+      // Mensaje de error amigable
+      const errorMessage: Message = {
+        id: `bot-${Date.now()}`,
+        text: "Ups, tuve un problema técnico 😅 ¿Podrías intentar de nuevo?",
+        sender: "bot",
+        timestamp: new Date(),
+      };
 
-    // TODO: Integrar con Gemini API aquí cuando esté listo
-    // const response = await fetch('/api/generate-idea', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({ prompt: input.trim() })
-    // });
-    // const data = await response.json();
+      setMessages((prev) => [...prev, errorMessage]);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const toggleChat = () => {

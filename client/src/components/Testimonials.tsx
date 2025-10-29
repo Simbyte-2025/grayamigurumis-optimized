@@ -24,7 +24,7 @@ export default function Testimonials() {
       className="section-paper bg-quotes py-16 md:py-24"
     >
       <div className="container mx-auto px-6">
-        <h2 className="font-heading text-4xl sm:text-5xl text-center mb-12 md:mb-16" style={{color: '#4A5568'}}>
+        <h2 className="font-heading text-5xl sm:text-6xl text-center mb-12 md:mb-16" style={{color: '#4A5568'}}>
           Lo que dicen los fans
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 text-center">

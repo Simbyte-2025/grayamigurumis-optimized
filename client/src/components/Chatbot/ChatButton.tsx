@@ -1,5 +1,4 @@
 import React from "react";
-import { MessageCircle } from "lucide-react";
 
 interface ChatButtonProps {
   onClick: () => void;
@@ -14,8 +13,12 @@ export default function ChatButton({ onClick, isOpen }: ChatButtonProps) {
       aria-label={isOpen ? "Cerrar chat" : "Abrir chat"}
       type="button"
     >
-      {/* Ícono de ovillo/chat */}
-      <MessageCircle strokeWidth={2.5} />
+      {/* Robot amigurumi */}
+      <img 
+        src="/robot-face.webp" 
+        alt="GrayBot - Asistente de Grayamigurumis"
+        className="w-full h-full object-contain p-1"
+      />
       
       {/* Indicator de disponibilidad */}
       {!isOpen && (

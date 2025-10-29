@@ -276,7 +276,9 @@
   .font-heading {
     font-family: 'Moon Flower', cursive !important;
     font-weight: bold !important;
-    font-weight: 700 !important;
+    font-weight: 900 !important;
+    text-shadow: 0.8px 0.8px 0px rgba(74, 85, 104, 0.25);
+    letter-spacing: 0.015em;
   }
 
   /* ========================================
