@@ -5,11 +5,14 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite --host",
-    "build": "vite build",
+    "build": "vite build --config vite.config.cloudflare.ts",
+    "build:analyze": "ANALYZE=true vite build --config vite.config.cloudflare.ts",
+    "build:dev": "vite build",
     "start": "vite preview --host",
-    "preview": "vite preview --host",
+    "preview": "vite preview --host --config vite.config.cloudflare.ts",
     "check": "tsc --noEmit",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "optimize:images": "node optimize-images.mjs"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.12",
@@ -38,8 +41,6 @@
     "@radix-ui/react-toggle": "^1.1.10",
     "@radix-ui/react-toggle-group": "^1.1.11",
     "@radix-ui/react-tooltip": "^1.2.8",
-    "@tanstack/react-query": "^4.41.0",
-    "axios": "^1.12.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
@@ -47,7 +48,6 @@
     "framer-motion": "^12.23.22",
     "input-otp": "^1.4.2",
     "lucide-react": "^0.453.0",
-    "nanoid": "^5.1.5",
     "next-themes": "^0.4.6",
     "react": "^18.3.1",
     "react-day-picker": "^9.11.1",
@@ -59,8 +59,7 @@
     "tailwind-merge": "^3.3.1",
     "tailwindcss-animate": "^1.0.7",
     "vaul": "^1.1.2",
-    "wouter": "^3.3.5",
-    "zod": "^4.1.12"
+    "wouter": "^3.3.5"
   },
   "devDependencies": {
     "@builder.io/vite-plugin-jsx-loc": "^0.1.1",
@@ -70,18 +69,21 @@
     "@types/react": "^19.1.16",
     "@types/react-dom": "^19.1.9",
     "@vitejs/plugin-react": "^5.0.4",
-    "add": "^2.0.6",
     "autoprefixer": "^10.4.20",
-    "pnpm": "^10.15.1",
+    "depcheck": "^1.4.7",
+    "imagemin": "^9.0.1",
+    "imagemin-mozjpeg": "^10.0.0",
+    "imagemin-webp": "^8.0.0",
     "postcss": "^8.4.47",
     "prettier": "^3.6.2",
+    "rollup-plugin-visualizer": "^6.0.5",
+    "sharp": "^0.34.4",
     "tailwindcss": "^4.1.14",
+    "terser": "^5.44.0",
     "tsx": "^4.19.1",
-    "tw-animate-css": "^1.4.0",
     "typescript": "5.6.3",
     "vite": "^7.1.7",
-    "vite-plugin-manus-runtime": "^0.0.42",
-    "vitest": "^2.1.4"
+    "vite-plugin-manus-runtime": "^0.0.42"
   },
   "packageManager": "pnpm@10.4.1+sha512.c753b6c3ad7afa13af388fa6d808035a008e30ea9993f58c6663e2bc5ff21679aa834db094987129aa4d488b86df57f7b634981b2f827cdcacc698cc0cfb88af",
   "pnpm": {

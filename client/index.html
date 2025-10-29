@@ -6,8 +6,14 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1"
     />
-    <link rel="icon" type="image/png" href="/logo.png" />
-    <link rel="apple-touch-icon" href="/logo.png" />
+    
+    <!-- Preconnect para mejorar rendimiento de fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Usar WebP optimizado en lugar de PNG -->
+    <link rel="icon" type="image/webp" href="/logo.webp" />
+    <link rel="apple-touch-icon" href="/logo.webp" />
     <title>GrayAmigurumis</title>
 
     <!-- SEO Meta Tags -->
@@ -40,7 +46,7 @@
     <script type="module">
       const logo =
         import.meta.env.VITE_APP_LOGO ??
-        "/logo.png";
+        "/logo.webp";
       const title =
         import.meta.env.VITE_APP_TITLE ??
         "GrayAmigurumis";
