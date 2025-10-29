@@ -57,7 +57,8 @@ export default function Header() {
             </button>
           </nav>
 
-          <div className="hidden md:block">
+          {/* WhatsApp Button - Desktop and Mobile */}
+          <div className="flex items-center gap-3">
             <motion.a 
               href={`https://wa.me/${whatsappNumber}?text=Hola!%20Me%20interesan%20tus%20amigurumis.`}
               target="_blank"
@@ -69,16 +70,16 @@ export default function Header() {
             >
               <WhatsAppIcon size={20} title="WhatsApp" />
             </motion.a>
-          </div>
 
-          {/* Mobile Menu Button */}
-          <button 
-            onClick={() => setMobileMenuOpen(true)}
-            className="md:hidden text-3xl text-white p-2 rounded-md hover:bg-white/20 transition"
-            aria-label="Abrir menú"
-          >
-            ☰
-          </button>
+            {/* Mobile Menu Button */}
+            <button 
+              onClick={() => setMobileMenuOpen(true)}
+              className="md:hidden text-3xl text-white p-2 rounded-md hover:bg-white/20 transition"
+              aria-label="Abrir menú"
+            >
+              ☰
+            </button>
+          </div>
         </div>
       </header>
 
