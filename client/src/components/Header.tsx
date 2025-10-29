@@ -63,12 +63,13 @@ export default function Header() {
               href={`https://wa.me/${whatsappNumber}?text=Hola!%20Me%20interesan%20tus%20amigurumis.`}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-whatsapp"
+              className="inline-flex items-center justify-center bg-green-500 hover:bg-green-600 text-white rounded-full p-3 shadow-lg transition-all duration-300"
               aria-label="Contactar por WhatsApp"
               title="Contactar por WhatsApp"
               whileHover={animationVariants.heartbeat}
+              style={{ backgroundColor: '#25D366' }}
             >
-              <WhatsAppIcon size={20} title="WhatsApp" />
+              <WhatsAppIcon size={24} title="WhatsApp" />
             </motion.a>
 
             {/* Mobile Menu Button */}
