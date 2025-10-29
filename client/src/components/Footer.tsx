@@ -40,7 +40,7 @@ export default function Footer() {
                 aria-label="Instagram"
                 title="Visitar Instagram"
               >
-                <img src="/instagram-logo.png" alt="Instagram" className="w-7 h-7" />
+                <img src="/instagram-logo.webp" alt="Instagram" className="w-7 h-7" />
               </a>
               <a 
                 href={`https://wa.me/${whatsappNumber}?text=${message}`}
@@ -50,7 +50,7 @@ export default function Footer() {
                 aria-label="WhatsApp"
                 title="Contactar por WhatsApp"
               >
-                <img src="/whatsapp-logo.png" alt="WhatsApp" className="w-7 h-7" />
+                <img src="/whatsapp-logo.webp" alt="WhatsApp" className="w-7 h-7" />
               </a>
             </div>
           </div>

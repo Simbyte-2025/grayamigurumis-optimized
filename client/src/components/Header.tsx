@@ -27,7 +27,7 @@ export default function Header() {
               animate={animationVariants.floatAnimation.animate}
             >
               <img
-                src="/logo.png" 
+                src="/logo.webp" 
                 alt="GrayAmigurumis Logo"
                 className="h-full w-full object-contain aspect-square rounded-full"
                 onError={(e) => { 
@@ -69,7 +69,7 @@ export default function Header() {
               whileHover={animationVariants.heartbeat}
               style={{ backgroundColor: '#25D366' }}
             >
-              <img src="/whatsapp-logo.png" alt="WhatsApp" className="w-7 h-7" />
+              <img src="/whatsapp-logo.webp" alt="WhatsApp" className="w-7 h-7" />
             </motion.a>
 
             {/* Mobile Menu Button */}
