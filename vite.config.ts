@@ -1,45 +1,115 @@
-import { jsxLocPlugin } from "@builder.io/vite-plugin-jsx-loc";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
-import fs from "node:fs";
 import path from "path";
 import { defineConfig } from "vite";
-import { vitePluginManusRuntime } from "vite-plugin-manus-runtime";
-
-const plugins = [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime()];
+import { visualizer } from 'rollup-plugin-visualizer';
 
 export default defineConfig({
-  plugins,
+  plugins: [
+    react(),
+    tailwindcss(),
+    // Análisis de bundle (solo en modo analyze)
+    process.env.ANALYZE ? visualizer({
+      open: true,
+      gzipSize: true,
+      brotliSize: true,
+      filename: 'dist/stats.html'
+    }) : undefined,
+  ].filter(Boolean),
+  
   resolve: {
     alias: {
-      "@": path.resolve(import.meta.dirname, "client", "src"),
-      "@shared": path.resolve(import.meta.dirname, "shared"),
-      "@assets": path.resolve(import.meta.dirname, "attached_assets"),
+      "@": path.resolve(__dirname, "client/src"),
     },
   },
-  envDir: path.resolve(import.meta.dirname),
-  root: path.resolve(import.meta.dirname, "client"),
+  
+  root: path.resolve(__dirname, "client"),
+  publicDir: path.resolve(__dirname, "client/public"),
+  
   build: {
-    outDir: path.resolve(import.meta.dirname, "dist/public"),
+    outDir: path.resolve(__dirname, "dist"),
     emptyOutDir: true,
+    
+    // Optimizaciones para Cloudflare Pages
+    target: 'es2020',
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+        pure_funcs: ['console.log', 'console.info', 'console.debug'],
+      },
+      format: {
+        comments: false,
+      },
+    },
+    
+    // Code splitting optimizado
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vendor-react': ['react', 'react-dom', 'react/jsx-runtime'],
+          'vendor-ui': [
+            '@radix-ui/react-dialog',
+            '@radix-ui/react-slot',
+          ],
+          'vendor-routing': ['wouter'],
+          'vendor-utils': [
+            'clsx',
+            'tailwind-merge',
+            'class-variance-authority',
+          ],
+        },
+        chunkFileNames: 'assets/js/[name]-[hash].js',
+        entryFileNames: 'assets/js/[name]-[hash].js',
+        assetFileNames: (assetInfo) => {
+          const info = assetInfo.name.split('.');
+          const ext = info[info.length - 1];
+          
+          if (/\.(png|jpe?g|svg|gif|webp|avif)$/i.test(assetInfo.name)) {
+            return 'assets/images/[name]-[hash].[ext]';
+          }
+          
+          if (/\.(woff2?|eot|ttf|otf)$/i.test(assetInfo.name)) {
+            return 'assets/fonts/[name]-[hash].[ext]';
+          }
+          
+          if (/\.css$/i.test(assetInfo.name)) {
+            return 'assets/css/[name]-[hash].[ext]';
+          }
+          
+          return 'assets/[name]-[hash].[ext]';
+        },
+      },
+    },
+    
+    chunkSizeWarningLimit: 500,
+    cssCodeSplit: true,
+    sourcemap: false,
+    reportCompressedSize: true,
+    assetsInlineLimit: 4096,
   },
+  
+  optimizeDeps: {
+    include: [
+      'react',
+      'react-dom',
+      'wouter',
+    ],
+    exclude: [
+      '@builder.io/vite-plugin-jsx-loc',
+      'vite-plugin-manus-runtime',
+    ],
+  },
+  
   server: {
     port: 3000,
-    strictPort: false, // Will find next available port if 3000 is busy
+    strictPort: false,
     host: true,
-    allowedHosts: [
-      ".manuspre.computer",
-      ".manus.computer",
-      ".manus-asia.computer",
-      ".manuscomputer.ai",
-      ".manusvm.computer",
-      ".sandbox.novita.ai",
-      "localhost",
-      "127.0.0.1",
-    ],
-    fs: {
-      strict: true,
-      deny: ["**/.*"],
-    },
+  },
+  
+  preview: {
+    port: 3000,
+    host: true,
   },
 });
