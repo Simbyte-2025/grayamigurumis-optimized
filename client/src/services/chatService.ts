@@ -1,13 +1,15 @@
 /**
  * Servicio de Chat para GrayAmigurumis
- * Sistema de fallback con 3 APIs: Gemini, Perplexity y OpenRouter
- * Usa las credenciales del entorno de Manus
+ * 
+ * SEGURIDAD: Usa SOLO el proxy de Pages Function (/chat/completions)
+ * - NUNCA expone API keys en el frontend
+ * - La API key de OpenRouter se almacena como secreto en Cloudflare Dashboard
+ * - Fallback automático entre modelos gratuitos de OpenRouter
  */
 
 interface ChatMessage {
   role: string;
-  parts?: Array<{ text: string }>;
-  content?: string;
+  content: string;
 }
 
 interface ChatResponse {
@@ -52,87 +54,45 @@ const SYSTEM_INSTRUCTION = `Eres el asistente virtual amoroso y respetuoso de Gr
 ¡Haz que cada interacción sea un reflejo del mundo afectuoso, creativo y personalizado de Grayamigurumis!`;
 
 /**
- * Intenta llamar a Google Gemini API
+ * Modelos gratuitos de OpenRouter con fallback optimizado por velocidad
+ * Ordenados por latencia: más rápido primero, más potente último
+ * https://openrouter.ai/docs#models
  */
-async function tryGemini(userMessage: string, conversationHistory: any[]): Promise<ChatResponse> {
-  const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-  
-  if (!apiKey) {
-    throw new Error("Gemini API key no configurada");
-  }
+const FREE_MODELS = [
+  "meituan/longcat-flash-chat:free",      // 1º: Ultra-rápido (2-5s) - MoE chat specialist
+  "anthropic/claude-3.5-haiku:free",      // 2º: Premium speed (3-6s) - Real-time chat
+  "google/gemini-flash-1.5:free",         // 3º: Estable y rápido (4-8s) - High uptime
+  "deepseek/deepseek-chat-v3.1:free"      // 4º: Potente fallback (8-12s) - Deep reasoning
+];
 
-  const contents = [
+/**
+ * Endpoint del proxy seguro (Cloudflare Worker existente)
+ * Worker: grayamigurumis-or-relay.caballero-sepulveda-nicolas.workers.dev
+ * La API key de OpenRouter está almacenada como Secret en el Worker
+ */
+const PROXY_ENDPOINT = 'https://grayamigurumis-or-relay.caballero-sepulveda-nicolas.workers.dev/chat/completions';
+
+/**
+ * Intenta enviar mensaje usando el proxy con un modelo específico
+ */
+async function tryModel(
+  model: string,
+  userMessage: string,
+  conversationHistory: ChatMessage[]
+): Promise<ChatResponse> {
+  const messages: ChatMessage[] = [
+    { role: "system", content: SYSTEM_INSTRUCTION },
     ...conversationHistory,
-    {
-      role: "user",
-      parts: [{ text: userMessage }]
-    }
-  ];
-
-  const response = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${apiKey}`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        system_instruction: {
-          parts: [{ text: SYSTEM_INSTRUCTION }]
-        },
-        contents: contents,
-        generationConfig: {
-          temperature: 0.8,
-          maxOutputTokens: 300,
-        },
-      }),
-    }
-  );
-
-  if (!response.ok) {
-    throw new Error(`Gemini API error: ${response.status}`);
-  }
-
-  const data = await response.json();
-  
-  if (!data.candidates?.[0]?.content?.parts?.[0]?.text) {
-    throw new Error("Respuesta inválida de Gemini");
-  }
-
-  return {
-    success: true,
-    message: data.candidates[0].content.parts[0].text,
-    provider: "Gemini"
-  };
-}
-
-/**
- * Intenta llamar a Perplexity API (Sonar)
- */
-async function tryPerplexity(userMessage: string, conversationHistory: any[]): Promise<ChatResponse> {
-  const apiKey = import.meta.env.VITE_PERPLEXITY_API_KEY;
-  
-  if (!apiKey) {
-    throw new Error("Perplexity API key no configurada");
-  }
-
-  const messages = [
-    { role: "system", content: SYSTEM_INSTRUCTION },
-    ...conversationHistory.map(msg => ({
-      role: msg.role === "model" ? "assistant" : msg.role,
-      content: msg.parts?.[0]?.text || msg.content || ""
-    })),
     { role: "user", content: userMessage }
   ];
 
-  const response = await fetch("https://api.perplexity.ai/chat/completions", {
+  const response = await fetch(PROXY_ENDPOINT, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${apiKey}`,
     },
     body: JSON.stringify({
-      model: "sonar-pro",
+      model: model,
       messages: messages,
       temperature: 0.8,
       max_tokens: 300,
@@ -140,122 +100,76 @@ async function tryPerplexity(userMessage: string, conversationHistory: any[]): P
   });
 
   if (!response.ok) {
-    throw new Error(`Perplexity API error: ${response.status}`);
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(
+      errorData.error || `HTTP ${response.status}: ${response.statusText}`
+    );
   }
 
   const data = await response.json();
-  
+
   if (!data.choices?.[0]?.message?.content) {
-    throw new Error("Respuesta inválida de Perplexity");
+    throw new Error("Respuesta inválida del servidor");
   }
 
   return {
     success: true,
     message: data.choices[0].message.content,
-    provider: "Perplexity"
+    provider: `OpenRouter (${model})`,
   };
 }
 
 /**
- * Intenta llamar a OpenRouter API
- */
-async function tryOpenRouter(userMessage: string, conversationHistory: any[]): Promise<ChatResponse> {
-  const apiKey = import.meta.env.VITE_OPENROUTER_API_KEY;
-  
-  if (!apiKey) {
-    throw new Error("OpenRouter API key no configurada");
-  }
-
-  const messages = [
-    { role: "system", content: SYSTEM_INSTRUCTION },
-    ...conversationHistory.map(msg => ({
-      role: msg.role === "model" ? "assistant" : msg.role,
-      content: msg.parts?.[0]?.text || msg.content || ""
-    })),
-    { role: "user", content: userMessage }
-  ];
-
-  const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${apiKey}`,
-      "HTTP-Referer": window.location.origin,
-      "X-Title": "GrayAmigurumis Chatbot"
-    },
-    body: JSON.stringify({
-      model: "google/gemini-2.0-flash-exp:free",
-      messages: messages,
-      temperature: 0.8,
-      max_tokens: 300,
-    }),
-  });
-
-  if (!response.ok) {
-    throw new Error(`OpenRouter API error: ${response.status}`);
-  }
-
-  const data = await response.json();
-  
-  if (!data.choices?.[0]?.message?.content) {
-    throw new Error("Respuesta inválida de OpenRouter");
-  }
-
-  return {
-    success: true,
-    message: data.choices[0].message.content,
-    provider: "OpenRouter"
-  };
-}
-
-/**
- * Envía un mensaje al chatbot con sistema de fallback
- * Intenta en orden: Gemini → Perplexity → OpenRouter
+ * Envía un mensaje al chatbot con sistema de fallback entre modelos
+ * Intenta en orden: LongCat Flash → Claude 3.5 Haiku → Gemini Flash 1.5 → DeepSeek V3.1
+ * Optimizado para velocidad (2-6s respuesta promedio)
  */
 export async function sendChatMessage(
   userMessage: string,
-  conversationHistory: any[] = []
+  conversationHistory: Array<{ sender: "user" | "bot"; text: string }> = []
 ): Promise<ChatResponse> {
-  const providers = [
-    { name: "Gemini", fn: tryGemini },
-    { name: "Perplexity", fn: tryPerplexity },
-    { name: "OpenRouter", fn: tryOpenRouter }
-  ];
+  // Convertir historial al formato de OpenRouter
+  const apiHistory: ChatMessage[] = conversationHistory.map((msg) => ({
+    role: msg.sender === "user" ? "user" : "assistant",
+    content: msg.text,
+  }));
 
   let lastError: Error | null = null;
 
-  // Intentar con cada proveedor en orden
-  for (const provider of providers) {
+  // Intentar con cada modelo en orden
+  for (const model of FREE_MODELS) {
     try {
-      console.log(`Intentando con ${provider.name}...`);
-      const result = await provider.fn(userMessage, conversationHistory);
-      console.log(`✓ ${provider.name} respondió exitosamente`);
+      console.log(`🤖 Intentando con ${model}...`);
+      const result = await tryModel(model, userMessage, apiHistory);
+      console.log(`✅ ${model} respondió exitosamente`);
       return result;
     } catch (error) {
-      console.warn(`✗ ${provider.name} falló:`, error);
+      console.warn(`❌ ${model} falló:`, error);
       lastError = error instanceof Error ? error : new Error(String(error));
-      // Continuar con el siguiente proveedor
+      // Continuar con el siguiente modelo
     }
   }
 
-  // Si todos fallaron
-  console.error("Todos los proveedores fallaron:", lastError);
-  
+  // Si todos los modelos fallaron
+  console.error("❌ Todos los modelos fallaron:", lastError);
+
   return {
     success: false,
     error: lastError?.message || "Error desconocido",
-    message: "Lo siento, tuve un problema técnico 😅 ¿Podrías intentar de nuevo en un momento?",
+    message:
+      "Lo siento, tuve un problema técnico 😅 ¿Podrías intentar de nuevo en un momento? También puedes contactarme directamente por WhatsApp.",
   };
 }
 
 /**
- * Convierte el historial de mensajes del chatbot al formato de Gemini API
+ * Convierte el historial de mensajes del chatbot al formato de la API
+ * @deprecated Esta función ya no es necesaria con el nuevo sistema
  */
 export function convertMessagesToAPIFormat(
   messages: Array<{ sender: "user" | "bot"; text: string }>
-): any[] {
+): ChatMessage[] {
   return messages.map((msg) => ({
-    role: msg.sender === "user" ? "user" : "model",
-    parts: [{ text: msg.text }],
+    role: msg.sender === "user" ? "user" : "assistant",
+    content: msg.text,
   }));
 }

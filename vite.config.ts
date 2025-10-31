@@ -97,7 +97,6 @@ export default defineConfig({
       'wouter',
     ],
     exclude: [
-      '@builder.io/vite-plugin-jsx-loc',
       'vite-plugin-manus-runtime',
     ],
   },
