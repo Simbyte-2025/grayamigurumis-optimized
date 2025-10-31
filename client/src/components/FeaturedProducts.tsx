@@ -8,9 +8,9 @@ import {
 } from "@/hooks/useAnimations";
 
 const featuredProducts = [
-  { id: 1, name: "Deadpool", price: "$22.000", image: "/src/assets/deadpool.webp", flowLink: "https://www.flow.cl/checkout" },
-  { id: 10, name: "Stitch", price: "$18.000", image: "/src/assets/stitch.webp", flowLink: "https://www.flow.cl/checkout" },
-  { id: 15, name: "Goku", price: "$24.000", image: "/src/assets/goku.webp", flowLink: "https://www.flow.cl/checkout" },
+  { id: 1, name: "Deadpool", price: "$22.000", image: "/assets/products/deadpool.webp", flowLink: "https://www.flow.cl/checkout" },
+  { id: 10, name: "Stitch", price: "$18.000", image: "/assets/products/stitch.webp", flowLink: "https://www.flow.cl/checkout" },
+  { id: 15, name: "Goku", price: "$24.000", image: "/assets/products/goku.webp", flowLink: "https://www.flow.cl/checkout" },
 ];
 
 export default function FeaturedProducts() {

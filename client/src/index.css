@@ -6,7 +6,7 @@
 /* Quicksand - Regular (400) */
 @font-face {
   font-family: 'Quicksand';
-  src: url('/fonts/Quicksand-Regular.woff2') format('woff2');
+  src: url('/fonts/quicksand-regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -15,7 +15,7 @@
 /* Quicksand - Medium (500) */
 @font-face {
   font-family: 'Quicksand';
-  src: url('/fonts/Quicksand-Medium.woff2') format('woff2');
+  src: url('/fonts/quicksand-medium.woff2') format('woff2');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -24,7 +24,7 @@
 /* Quicksand - Bold (700) */
 @font-face {
   font-family: 'Quicksand';
-  src: url('/fonts/Quicksand-Bold.woff2') format('woff2');
+  src: url('/fonts/quicksand-bold.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -33,17 +33,16 @@
 /* Pacifico - Regular */
 @font-face {
   font-family: 'Pacifico';
-  src: url('/fonts/Pacifico-Regular.woff2') format('woff2');
+  src: url('/fonts/pacifico-regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
-/* Moon Flower - Fuente local */
+/* Moon Flower - Display font optimizada */
 @font-face {
   font-family: 'Moon Flower';
-  src: url('/fonts/Moon Flower.ttf') format('truetype'),
-       url('/fonts/Moon Flower.otf') format('opentype');
+  src: url('/fonts/moon-flower.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
