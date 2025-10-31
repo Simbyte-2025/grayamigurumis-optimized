@@ -69,7 +69,7 @@ export default function Header() {
               whileHover={animationVariants.heartbeat}
               style={{ backgroundColor: '#25D366' }}
             >
-              <img src="/whatsapp-logo.webp" alt="WhatsApp" className="w-7 h-7" />
+              <img src="/whatsapp-logo.webp" alt="WhatsApp" className="w-7 h-7 object-contain aspect-square" />
             </motion.a>
 
             {/* Mobile Menu Button */}
@@ -86,10 +86,9 @@ export default function Header() {
 
       {/* Mobile Menu Overlay */}
       <div 
-        className={`fixed top-0 right-0 h-full w-64 shadow-lg p-6 md:hidden transition-transform duration-300 ease-in-out z-50 ${
+        className={`fixed top-0 right-0 h-full w-64 shadow-lg p-6 md:hidden transition-transform duration-300 ease-in-out z-50 bg-[rgba(255,192,203,0.85)] backdrop-blur-md ${
           mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
-        style={{backgroundColor: '#F4C7D4'}}
         role="dialog"
         aria-modal="true"
         aria-labelledby="mobile-menu-title"
@@ -121,10 +120,11 @@ export default function Header() {
             href={`https://wa.me/${whatsappNumber}?text=Hola!%20Me%20interesan%20tus%20amigurumis.`}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-xl font-semibold text-left py-1 hover:opacity-75 transition"
+            className="text-xl font-semibold text-left py-1 hover:opacity-75 transition flex items-center gap-2"
             style={{color: '#4A5568'}}
           >
-            WhatsApp 💬
+            <img src="/whatsapp-logo.webp" alt="" className="w-7 h-7 object-contain aspect-square" />
+            WhatsApp
           </a>
         </nav>
       </div>

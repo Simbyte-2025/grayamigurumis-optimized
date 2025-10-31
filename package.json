@@ -5,11 +5,10 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite --host",
-    "build": "vite build --config vite.config.cloudflare.ts",
-    "build:analyze": "ANALYZE=true vite build --config vite.config.cloudflare.ts",
-    "build:dev": "vite build",
+    "build": "vite build",
+    "build:analyze": "ANALYZE=true vite build",
     "start": "vite preview --host",
-    "preview": "vite preview --host --config vite.config.cloudflare.ts",
+    "preview": "vite preview --host",
     "check": "tsc --noEmit",
     "format": "prettier --write .",
     "optimize:images": "node optimize-images.mjs"
