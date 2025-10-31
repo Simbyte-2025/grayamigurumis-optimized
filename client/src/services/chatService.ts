@@ -54,13 +54,15 @@ const SYSTEM_INSTRUCTION = `Eres el asistente virtual amoroso y respetuoso de Gr
 ¡Haz que cada interacción sea un reflejo del mundo afectuoso, creativo y personalizado de Grayamigurumis!`;
 
 /**
- * Modelos gratuitos de OpenRouter con fallback
+ * Modelos gratuitos de OpenRouter con fallback optimizado por velocidad
+ * Ordenados por latencia: más rápido primero, más potente último
  * https://openrouter.ai/docs#models
  */
 const FREE_MODELS = [
-  "minimax/minimax-m2:free",
-  "nvidia/nemotron-nano-12b-v2-vl:free",
-  "deepseek/deepseek-chat-v3.1:free"
+  "meituan/longcat-flash-chat:free",      // 1º: Ultra-rápido (2-5s) - MoE chat specialist
+  "anthropic/claude-3.5-haiku:free",      // 2º: Premium speed (3-6s) - Real-time chat
+  "google/gemini-flash-1.5:free",         // 3º: Estable y rápido (4-8s) - High uptime
+  "deepseek/deepseek-chat-v3.1:free"      // 4º: Potente fallback (8-12s) - Deep reasoning
 ];
 
 /**
@@ -119,7 +121,8 @@ async function tryModel(
 
 /**
  * Envía un mensaje al chatbot con sistema de fallback entre modelos
- * Intenta en orden: Minimax M2 → Nemotron Nano 12B V2 VL → DeepSeek Chat V3.1
+ * Intenta en orden: LongCat Flash → Claude 3.5 Haiku → Gemini Flash 1.5 → DeepSeek V3.1
+ * Optimizado para velocidad (2-6s respuesta promedio)
  */
 export async function sendChatMessage(
   userMessage: string,
