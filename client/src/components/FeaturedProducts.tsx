@@ -28,15 +28,13 @@ export default function FeaturedProducts() {
 
   return (
     <section id="favoritos" className="section-paper bg-favs py-16 md:py-24">
-      {/* Contenedor sin padding lateral ni desplazamiento */}
-      <div className="w-full flex justify-center bg-favs py-16 md:py-24">
-        <div className="w-full max-w-7xl px-4 md:px-0 flex flex-col items-center">
-          <h2 className="font-heading text-5xl sm:text-6xl text-center mb-12 md:mb-16" style={{ color: "#4A5568" }}>
-            Nuestros Favoritos
-          </h2>
+      <div className="max-w-6xl mx-auto px-4">
+        <h2 className="font-heading text-5xl sm:text-6xl text-center mb-12 md:mb-16" style={{ color: "#4A5568" }}>
+          Nuestros Favoritos
+        </h2>
 
-          {/* Grid perfectamente centrado */}
-          <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-3 justify-items-center mx-auto place-items-center">
+        {/* Grid unificado con catálogo */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
             {featuredProducts.map((product) => (
               <motion.div
                 key={product.id}
@@ -55,7 +53,7 @@ export default function FeaturedProducts() {
                       src={product.image}
                       alt={product.name}
                       loading="lazy"
-                      className="h-full w-full object-cover"
+                      className="absolute inset-0 w-full h-full object-cover"
                       variants={productCardImageVariants}
                       onError={(event) => {
                         const target = event.currentTarget;
@@ -90,7 +88,6 @@ export default function FeaturedProducts() {
                 </motion.div>
               </motion.div>
             ))}
-          </div>
         </div>
       </div>
     </section>

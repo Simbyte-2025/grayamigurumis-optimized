@@ -1,29 +1,28 @@
 import { motion } from "framer-motion";
 import { animationVariants } from "@/hooks/useAnimations";
-
-const PORTRAIT_SRC = "/assets/img/about-owner.jpg";
+import owner from '@/assets/img/about-owner.jpg';
 
 export default function About() {
   return (
     <section
       id="nosotros"
-      className="section-paper bg-about py-16 md:py-24"
+      className="section-paper bg-about py-16 md:py-24 -mt-px"
     >
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row items-center gap-12 md:gap-16 lg:gap-20">
           {/* Retrato principal */}
           <div className="md:w-1/2 flex justify-center">
             <motion.div
-              className="rounded-full shadow-2xl w-full max-w-sm sm:max-w-md aspect-square overflow-hidden border-4 border-white"
+              className="relative aspect-[4/3] min-h-[220px] overflow-hidden rounded-2xl shadow-2xl w-full max-w-sm sm:max-w-md border-4 border-white"
               style={{ backgroundColor: "#FFF9F5" }}
               initial={animationVariants.floatAnimationSlow.initial}
               animate={animationVariants.floatAnimationSlow.animate}
             >
               <img
-                src={PORTRAIT_SRC}
+                src={OWNER_IMAGE}
                 alt="Retrato de la artesana GrayAmigurumis"
-                className="w-full h-full object-cover"
-                loading="lazy"
+                className="absolute inset-0 w-full h-full object-cover"
+                loading="eager"
                 onError={(e) => { 
                   const target = e.currentTarget;
                   target.src = 'https://placehold.co/448x448/B8D4E3/FFF9F5?text=Foto'; 

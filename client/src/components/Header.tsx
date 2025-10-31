@@ -17,8 +17,8 @@ export default function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-50 shadow-md h-16 sm:h-18 md:h-20" style={{backgroundColor: 'rgba(244, 199, 212, 0.8)', backdropFilter: 'blur(12px)'}}>
-        <div className="container mx-auto px-4 sm:px-6 h-full flex justify-between items-center">
+      <header className="h-16 sm:h-18 md:h-20 sticky top-0 z-50 shadow-md bg-[rgba(255,192,203,0.85)] backdrop-blur-md px-3 sm:px-4">
+        <div className="container mx-auto h-full flex justify-between items-center">
           <a href="#" className="flex items-center gap-3 sm:gap-4">
             <motion.div 
               className="h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 rounded-full border-2 border-white/50 flex items-center justify-center inline-block"
@@ -29,7 +29,7 @@ export default function Header() {
               <img
                 src="/logo.webp" 
                 alt="GrayAmigurumis Logo"
-                className="h-full w-full object-contain aspect-square rounded-full"
+                className="h-full max-h-[72px] w-auto p-1 md:p-2 pointer-events-none select-none will-change-transform"
                 onError={(e) => { 
                   const target = e.currentTarget;
                   target.src = 'https://placehold.co/48x48/FFF9F5/4A5568?text=GA'; 

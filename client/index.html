@@ -7,9 +7,13 @@
       content="width=device-width, initial-scale=1.0, maximum-scale=1"
     />
     
-    <!-- Preconnect para mejorar rendimiento de fuentes -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Preload de fuentes locales WOFF2 -->
+    <link rel="preload" as="font" href="/fonts/Quicksand-Regular.woff2" type="font/woff2" crossorigin>
+    <link rel="preload" as="font" href="/fonts/Pacifico-Regular.woff2" type="font/woff2" crossorigin>
+    
+    <!-- Preload de imagen hero LCP (AVIF con fallback) -->
+    <link rel="preload" as="image" href="/assets/img/placeholder-4x5.avif" type="image/avif" fetchpriority="high">
+    <link rel="preload" as="image" href="/assets/img/placeholder-4x5.webp" type="image/webp" fetchpriority="high">
     
     <!-- Usar WebP optimizado en lugar de PNG -->
     <link rel="icon" type="image/webp" href="/logo.webp" />

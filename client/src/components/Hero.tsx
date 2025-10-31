@@ -12,15 +12,27 @@ export default function Hero() {
   return (
     <section 
       id="inicio" 
-      className="section-paper bg-hero relative flex items-center justify-center py-24 md:py-32 bg-cover bg-center"
+      className="section-paper bg-hero relative flex items-center justify-center py-24 md:py-32"
       style={{
         minHeight: '65vh',
-        backgroundImage: `url('/assets/img/placeholder-4x5.jpg')`,
       }}
     >
-      <div className="absolute inset-0 bg-black/20"></div>
+      {/* Background image con AVIF + WebP fallback */}
+      <picture className="absolute inset-0 w-full h-full">
+        <source srcSet="/assets/img/placeholder-4x5.avif" type="image/avif" />
+        <source srcSet="/assets/img/placeholder-4x5.webp" type="image/webp" />
+        <img 
+          src="/assets/img/placeholder-4x5.jpg" 
+          alt="Hero background"
+          className="absolute inset-0 w-full h-full object-cover"
+          loading="eager"
+          fetchpriority="high"
+        />
+      </picture>
       
-      <div className="relative container mx-auto px-6 text-center z-10">
+      <div className="absolute inset-0 bg-black/20 z-[1]"></div>
+      
+      <div className="relative container mx-auto px-6 text-center z-[2]">
         <motion.div 
           className="inline-block p-6 sm:p-8 md:p-12 rounded-xl shadow-xl max-w-3xl"
           style={{backgroundColor: 'rgba(255, 254, 249, 0.85)', backdropFilter: 'blur(5px)'}}
