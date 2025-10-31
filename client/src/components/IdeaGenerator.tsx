@@ -16,6 +16,12 @@ export default function IdeaGenerator() {
     setLoading(true);
     setResult('');
 
+    // TODO: SECURITY FIX - This component exposes API keys in the client bundle.
+    // This functionality must be migrated to a secure Cloudflare Pages Function
+    // or removed entirely if not in active use. Direct API calls from the client
+    // are a critical security vulnerability.
+
+    /* INSECURE CODE - DISABLED FOR SECURITY REASONS
     const systemPrompt = `Eres un asistente creativo para 'Grayamigurumis', una tienda de muñecos de crochet (amigurumis) hechos a mano. Un cliente quiere un pedido personalizado. Tu tarea es tomar su idea y expandirla en una descripción adorable, detallada y mágica para ayudarle a visualizar el producto final.
 - Describe su apariencia general y su expresión.
 - Sugiere una paleta de colores que combine bien, usando tonos suaves y cálidos.
@@ -57,6 +63,11 @@ export default function IdeaGenerator() {
     } finally {
       setLoading(false);
     }
+    */
+
+    // Temporary fallback response
+    setResult('Esta funcionalidad está temporalmente deshabilitada por razones de seguridad. Estamos trabajando en una solución más segura.');
+    setLoading(false);
   };
 
   return (

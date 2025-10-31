@@ -1,14 +1,21 @@
 /**
  * Cloudflare Pages Function: /chat/completions
- * 
+ *
  * Proxy seguro para OpenRouter API
  * - La API key se almacena como secreto en Cloudflare Dashboard
  * - No expone credenciales al frontend
- * 
+ * - CORS restringido a dominios de producción autorizados
+ *
  * Setup en Cloudflare Dashboard:
  * 1. Pages → Settings → Environment Variables
  * 2. Agregar: OPENROUTER_API_KEY = "tu-api-key"
  */
+
+// Dominios autorizados para CORS
+const ALLOWED_ORIGINS = [
+  'https://grayamigurumis.pages.dev',
+  'https://grayamigurumis.com'
+];
 
 interface Env {
   OPENROUTER_API_KEY: string;
@@ -81,16 +88,21 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
 
     // Retornar respuesta
     const data = await response.json();
-    
+
+    // Determinar origen permitido para CORS
+    const origin = request.headers.get('origin') || '';
+    const corsOrigin = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
+
     return new Response(
-      JSON.stringify(data), 
+      JSON.stringify(data),
       {
         status: 200,
         headers: {
           'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Origin': corsOrigin,
           'Access-Control-Allow-Methods': 'POST, OPTIONS',
-          'Access-Control-Allow-Headers': 'Content-Type'
+          'Access-Control-Allow-Headers': 'Content-Type',
+          'Access-Control-Allow-Credentials': 'true'
         }
       }
     );
@@ -112,13 +124,20 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
 };
 
 // Handle CORS preflight
-export const onRequestOptions: PagesFunction = async () => {
+export const onRequestOptions: PagesFunction = async (context) => {
+  const { request } = context;
+
+  // Determinar origen permitido para CORS
+  const origin = request.headers.get('origin') || '';
+  const corsOrigin = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
+
   return new Response(null, {
     status: 204,
     headers: {
-      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Origin': corsOrigin,
       'Access-Control-Allow-Methods': 'POST, OPTIONS',
       'Access-Control-Allow-Headers': 'Content-Type',
+      'Access-Control-Allow-Credentials': 'true',
       'Access-Control-Max-Age': '86400'
     }
   });
