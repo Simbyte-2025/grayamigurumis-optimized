@@ -43,7 +43,7 @@ export default {
       return new Response('Method Not Allowed', { status: 405, headers: corsHeaders });
     }
 
-    if (!env.OPENROUTER_API_KEY) {
+    if (!env.OPENPOUTER_API_KEY) {
       return new Response(JSON.stringify({ error: 'API key not configured' }), {
         status: 500,
         headers: { 'Content-Type': 'application/json', ...corsHeaders }
