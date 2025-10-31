@@ -14,7 +14,7 @@ export default function About() {
           {/* Retrato principal */}
           <div className="md:w-1/2 flex justify-center">
             <motion.div
-              className="relative aspect-square w-full max-w-[320px] sm:max-w-[380px] overflow-hidden rounded-full shadow-2xl border-4 border-white"
+              className="relative aspect-square w-full min-w-[280px] max-w-[380px] sm:max-w-[420px] overflow-hidden rounded-full shadow-2xl border-4 border-white"
               style={{ backgroundColor: "#FFF9F5" }}
               initial={animationVariants.floatAnimationSlow.initial}
               animate={animationVariants.floatAnimationSlow.animate}

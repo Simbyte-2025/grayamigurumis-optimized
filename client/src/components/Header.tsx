@@ -29,7 +29,7 @@ export default function Header() {
               <img
                 src="/logo.webp" 
                 alt="GrayAmigurumis Logo"
-                className="h-full w-full object-contain p-1 pointer-events-none select-none will-change-transform"
+                className="h-full w-full object-contain pointer-events-none select-none will-change-transform"
                 onError={(e) => { 
                   const target = e.currentTarget;
                   target.src = 'https://placehold.co/48x48/FFF9F5/4A5568?text=GA'; 
