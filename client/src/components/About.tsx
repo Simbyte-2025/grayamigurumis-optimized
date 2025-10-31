@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { animationVariants } from "@/hooks/useAnimations";
-import owner from '@/assets/img/about-owner.jpg';
+
+const OWNER_IMAGE = "/assets/img/about-owner.webp";
 
 export default function About() {
   return (
