@@ -105,3 +105,10 @@ temp/
 *.db
 *.sqlite
 *.sqlite3
+
+# Entornos del cliente (Vite)
+client/.env
+client/.env.local
+client/.env.development
+client/.env.production
+client/.env.*.local
