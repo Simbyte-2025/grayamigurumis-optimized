@@ -1,10 +1,20 @@
 /**
  * Servicio de Chat para GrayAmigurumis
- * 
- * SEGURIDAD: Usa SOLO el proxy de Pages Function (/chat/completions)
- * - NUNCA expone API keys en el frontend
- * - La API key de OpenRouter se almacena como secreto en Cloudflare Dashboard
- * - Fallback automático entre modelos gratuitos de OpenRouter
+ *
+ * Arquitectura unificada:
+ * - Frontend llama a un único endpoint same-origin: /chat/completions
+ * - Backend: Cloudflare Pages Function que llama a OpenRouter con API key segura
+ *
+ * Seguridad:
+ * - NUNCA se expone la API key en el frontend
+ * - Todo el tráfico pasa por el dominio del sitio (same-origin)
+ *
+ * Fallback:
+ * - Lista de modelos FREE de OpenRouter, probados en orden
+ *
+ * Modo mock:
+ * - Activado en frontend con VITE_CHAT_MOCK=true
+ * - Útil para desarrollo local sin consumir cuota de OpenRouter
  */
 
 interface ChatMessage {
@@ -54,9 +64,8 @@ const SYSTEM_INSTRUCTION = `Eres el asistente virtual amoroso y respetuoso de Gr
 ¡Haz que cada interacción sea un reflejo del mundo afectuoso, creativo y personalizado de Grayamigurumis!`;
 
 /**
- * Modelos gratuitos de OpenRouter con fallback optimizado por velocidad
- * Ordenados por latencia: más rápido primero, más potente último
- * https://openrouter.ai/docs#models
+ * Modelos gratuitos de OpenRouter con fallback optimizado por velocidad.
+ * Ordenados por latencia: más rápido primero, más potente último.
  */
 const FREE_MODELS = [
   "meituan/longcat-flash-chat:free",      // 1º: Ultra-rápido (2-5s) - MoE chat specialist
@@ -66,14 +75,48 @@ const FREE_MODELS = [
 ];
 
 /**
- * Endpoint del proxy seguro (Cloudflare Worker existente)
- * Worker: grayamigurumis-or-relay.caballero-sepulveda-nicolas.workers.dev
- * La API key de OpenRouter está almacenada como Secret en el Worker
+ * Endpoint del proxy same-origin (Pages Function)
+ * - En dev: Vite proxeará /chat/completions al entorno de Pages (según configuración)
+ * - En prod: mismo dominio de grayamigurumis.pages.dev / dominio custom
  */
-const PROXY_ENDPOINT = 'https://grayamigurumis-or-relay.caballero-sepulveda-nicolas.workers.dev/chat/completions';
+const PROXY_ENDPOINT = "/chat/completions";
 
 /**
- * Intenta enviar mensaje usando el proxy con un modelo específico
+ * Modo mock de frontend (desarrollo local)
+ * - Controlado por VITE_CHAT_MOCK=true
+ * - NO hace llamadas de red, devuelve una respuesta simulada
+ */
+const USE_MOCK = import.meta.env.VITE_CHAT_MOCK === "true";
+
+function buildMockResponse(
+  userMessage: string,
+  conversationHistory: Array<{ sender: "user" | "bot"; text: string }>
+): ChatResponse {
+  const lastUserMessage = userMessage.trim();
+
+  const intro =
+    "🧶 [MODO DEMO] Este es un entorno de desarrollo sin conexión real a la API de OpenRouter.\n\n";
+  const body =
+    "Normalmente aquí te ayudaría a elegir amigurumis, combinar ideas personalizadas " +
+    "y luego te invitaría a escribir por WhatsApp para coordinar tu pedido.\n\n";
+  const echo =
+    lastUserMessage.length > 0
+      ? `Mensaje recibido para pruebas:\n> ${lastUserMessage.slice(0, 280)}\n\n`
+      : "";
+
+  const outro =
+    "Cuando desactives el modo demo (VITE_CHAT_MOCK=false), el chatbot usará la API real " +
+    "mediante la Pages Function /chat/completions.\n";
+
+  return {
+    success: true,
+    provider: "mock-local",
+    message: `${intro}${body}${echo}${outro}`,
+  };
+}
+
+/**
+ * Intenta enviar mensaje usando el proxy same-origin con un modelo específico.
  */
 async function tryModel(
   model: string,
@@ -83,7 +126,7 @@ async function tryModel(
   const messages: ChatMessage[] = [
     { role: "system", content: SYSTEM_INSTRUCTION },
     ...conversationHistory,
-    { role: "user", content: userMessage }
+    { role: "user", content: userMessage },
   ];
 
   const response = await fetch(PROXY_ENDPOINT, {
@@ -92,8 +135,8 @@ async function tryModel(
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      model: model,
-      messages: messages,
+      model,
+      messages,
       temperature: 0.8,
       max_tokens: 300,
     }),
@@ -102,7 +145,8 @@ async function tryModel(
   if (!response.ok) {
     const errorData = await response.json().catch(() => ({}));
     throw new Error(
-      errorData.error || `HTTP ${response.status}: ${response.statusText}`
+      (errorData as any).error ||
+        `HTTP ${response.status}: ${response.statusText}`
     );
   }
 
@@ -120,14 +164,20 @@ async function tryModel(
 }
 
 /**
- * Envía un mensaje al chatbot con sistema de fallback entre modelos
- * Intenta en orden: LongCat Flash → Claude 3.5 Haiku → Gemini Flash 1.5 → DeepSeek V3.1
- * Optimizado para velocidad (2-6s respuesta promedio)
+ * Envía un mensaje al chatbot con sistema de fallback entre modelos:
+ * LongCat Flash → Claude 3.5 Haiku → Gemini Flash 1.5 → DeepSeek V3.1
+ *
+ * Optimizado para velocidad (2-6s respuesta promedio en condiciones normales).
  */
 export async function sendChatMessage(
   userMessage: string,
   conversationHistory: Array<{ sender: "user" | "bot"; text: string }> = []
 ): Promise<ChatResponse> {
+  // Modo mock de desarrollo: no hace llamadas de red
+  if (USE_MOCK) {
+    return buildMockResponse(userMessage, conversationHistory);
+  }
+
   // Convertir historial al formato de OpenRouter
   const apiHistory: ChatMessage[] = conversationHistory.map((msg) => ({
     role: msg.sender === "user" ? "user" : "assistant",
@@ -162,8 +212,8 @@ export async function sendChatMessage(
 }
 
 /**
- * Convierte el historial de mensajes del chatbot al formato de la API
- * @deprecated Esta función ya no es necesaria con el nuevo sistema
+ * Convierte el historial de mensajes del chatbot al formato de la API.
+ * @deprecated Esta función ya no es necesaria con el nuevo sistema, pero se mantiene por compatibilidad.
  */
 export function convertMessagesToAPIFormat(
   messages: Array<{ sender: "user" | "bot"; text: string }>

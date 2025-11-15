@@ -431,4 +431,78 @@ VITE_WHATSAPP_PHONE=56992834268  # ✅ Público
 
 ---
 
+## 🧠 Arquitectura unificada del chatbot (2025)
+
+Esta sección describe la arquitectura actual del chatbot de GrayAmigurumis, basada en un único endpoint same-origin y un proxy seguro en Cloudflare Pages Functions.
+
+### Componentes principales
+
+1. **Frontend (React + Vite)**
+   - Archivo principal de servicio: `client/src/services/chatService.ts`
+   - Envía las solicitudes de chat a la ruta same-origin: `POST /chat/completions`
+   - Implementa:
+     - Sistema de fallback entre varios modelos FREE de OpenRouter
+       (`meituan/longcat-flash-chat:free`, `anthropic/claude-3.5-haiku:free`,
+       `google/gemini-flash-1.5:free`, `deepseek/deepseek-chat-v3.1:free`)
+     - Modo mock de desarrollo (`VITE_CHAT_MOCK=true`) que evita llamadas reales a la API
+
+2. **Backend (Cloudflare Pages Functions)**
+   - Endpoint: `functions/chat/completions.ts` → expuesto como `/chat/completions`
+   - Responsabilidades:
+     - Validar el payload de entrada (`messages` obligatorio)
+     - Llamar a la API de OpenRouter con la API key segura (`OPENROUTER_API_KEY`)
+     - Aplicar **retry con backoff exponencial** ante errores 429 / 5xx / fallos de red
+     - Enviar la respuesta al frontend respetando el formato de OpenRouter
+     - Aplicar CORS restringido a:
+       - `https://grayamigurumis.pages.dev`
+       - `https://grayamigurumis.com`
+
+3. **Modo mock de backend (opcional)**
+   - Controlado por la variable `CHAT_MOCK_MODE` en Cloudflare o por el parámetro de query `?mock=1`
+   - Útil para:
+     - Pruebas de integración sin consumir cuota de OpenRouter
+     - Validar que el frontend maneja correctamente respuestas válidas de la API
+   - Emite una respuesta con estructura compatible con `chat.completions`, pero con contenido claramente marcado como "MODO DEMO".
+
+### Flujo de petición
+
+1. El usuario escribe un mensaje en el chatbot del sitio.
+2. El frontend construye el `conversationHistory` y llama a `sendChatMessage(...)`.
+3. `sendChatMessage`:
+   - Si `VITE_CHAT_MOCK=true` → devuelve una respuesta simulada local, sin red.
+   - Si no:
+     - Intenta en orden cada modelo FREE definido en `FREE_MODELS`.
+     - Para cada modelo, envía una solicitud `POST /chat/completions` con:
+       - `model`
+       - `messages`
+       - `temperature`
+       - `max_tokens`
+4. La Pages Function:
+   - Valida la estructura del body.
+   - Si está en modo mock (`CHAT_MOCK_MODE` o `?mock=1`) → responde con mock backend.
+   - Si no, llama a OpenRouter con **hasta 3 reintentos** y backoff exponencial.
+   - Reenvía la respuesta JSON al frontend con headers CORS correctos.
+5. El frontend extrae `data.choices[0].message.content` y lo muestra como respuesta del chatbot.
+
+### Variables de entorno relevantes
+
+En **Cloudflare Pages / Functions**:
+
+- `OPENROUTER_API_KEY` (obligatoria, secreta)
+- `CHAT_MOCK_MODE` (opcional, `"true"` para mockear backend)
+
+En **frontend (Vite)**, archivo `client/.env` (no se commitea, se usa `client/.env.example` como plantilla):
+
+- `VITE_WHATSAPP_PHONE`
+- `VITE_CHAT_MOCK` (`true` en desarrollo para no llamar a la API real, `false` en producción)
+
+### Seguridad
+
+- La API key de OpenRouter **solo** vive en Cloudflare (env vars de Pages / Functions).
+- El frontend nunca ve la API key, solo conoce el endpoint `/chat/completions`.
+- CORS está restringido a los dominios oficiales de GrayAmigurumis.
+- El modo mock (frontend y backend) está claramente etiquetado para evitar confusión con producción real.
+
+---
+
 **Desarrollado con ❤️ por Nicolas Caballero Sepúlveda** · Optimizado para Cloudflare Pages
