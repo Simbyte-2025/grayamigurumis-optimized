@@ -1,0 +1,5 @@
+User-agent: *
+
+Allow: /
+
+Sitemap: https://grayamigurumis-optimized.pages.dev/sitemap.xml
