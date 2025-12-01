@@ -17,20 +17,26 @@ export default function Hero() {
         minHeight: '65vh',
       }}
     >
-      {/* Background image con AVIF + WebP fallback */}
+      {/* Background image con difuminado hacia blanco en los bordes */}
       <picture className="absolute inset-0 w-full h-full">
         <source srcSet="/assets/img/placeholder-4x5.avif" type="image/avif" />
         <source srcSet="/assets/img/placeholder-4x5.webp" type="image/webp" />
         <img 
           src="/assets/img/placeholder-4x5.jpg" 
-          alt="Hero background"
+          alt="Hero background - Amigurumis artesanales"
           className="absolute inset-0 w-full h-full object-cover"
           loading="eager"
           fetchpriority="high"
         />
       </picture>
       
-      <div className="absolute inset-0 bg-black/20 z-[1]"></div>
+      {/* Overlay con difuminado radial desde el centro hacia blanco */}
+      <div 
+        className="absolute inset-0 z-[1]"
+        style={{
+          background: 'radial-gradient(ellipse at center, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.6) 60%, rgba(255,255,255,0.95) 100%)'
+        }}
+      ></div>
       
       <div className="relative container mx-auto px-6 text-center z-[2]">
         <motion.div 

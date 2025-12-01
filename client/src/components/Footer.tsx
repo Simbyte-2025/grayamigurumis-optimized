@@ -98,8 +98,15 @@ export default function Footer() {
           </div>
         </div>
         
-        {/* Botón CTA centrado */}
-        <div className="text-center mb-10 md:mb-12">
+        {/* Sección de Pedidos Personalizados */}
+        <div className="text-center mb-10 md:mb-12 max-w-2xl mx-auto">
+          <h3 className="font-heading text-3xl sm:text-4xl mb-4">
+            ¿Tienes una idea en mente?
+          </h3>
+          <p className="text-base sm:text-lg leading-relaxed mb-6 opacity-90">
+            Hago confecciones <strong>100% personalizadas</strong> a pedido. Si no encuentras lo que buscas en el catálogo, 
+            puedo crear ese amigurumi especial que imaginas. Comparte tu idea conmigo y la haré realidad con todo mi cariño y dedicación.
+          </p>
           <a 
             href={`https://wa.me/${whatsappNumber}?text=${message}`}
             target="_blank"
@@ -112,7 +119,7 @@ export default function Footer() {
             aria-label="Hacer pedido personalizado por WhatsApp"
             title="Hacer pedido personalizado"
           >
-            Pedidos Personalizados
+            Cotizar Pedido Personalizado
           </a>
         </div>
         

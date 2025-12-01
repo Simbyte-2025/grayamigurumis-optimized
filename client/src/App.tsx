@@ -23,6 +23,19 @@ function App() {
       <ThemeProvider defaultTheme="light">
         <TooltipProvider>
           <Toaster />
+          
+          {/* Bordes laterales con tonos pastel fijos */}
+          <div className="fixed inset-y-0 left-0 w-4 md:w-8 z-40 pointer-events-none" 
+               style={{
+                 background: 'linear-gradient(to bottom, #FFE4E8 0%, #E8D4F8 25%, #D4E8FF 50%, #FFE8D4 75%, #E8FFD4 100%)'
+               }}
+          />
+          <div className="fixed inset-y-0 right-0 w-4 md:w-8 z-40 pointer-events-none"
+               style={{
+                 background: 'linear-gradient(to bottom, #E8FFD4 0%, #FFE8D4 25%, #D4E8FF 50%, #E8D4F8 75%, #FFE4E8 100%)'
+               }}
+          />
+          
           <div className="min-h-screen">
             <Header />
             <main>
