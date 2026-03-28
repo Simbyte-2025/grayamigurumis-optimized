@@ -40,13 +40,10 @@ export default function Catalog() {
   return (
     <section id="tienda" className="section-paper bg-catalog py-16 md:py-24">
       <div className="container mx-auto px-6">
-        <h2 className="font-heading text-5xl sm:text-6xl text-center mb-4 md:mb-6" style={{ color: "#4A5568" }}>
+        <h2 className="font-heading text-5xl sm:text-6xl text-center mb-4 md:mb-6 text-gray-600">
           Catálogo de Creaciones
         </h2>
-        <p
-          className="text-center text-base md:text-lg max-w-3xl mx-auto mb-10 md:mb-16 leading-relaxed"
-          style={{ color: "#777C7C" }}
-        >
+        <p className="text-center text-base md:text-lg max-w-3xl mx-auto mb-10 md:mb-16 leading-relaxed text-gray-500">
           Explora algunos de mis trabajos. Si no ves lo que buscas, recuerda que hago confecciones a pedido. ¡Tu imaginación es el
           límite!
         </p>

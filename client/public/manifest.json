@@ -1,0 +1,26 @@
+{
+  "name": "GrayAmigurumis",
+  "short_name": "GrayAmigurumis",
+  "description": "Amigurumis únicos tejidos a mano en Punta Arenas, Chile. Personajes y accesorios personalizados hechos con amor.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFF8F0",
+  "theme_color": "#f5a9b8",
+  "lang": "es",
+  "icons": [
+    {
+      "src": "/logo.webp",
+      "sizes": "192x192",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logo.webp",
+      "sizes": "512x512",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["shopping", "lifestyle"],
+  "screenshots": []
+}
