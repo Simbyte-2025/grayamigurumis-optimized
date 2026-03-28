@@ -4,11 +4,12 @@ import { Menu, Moon, Sun, X } from "lucide-react";
 import WhatsAppIcon from "./shared/WhatsAppIcon";
 import { animationVariants } from "@/hooks/useAnimations";
 import { useTheme } from "@/contexts/ThemeContext";
+import { WHATSAPP_NUMBER } from "@/const";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
-  const whatsappNumber = "56992834268";
+  const whatsappNumber = WHATSAPP_NUMBER;
   const { theme, toggleTheme, switchable } = useTheme();
 
   const scrollToSection = (sectionId: string) => {

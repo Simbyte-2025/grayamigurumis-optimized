@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { WHATSAPP_NUMBER } from "@/const";
 import WhatsAppIcon from "./shared/WhatsAppIcon";
 import {
   animationVariants,
@@ -15,7 +16,7 @@ const featuredProducts = [
 
 export default function FeaturedProducts() {
   const scrollAnimationProps = useScrollAnimation();
-  const whatsappNumber = "56992834268";
+  const whatsappNumber = WHATSAPP_NUMBER;
 
   const handleWhatsApp = (productName: string) => {
     const message = encodeURIComponent(`¡Hola! Me interesa el producto: ${productName} 🧸`);

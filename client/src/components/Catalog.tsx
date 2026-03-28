@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { products } from "../data/products";
+import { WHATSAPP_NUMBER } from "@/const";
 import WhatsAppIcon from "./shared/WhatsAppIcon";
 import {
   animationVariants,
@@ -14,7 +15,7 @@ type Category = "all" | "cine-tv" | "animatitos" | "anime-videojuegos";
 
 export default function Catalog() {
   const [activeFilter, setActiveFilter] = useState<Category>("all");
-  const whatsappNumber = "56992834268";
+  const whatsappNumber = WHATSAPP_NUMBER;
   const scrollAnimationProps = useScrollAnimation();
 
   const categoryMap: Record<string, Category> = {

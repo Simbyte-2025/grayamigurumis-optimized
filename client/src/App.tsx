@@ -24,8 +24,14 @@ function App() {
         <TooltipProvider>
           <Toaster />
           <div className="min-h-screen">
+            <a
+              href="#main-content"
+              className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-white focus:text-gray-800 focus:shadow-lg"
+            >
+              Ir al contenido principal
+            </a>
             <Header />
-            <main>
+            <main id="main-content">
               <Hero />
               <FeaturedProducts />
               <About />

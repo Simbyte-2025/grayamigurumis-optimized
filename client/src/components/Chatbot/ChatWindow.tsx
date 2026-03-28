@@ -38,7 +38,7 @@ export default function ChatWindow({
     inputRef.current?.focus();
   }, []);
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
+  const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" && !e.shiftKey && input.trim()) {
       e.preventDefault();
       onSendMessage();
@@ -99,7 +99,7 @@ export default function ChatWindow({
           placeholder="Escribe tu idea aquí..."
           value={input}
           onChange={(e) => onInputChange(e.target.value)}
-          onKeyPress={handleKeyPress}
+          onKeyDown={handleKeyDown}
           disabled={isLoading}
         />
         <button
