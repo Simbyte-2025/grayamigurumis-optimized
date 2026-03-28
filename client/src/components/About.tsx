@@ -36,19 +36,28 @@ export default function About() {
             <h2 className="font-heading text-5xl sm:text-6xl mb-6 md:mb-8 text-gray-600">
               El Arte de Tejer tus Ideas
             </h2>
-            <p className="text-base md:text-lg leading-relaxed mb-4 text-balance text-gray-600">
-              ¡Hola! Soy la creadora detrás de GrayAmigurumis. Como{" "}
-              <strong>emprendedora regional</strong>, mi pasión es dar vida a
-              tus personajes e ideas a través del crochet. Cada pieza es una
-              confección única, hecha a pedido con materiales de la más alta
-              calidad.
-            </p>
-            <p className="text-base md:text-lg leading-relaxed text-balance text-gray-600">
-              Desde adorables animalitos hasta complejos personajes, me
-              especializo en <strong>pedidos personalizados</strong> para crear
-              ese regalo o auto-regalo perfecto que estás buscando. ¡Gracias
-              por apoyar mi emprendimiento!
-            </p>
+
+            <div className="space-y-4 text-base md:text-lg leading-relaxed text-gray-600">
+              <p className="text-balance">
+                ¡Hola! Soy la creadora detrás de <strong>GrayAmigurumis</strong>. Como <strong>emprendedora regional de Punta Arenas</strong>, mi pasión es dar vida a tus personajes e ideas más queridas a través del arte del crochet.
+              </p>
+
+              <p className="text-balance">
+                Cada pieza que confecciono es una <strong>creación única y artesanal</strong>, hecha completamente a mano con materiales de la más alta calidad. Trabajo con hilos premium y rellenos suaves que garantizan durabilidad y suavidad en cada amigurumi.
+              </p>
+
+              <p className="text-balance">
+                Desde adorables animalitos y personajes de películas, hasta complejos diseños de anime y videojuegos, me especializo en <strong>pedidos personalizados</strong> que dan vida a tu imaginación. Ya sea para un regalo especial, decoración de tu espacio, o simplemente para consentirte, cada amigurumi lleva mi dedicación y cariño en cada puntada.
+              </p>
+
+              <p className="text-balance font-medium">
+                ¿Tienes una idea especial? <strong>¡Conversemos!</strong> Me encanta trabajar en proyectos únicos y ayudarte a crear ese amigurumi perfecto que estás buscando.
+              </p>
+
+              <p className="text-balance text-sm mt-6 opacity-80">
+                Gracias por apoyar el emprendimiento regional y el trabajo artesanal chileno.
+              </p>
+            </div>
           </div>
         </div>
       </div>

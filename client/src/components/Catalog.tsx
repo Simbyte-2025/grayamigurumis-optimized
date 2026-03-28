@@ -1,20 +1,24 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { products } from "../data/products";
+import { products, type Product } from "../data/products";
 import { WHATSAPP_NUMBER } from "@/const";
 import WhatsAppIcon from "./shared/WhatsAppIcon";
+import ProductImageSlider from "./ProductImageSlider";
+import ImageLightbox from "./ImageLightbox";
 import {
   animationVariants,
   useScrollAnimation,
   categoryButtonVariants,
   productCardVariants,
-  productCardImageVariants,
 } from "@/hooks/useAnimations";
 
 type Category = "all" | "cine-tv" | "animatitos" | "anime-videojuegos";
 
 export default function Catalog() {
   const [activeFilter, setActiveFilter] = useState<Category>("all");
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const whatsappNumber = WHATSAPP_NUMBER;
   const scrollAnimationProps = useScrollAnimation();
 
@@ -36,6 +40,16 @@ export default function Catalog() {
 
   const handlePagar = (flowLink: string) => {
     window.open(flowLink, "_blank");
+  };
+
+  const handleImageClick = (product: Product, imageIndex: number) => {
+    setSelectedProduct(product);
+    setSelectedImageIndex(imageIndex);
+    setLightboxOpen(true);
+  };
+
+  const closeLightbox = () => {
+    setLightboxOpen(false);
   };
 
   return (
@@ -117,22 +131,15 @@ export default function Catalog() {
                 whileHover="hover"
                 whileTap="tap"
               >
-                <div className="relative aspect-[4/5] overflow-hidden rounded-xl">
-                  <motion.img
-                    src={product.image}
-                    alt={product.name}
-                    loading="lazy"
-                    className="h-full w-full object-cover"
-                    variants={productCardImageVariants}
-                    onError={(event) => {
-                      const target = event.currentTarget;
-                      target.src = "https://placehold.co/400x500/CCCCCC/888888?text=Error";
-                    }}
-                  />
-                </div>
+                <ProductImageSlider
+                  images={product.images}
+                  productName={product.name}
+                  onImageClick={(imageIndex) => handleImageClick(product, imageIndex)}
+                />
                 <div className="flex flex-1 flex-col p-4">
                   <h3>{product.name}</h3>
-                  <p className="precio">{product.price}</p>
+                  <p className="precio">${product.priceCLP.toLocaleString("es-CL")}</p>
+                  <p className="text-sm text-gray-600 mb-3">{product.heightCm} cm aprox.</p>
 
                   <div className="botones">
                     <motion.button
@@ -146,7 +153,7 @@ export default function Catalog() {
                     </motion.button>
 
                     <button
-                      onClick={() => handlePagar(product.flowLink)}
+                      onClick={() => handlePagar(product.flowLink || "https://www.flow.cl/checkout")}
                       className="btn-comprar"
                       aria-label={`Pagar ${product.name}`}
                       title={`Pagar ${product.name}`}
@@ -160,6 +167,17 @@ export default function Catalog() {
           ))}
         </div>
       </div>
+
+      {/* Lightbox Modal */}
+      {selectedProduct && (
+        <ImageLightbox
+          images={selectedProduct.images}
+          initialIndex={selectedImageIndex}
+          isOpen={lightboxOpen}
+          onClose={closeLightbox}
+          productName={selectedProduct.name}
+        />
+      )}
     </section>
   );
 }

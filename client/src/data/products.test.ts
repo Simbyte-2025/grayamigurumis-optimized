@@ -9,12 +9,14 @@ describe("products data integrity", () => {
 
   it("all products have required fields", () => {
     for (const product of products) {
-      expect(product.id, `product.id missing in "${product.name}"`).toBeDefined();
+      expect(product.id, `product.id missing in "${product.name}"`).toBeTruthy();
+      expect(product.slug, `product.slug missing in "${product.name}"`).toBeTruthy();
       expect(product.name, `product.name missing`).toBeTruthy();
-      expect(product.image, `product.image missing in "${product.name}"`).toBeTruthy();
-      expect(product.price, `product.price missing in "${product.name}"`).toBeTruthy();
-      expect(product.flowLink, `product.flowLink missing in "${product.name}"`).toBeTruthy();
+      expect(product.priceCLP, `product.priceCLP missing in "${product.name}"`).toBeGreaterThan(0);
+      expect(product.heightCm, `product.heightCm missing in "${product.name}"`).toBeGreaterThan(0);
       expect(product.category, `product.category missing in "${product.name}"`).toBeTruthy();
+      expect(product.images, `product.images missing in "${product.name}"`).toBeInstanceOf(Array);
+      expect(product.images.length, `"${product.name}" has no images`).toBeGreaterThan(0);
     }
   });
 
@@ -26,19 +28,21 @@ describe("products data integrity", () => {
 
   it("all image paths follow /assets/products/ convention", () => {
     for (const product of products) {
-      expect(
-        product.image,
-        `"${product.name}" image path should start with /assets/products/`
-      ).toMatch(/^\/assets\/products\/.+\.webp$/);
+      for (const image of product.images) {
+        expect(
+          image.src,
+          `"${product.name}" image path should start with /assets/products/`
+        ).toMatch(/^\/assets\/products\/.+\.webp$/);
+      }
     }
   });
 
-  it("all price strings are in Chilean peso format ($XX.XXX)", () => {
+  it("all prices are positive CLP numbers", () => {
     for (const product of products) {
       expect(
-        product.price,
-        `"${product.name}" price "${product.price}" is not in format $XX.XXX`
-      ).toMatch(/^\$\d{1,3}\.\d{3}$/);
+        product.priceCLP,
+        `"${product.name}" priceCLP ${product.priceCLP} should be > 0`
+      ).toBeGreaterThan(0);
     }
   });
 

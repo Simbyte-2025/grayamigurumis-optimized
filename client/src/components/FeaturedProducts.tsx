@@ -9,9 +9,9 @@ import {
 } from "@/hooks/useAnimations";
 
 const featuredProducts = [
-  { id: 1, name: "Deadpool", price: "$22.000", image: "/assets/products/deadpool.webp", flowLink: "https://www.flow.cl/checkout" },
-  { id: 10, name: "Stitch", price: "$18.000", image: "/assets/products/stitch.webp", flowLink: "https://www.flow.cl/checkout" },
-  { id: 15, name: "Goku", price: "$24.000", image: "/assets/products/goku.webp", flowLink: "https://www.flow.cl/checkout" },
+  { id: "stitch", name: "Stitch", price: "$18.000", image: "/assets/products/stitch/stitch-1.webp", flowLink: "https://www.flow.cl/checkout" },
+  { id: "el-chapulin", name: "El Chapulín Colorado", price: "$24.000", image: "/assets/products/el-chapulin/el-chapulin-1.webp", flowLink: "https://www.flow.cl/checkout" },
+  { id: "emociones", name: "Emociones (Inside Out)", price: "$22.000", image: "/assets/products/emociones/emociones-1.webp", flowLink: "https://www.flow.cl/checkout" },
 ];
 
 export default function FeaturedProducts() {
