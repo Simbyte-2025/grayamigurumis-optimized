@@ -1,3 +1,4 @@
+/// <reference types="vitest" />
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
@@ -110,5 +111,15 @@ export default defineConfig({
   preview: {
     port: 3000,
     host: true,
+  },
+
+  test: {
+    globals: true,
+    environment: "jsdom",
+    setupFiles: ["./src/test/setup.ts"],
+    include: ["src/**/*.{test,spec}.{ts,tsx}"],
+    alias: {
+      "@": path.resolve(__dirname, "client/src"),
+    },
   },
 });

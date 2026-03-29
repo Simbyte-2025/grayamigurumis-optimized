@@ -14,8 +14,7 @@ export default function About() {
           {/* Retrato principal */}
           <div className="md:w-1/2 flex justify-center">
             <motion.div
-              className="relative aspect-square w-full min-w-[280px] max-w-[380px] sm:max-w-[420px] overflow-hidden rounded-full shadow-2xl border-4 border-white"
-              style={{ backgroundColor: "#FFF9F5" }}
+              className="relative aspect-square w-full min-w-[280px] max-w-[380px] sm:max-w-[420px] overflow-hidden rounded-full shadow-2xl border-4 border-white bg-[#FFF9F5]"
               initial={animationVariants.floatAnimationSlow.initial}
               animate={animationVariants.floatAnimationSlow.animate}
             >
@@ -24,9 +23,9 @@ export default function About() {
                 alt="Retrato de la artesana GrayAmigurumis"
                 className="absolute inset-0 w-full h-full object-cover"
                 loading="eager"
-                onError={(e) => { 
+                onError={(e) => {
                   const target = e.currentTarget;
-                  target.src = 'https://placehold.co/448x448/B8D4E3/FFF9F5?text=Foto'; 
+                  target.src = "https://placehold.co/448x448/B8D4E3/FFF9F5?text=Foto";
                 }}
               />
             </motion.div>
@@ -34,18 +33,31 @@ export default function About() {
 
           {/* Texto */}
           <div className="md:w-1/2 text-center md:text-left">
-            <h2 className="font-heading text-5xl sm:text-6xl mb-6 md:mb-8" style={{ color: "#4A5568" }}>
+            <h2 className="font-heading text-5xl sm:text-6xl mb-6 md:mb-8 text-gray-600">
               El Arte de Tejer tus Ideas
             </h2>
-            <p
-              className="text-base md:text-lg leading-relaxed mb-4 text-balance"
-              style={{ color: "#4A5568" }}
-            >
-              ¡Hola! Soy la creadora detrás de GrayAmigurumis. Como <strong>emprendedora regional</strong>, mi pasión es dar vida a tus personajes e ideas a través del crochet. Cada pieza es una confección única, hecha a pedido con materiales de la más alta calidad.
-            </p>
-            <p className="text-base md:text-lg leading-relaxed text-balance" style={{ color: "#4A5568" }}>
-              Desde adorables animalitos hasta complejos personajes, me especializo en <strong>pedidos personalizados</strong> para crear ese regalo o auto-regalo perfecto que estás buscando. ¡Gracias por apoyar mi emprendimiento!
-            </p>
+
+            <div className="space-y-4 text-base md:text-lg leading-relaxed text-gray-600">
+              <p className="text-balance">
+                ¡Hola! Soy la creadora detrás de <strong>GrayAmigurumis</strong>. Como <strong>emprendedora regional de Punta Arenas</strong>, mi pasión es dar vida a tus personajes e ideas más queridas a través del arte del crochet.
+              </p>
+
+              <p className="text-balance">
+                Cada pieza que confecciono es una <strong>creación única y artesanal</strong>, hecha completamente a mano con materiales de la más alta calidad. Trabajo con hilos premium y rellenos suaves que garantizan durabilidad y suavidad en cada amigurumi.
+              </p>
+
+              <p className="text-balance">
+                Desde adorables animalitos y personajes de películas, hasta complejos diseños de anime y videojuegos, me especializo en <strong>pedidos personalizados</strong> que dan vida a tu imaginación. Ya sea para un regalo especial, decoración de tu espacio, o simplemente para consentirte, cada amigurumi lleva mi dedicación y cariño en cada puntada.
+              </p>
+
+              <p className="text-balance font-medium">
+                ¿Tienes una idea especial? <strong>¡Conversemos!</strong> Me encanta trabajar en proyectos únicos y ayudarte a crear ese amigurumi perfecto que estás buscando.
+              </p>
+
+              <p className="text-balance text-sm mt-6 opacity-80">
+                Gracias por apoyar el emprendimiento regional y el trabajo artesanal chileno.
+              </p>
+            </div>
           </div>
         </div>
       </div>

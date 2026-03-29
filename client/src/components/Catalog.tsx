@@ -1,20 +1,25 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { products } from "../data/products";
+import { products, type Product } from "../data/products";
+import { WHATSAPP_NUMBER } from "@/const";
 import WhatsAppIcon from "./shared/WhatsAppIcon";
+import ProductImageSlider from "./ProductImageSlider";
+import ImageLightbox from "./ImageLightbox";
 import {
   animationVariants,
   useScrollAnimation,
   categoryButtonVariants,
   productCardVariants,
-  productCardImageVariants,
 } from "@/hooks/useAnimations";
 
 type Category = "all" | "cine-tv" | "animatitos" | "anime-videojuegos";
 
 export default function Catalog() {
   const [activeFilter, setActiveFilter] = useState<Category>("all");
-  const whatsappNumber = "56992834268";
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const whatsappNumber = WHATSAPP_NUMBER;
   const scrollAnimationProps = useScrollAnimation();
 
   const categoryMap: Record<string, Category> = {
@@ -37,16 +42,23 @@ export default function Catalog() {
     window.open(flowLink, "_blank");
   };
 
+  const handleImageClick = (product: Product, imageIndex: number) => {
+    setSelectedProduct(product);
+    setSelectedImageIndex(imageIndex);
+    setLightboxOpen(true);
+  };
+
+  const closeLightbox = () => {
+    setLightboxOpen(false);
+  };
+
   return (
     <section id="tienda" className="section-paper bg-catalog py-16 md:py-24">
       <div className="container mx-auto px-6">
-        <h2 className="font-heading text-5xl sm:text-6xl text-center mb-4 md:mb-6" style={{ color: "#4A5568" }}>
+        <h2 className="font-heading text-5xl sm:text-6xl text-center mb-4 md:mb-6 text-gray-600">
           Catálogo de Creaciones
         </h2>
-        <p
-          className="text-center text-base md:text-lg max-w-3xl mx-auto mb-10 md:mb-16 leading-relaxed"
-          style={{ color: "#777C7C" }}
-        >
+        <p className="text-center text-base md:text-lg max-w-3xl mx-auto mb-10 md:mb-16 leading-relaxed text-gray-500">
           Explora algunos de mis trabajos. Si no ves lo que buscas, recuerda que hago confecciones a pedido. ¡Tu imaginación es el
           límite!
         </p>
@@ -119,22 +131,15 @@ export default function Catalog() {
                 whileHover="hover"
                 whileTap="tap"
               >
-                <div className="relative aspect-[4/5] overflow-hidden rounded-xl">
-                  <motion.img
-                    src={product.image}
-                    alt={product.name}
-                    loading="lazy"
-                    className="h-full w-full object-cover"
-                    variants={productCardImageVariants}
-                    onError={(event) => {
-                      const target = event.currentTarget;
-                      target.src = "https://placehold.co/400x500/CCCCCC/888888?text=Error";
-                    }}
-                  />
-                </div>
+                <ProductImageSlider
+                  images={product.images}
+                  productName={product.name}
+                  onImageClick={(imageIndex) => handleImageClick(product, imageIndex)}
+                />
                 <div className="flex flex-1 flex-col p-4">
                   <h3>{product.name}</h3>
-                  <p className="precio">{product.price}</p>
+                  <p className="precio">${product.priceCLP.toLocaleString("es-CL")}</p>
+                  <p className="text-sm text-gray-600 mb-3">{product.heightCm} cm aprox.</p>
 
                   <div className="botones">
                     <motion.button
@@ -148,7 +153,7 @@ export default function Catalog() {
                     </motion.button>
 
                     <button
-                      onClick={() => handlePagar(product.flowLink)}
+                      onClick={() => handlePagar(product.flowLink || "https://www.flow.cl/checkout")}
                       className="btn-comprar"
                       aria-label={`Pagar ${product.name}`}
                       title={`Pagar ${product.name}`}
@@ -162,6 +167,17 @@ export default function Catalog() {
           ))}
         </div>
       </div>
+
+      {/* Lightbox Modal */}
+      {selectedProduct && (
+        <ImageLightbox
+          images={selectedProduct.images}
+          initialIndex={selectedImageIndex}
+          isOpen={lightboxOpen}
+          onClose={closeLightbox}
+          productName={selectedProduct.name}
+        />
+      )}
     </section>
   );
 }
