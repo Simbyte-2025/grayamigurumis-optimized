@@ -145,7 +145,7 @@ async function tryModel(
   if (!response.ok) {
     const errorData = await response.json().catch(() => ({}));
     throw new Error(
-      (errorData as any).error ||
+      (errorData as { error?: string }).error ||
         `HTTP ${response.status}: ${response.statusText}`
     );
   }
@@ -211,15 +211,3 @@ export async function sendChatMessage(
   };
 }
 
-/**
- * Convierte el historial de mensajes del chatbot al formato de la API.
- * @deprecated Esta función ya no es necesaria con el nuevo sistema, pero se mantiene por compatibilidad.
- */
-export function convertMessagesToAPIFormat(
-  messages: Array<{ sender: "user" | "bot"; text: string }>
-): ChatMessage[] {
-  return messages.map((msg) => ({
-    role: msg.sender === "user" ? "user" : "assistant",
-    content: msg.text,
-  }));
-}

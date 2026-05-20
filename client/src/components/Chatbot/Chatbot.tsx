@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import ChatButton from "./ChatButton";
 import ChatWindow from "./ChatWindow";
 import "./chat.css";
-import { sendChatMessage, convertMessagesToAPIFormat } from "@/services/chatService";
+import { sendChatMessage } from "@/services/chatService";
 
 interface Message {
   id: string;
@@ -47,10 +47,10 @@ export default function Chatbot() {
     setIsLoading(true);
 
     try {
-      // Convertir historial de mensajes al formato de la API (excluyendo el mensaje de bienvenida inicial)
-      const conversationHistory = convertMessagesToAPIFormat(
-        messages.filter((msg) => msg.id !== `bot-${messages[0]?.id}`)
-      );
+      // Historial de conversación (excluyendo el mensaje de bienvenida)
+      const conversationHistory = messages
+        .filter((msg) => msg.id !== messages[0]?.id)
+        .map((msg) => ({ sender: msg.sender, text: msg.text }));
 
       // Llamar al servicio de chat
       const response = await sendChatMessage(userInput, conversationHistory);

@@ -70,14 +70,8 @@ function jsonResponse(
   });
 }
 
-function isMockEnabled(env: Env, request: Request): boolean {
-  if (env.CHAT_MOCK_MODE === "true") return true;
-
-  // Permitir forzar mock por querystring en entornos de prueba: /chat/completions?mock=1
-  const url = new URL(request.url);
-  if (url.searchParams.get("mock") === "1") return true;
-
-  return false;
+function isMockEnabled(env: Env): boolean {
+  return env.CHAT_MOCK_MODE === "true";
 }
 
 function buildMockPayload(body: ChatRequestBody): unknown {
@@ -197,7 +191,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   const corsOrigin = getCorsOrigin(request);
 
   // Mock mode de backend (para entornos de prueba / debug)
-  if (isMockEnabled(env, request)) {
+  if (isMockEnabled(env)) {
     try {
       const body = (await request.json()) as ChatRequestBody;
       if (!body.messages || !Array.isArray(body.messages)) {

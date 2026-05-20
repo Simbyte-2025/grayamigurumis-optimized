@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { products, type Product } from "../data/products";
-import { WHATSAPP_NUMBER } from "@/const";
+import { openWhatsApp, openWhatsAppPurchase } from "@/lib/utils";
 import WhatsAppIcon from "./shared/WhatsAppIcon";
 import ProductImageSlider from "./ProductImageSlider";
-import ImageLightbox from "./ImageLightbox";
+import ProductDetailModal from "./ProductDetailModal";
 import {
   animationVariants,
   useScrollAnimation,
@@ -14,12 +14,17 @@ import {
 
 type Category = "all" | "cine-tv" | "animatitos" | "anime-videojuegos";
 
+const CATEGORY_FILTERS: { key: Category; label: string }[] = [
+  { key: "all", label: "Todos" },
+  { key: "cine-tv", label: "Cine & TV" },
+  { key: "animatitos", label: "Animatitos" },
+  { key: "anime-videojuegos", label: "Anime & Videojuegos" },
+];
+
 export default function Catalog() {
   const [activeFilter, setActiveFilter] = useState<Category>("all");
-  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [detailOpen, setDetailOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
-  const whatsappNumber = WHATSAPP_NUMBER;
   const scrollAnimationProps = useScrollAnimation();
 
   const categoryMap: Record<string, Category> = {
@@ -33,23 +38,13 @@ export default function Catalog() {
       ? products
       : products.filter((product) => categoryMap[product.category] === activeFilter);
 
-  const handleWhatsApp = (productName: string) => {
-    const message = encodeURIComponent(`¡Hola! Me interesa el producto: ${productName} 🧸`);
-    window.open(`https://wa.me/${whatsappNumber}?text=${message}`, "_blank");
-  };
-
-  const handlePagar = (flowLink: string) => {
-    window.open(flowLink, "_blank");
-  };
-
-  const handleImageClick = (product: Product, imageIndex: number) => {
+  const openProductDetail = (product: Product) => {
     setSelectedProduct(product);
-    setSelectedImageIndex(imageIndex);
-    setLightboxOpen(true);
+    setDetailOpen(true);
   };
 
-  const closeLightbox = () => {
-    setLightboxOpen(false);
+  const closeProductDetail = () => {
+    setDetailOpen(false);
   };
 
   return (
@@ -65,54 +60,21 @@ export default function Catalog() {
 
         {/* Filters */}
         <div className="flex justify-center flex-wrap gap-3 sm:gap-4 mb-12 md:mb-16">
-          <motion.button
-            onClick={() => setActiveFilter("all")}
-            className={`categoria-btn ${activeFilter === "all" ? "active" : ""}`}
-            variants={categoryButtonVariants}
-            initial="initial"
-            whileHover="hover"
-            whileTap="tap"
-            animate={activeFilter === "all" ? "active" : "initial"}
-            aria-pressed={activeFilter === "all"}
-          >
-            Todos
-          </motion.button>
-          <motion.button
-            onClick={() => setActiveFilter("cine-tv")}
-            className={`categoria-btn ${activeFilter === "cine-tv" ? "active" : ""}`}
-            variants={categoryButtonVariants}
-            initial="initial"
-            whileHover="hover"
-            whileTap="tap"
-            animate={activeFilter === "cine-tv" ? "active" : "initial"}
-            aria-pressed={activeFilter === "cine-tv"}
-          >
-            Cine & TV
-          </motion.button>
-          <motion.button
-            onClick={() => setActiveFilter("animatitos")}
-            className={`categoria-btn ${activeFilter === "animatitos" ? "active" : ""}`}
-            variants={categoryButtonVariants}
-            initial="initial"
-            whileHover="hover"
-            whileTap="tap"
-            animate={activeFilter === "animatitos" ? "active" : "initial"}
-            aria-pressed={activeFilter === "animatitos"}
-          >
-            Animatitos
-          </motion.button>
-          <motion.button
-            onClick={() => setActiveFilter("anime-videojuegos")}
-            className={`categoria-btn ${activeFilter === "anime-videojuegos" ? "active" : ""}`}
-            variants={categoryButtonVariants}
-            initial="initial"
-            whileHover="hover"
-            whileTap="tap"
-            animate={activeFilter === "anime-videojuegos" ? "active" : "initial"}
-            aria-pressed={activeFilter === "anime-videojuegos"}
-          >
-            Anime & Videojuegos
-          </motion.button>
+          {CATEGORY_FILTERS.map(({ key, label }) => (
+            <motion.button
+              key={key}
+              onClick={() => setActiveFilter(key)}
+              className={`categoria-btn ${activeFilter === key ? "active" : ""}`}
+              variants={categoryButtonVariants}
+              initial="initial"
+              whileHover="hover"
+              whileTap="tap"
+              animate={activeFilter === key ? "active" : "initial"}
+              aria-pressed={activeFilter === key}
+            >
+              {label}
+            </motion.button>
+          ))}
         </div>
 
         {/* Product Grid */}
@@ -134,16 +96,21 @@ export default function Catalog() {
                 <ProductImageSlider
                   images={product.images}
                   productName={product.name}
-                  onImageClick={(imageIndex) => handleImageClick(product, imageIndex)}
+                  onImageClick={() => openProductDetail(product)}
                 />
                 <div className="flex flex-1 flex-col p-4">
-                  <h3>{product.name}</h3>
+                  <h3
+                    className="cursor-pointer hover:text-[var(--c-coral)] transition-colors"
+                    onClick={() => openProductDetail(product)}
+                  >
+                    {product.name}
+                  </h3>
                   <p className="precio">${product.priceCLP.toLocaleString("es-CL")}</p>
                   <p className="text-sm text-gray-600 mb-3">{product.heightCm} cm aprox.</p>
 
                   <div className="botones">
                     <motion.button
-                      onClick={() => handleWhatsApp(product.name)}
+                      onClick={() => openWhatsApp(product.name)}
                       className="btn-whatsapp"
                       aria-label={`Consultar ${product.name} por WhatsApp`}
                       title={`Consultar ${product.name} por WhatsApp`}
@@ -153,12 +120,12 @@ export default function Catalog() {
                     </motion.button>
 
                     <button
-                      onClick={() => handlePagar(product.flowLink || "https://www.flow.cl/checkout")}
+                      onClick={() => openWhatsAppPurchase(product.name)}
                       className="btn-comprar"
-                      aria-label={`Pagar ${product.name}`}
-                      title={`Pagar ${product.name}`}
+                      aria-label={`Comprar ${product.name} por WhatsApp`}
+                      title={`Comprar ${product.name} por WhatsApp`}
                     >
-                      Pagar
+                      Comprar
                     </button>
                   </div>
                 </div>
@@ -168,16 +135,12 @@ export default function Catalog() {
         </div>
       </div>
 
-      {/* Lightbox Modal */}
-      {selectedProduct && (
-        <ImageLightbox
-          images={selectedProduct.images}
-          initialIndex={selectedImageIndex}
-          isOpen={lightboxOpen}
-          onClose={closeLightbox}
-          productName={selectedProduct.name}
-        />
-      )}
+      {/* Product Detail Modal */}
+      <ProductDetailModal
+        product={selectedProduct}
+        isOpen={detailOpen}
+        onClose={closeProductDetail}
+      />
     </section>
   );
 }

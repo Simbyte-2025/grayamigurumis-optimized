@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { WHATSAPP_NUMBER } from "@/const";
+import { products } from "@/data/products";
+import { openWhatsApp, openWhatsAppPurchase } from "@/lib/utils";
 import WhatsAppIcon from "./shared/WhatsAppIcon";
 import {
   animationVariants,
@@ -8,24 +9,11 @@ import {
   productCardImageVariants,
 } from "@/hooks/useAnimations";
 
-const featuredProducts = [
-  { id: "stitch", name: "Stitch", price: "$18.000", image: "/assets/products/stitch/stitch-1.webp", flowLink: "https://www.flow.cl/checkout" },
-  { id: "el-chapulin", name: "El Chapulín Colorado", price: "$24.000", image: "/assets/products/el-chapulin/el-chapulin-1.webp", flowLink: "https://www.flow.cl/checkout" },
-  { id: "emociones", name: "Emociones (Inside Out)", price: "$22.000", image: "/assets/products/emociones/emociones-1.webp", flowLink: "https://www.flow.cl/checkout" },
-];
+const FEATURED_IDS = ["stitch", "el-chapulin", "emociones"];
+const featuredProducts = products.filter((p) => FEATURED_IDS.includes(p.id));
 
 export default function FeaturedProducts() {
   const scrollAnimationProps = useScrollAnimation();
-  const whatsappNumber = WHATSAPP_NUMBER;
-
-  const handleWhatsApp = (productName: string) => {
-    const message = encodeURIComponent(`¡Hola! Me interesa el producto: ${productName} 🧸`);
-    window.open(`https://wa.me/${whatsappNumber}?text=${message}`, "_blank");
-  };
-
-  const handlePagar = (flowLink: string) => {
-    window.open(flowLink, "_blank");
-  };
 
   return (
     <section id="favoritos" className="section-paper bg-favs py-16 md:py-24">
@@ -51,8 +39,8 @@ export default function FeaturedProducts() {
                 >
                   <div className="relative aspect-[4/5] overflow-hidden rounded-xl">
                     <motion.img
-                      src={product.image}
-                      alt={product.name}
+                      src={product.images[0].src}
+                      alt={product.images[0].alt}
                       loading="lazy"
                       className="absolute inset-0 w-full h-full object-cover"
                       variants={productCardImageVariants}
@@ -65,10 +53,10 @@ export default function FeaturedProducts() {
 
                   <div className="flex flex-1 flex-col p-6 text-center">
                     <h3>{product.name}</h3>
-                    <p className="precio">{product.price}</p>
+                    <p className="precio">${product.priceCLP.toLocaleString("es-CL")}</p>
                     <div className="botones flex justify-center gap-3 mt-2">
                       <motion.button
-                        onClick={() => handleWhatsApp(product.name)}
+                        onClick={() => openWhatsApp(product.name)}
                         className="btn-whatsapp"
                         aria-label={`Consultar ${product.name} por WhatsApp`}
                         title={`Consultar ${product.name} por WhatsApp`}
@@ -77,12 +65,12 @@ export default function FeaturedProducts() {
                         <WhatsAppIcon size={20} title="WhatsApp" />
                       </motion.button>
                       <button
-                        onClick={() => handlePagar(product.flowLink)}
+                        onClick={() => openWhatsAppPurchase(product.name)}
                         className="btn-comprar"
-                        aria-label={`Pagar ${product.name}`}
-                        title={`Pagar ${product.name}`}
+                        aria-label={`Comprar ${product.name} por WhatsApp`}
+                        title={`Comprar ${product.name} por WhatsApp`}
                       >
-                        Pagar
+                        Comprar
                       </button>
                     </div>
                   </div>

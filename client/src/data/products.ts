@@ -13,7 +13,6 @@ export interface Product {
   heightCm: number;
   category: string;
   images: ProductImage[];
-  flowLink?: string; // Opcional para futuro
 }
 
 // Catálogo completo de productos GrayAmigurumis
