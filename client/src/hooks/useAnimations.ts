@@ -592,5 +592,12 @@ export const animationVariants = {
   heroSubtitle: heroSubtitleVariants,
   heroCta: heroCtaVariants,
   fadeInScroll: scrollFadeInVariants,
-  heartbeat: whatsappButtonVariants.hover,
+  heartbeat: {
+    scale: [1.05, 1.08, 1.05],
+    transition: {
+      duration: DURATION.heartbeat,
+      repeat: Infinity,
+      ease: "easeInOut" as const,
+    },
+  },
 };
