@@ -64,9 +64,6 @@ export default defineConfig({
         chunkFileNames: 'assets/js/[name]-[hash].js',
         entryFileNames: 'assets/js/[name]-[hash].js',
         assetFileNames: (assetInfo) => {
-          const info = assetInfo.name.split('.');
-          const ext = info[info.length - 1];
-          
           if (/\.(png|jpe?g|svg|gif|webp|avif)$/i.test(assetInfo.name)) {
             return 'assets/images/[name]-[hash].[ext]';
           }
@@ -97,9 +94,7 @@ export default defineConfig({
       'react-dom',
       'wouter',
     ],
-    exclude: [
-      'vite-plugin-manus-runtime',
-    ],
+    exclude: [],
   },
   
   server: {

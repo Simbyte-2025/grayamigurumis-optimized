@@ -112,3 +112,6 @@ client/.env.local
 client/.env.development
 client/.env.production
 client/.env.*.local
+
+# Wrangler local cache
+.wrangler/
